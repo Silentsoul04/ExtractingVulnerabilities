@@ -13,6 +13,7 @@ import java.util.Scanner;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 /**
  *
@@ -31,76 +32,42 @@ public class Extracting_Vulnerabilities {
 
     public static void run() {
         String[][] cwe = getCWENameURL(); // "CWE-862", "name", "url"
-        String[] desc = new String[NUM_CWE];
+//        String[] desc = new String[NUM_CWE];
         for (int cweIndex = 0; cweIndex < NUM_CWE; cweIndex++) {
             String[] num = cwe[cweIndex][0].split("-");
             String url2 = "https://cwe.mitre.org/data/definitions/" + num[1] + ".html";
-            desc[cweIndex] = getDesc(url2);
+            String desc = getFullDesc(url2);
+            exportTextToFile(num[1],num[1],desc);
         }
 //        String[] relatedCWE = getRelated(); // unfinished
 
         // File creation and checking
-        String filename = "src/CWEdata.txt";
+
+        System.out.println("");
+    }
+
+    /*
+    export content to file
+     */
+    public static void exportTextToFile(String cwe,String name, String desc){
+        String filename = "src/"+cwe+".txt";
         boolean fileExists = new File(filename).isFile(); // to check if file exists
         boolean[] changes = new boolean[25];
         try {
-            if (fileExists) { // file exists, comparing new and saved data 
-                String line;
-                BufferedReader br = new BufferedReader(new FileReader(filename));
-                int i = 0;
-                while ((line = br.readLine()) != null) {
-                    if (!line.equals(cwe[i][0] + " " + cwe[i][1])) {
-                        changes[i] = true;
-                    }
-                    line = br.readLine();
-                    if (changes[i] == false && !line.equals(desc[i])) {
-                        changes[i] = true;
-                    }
-                    line = br.readLine();
-                    i++;  
-                }
-                br.close();
-                boolean changed = false;
-                for (i = 0; i < NUM_CWE; i++) {
-                    if (changes[i] == true) {
-                        System.out.println("Change found for: " + cwe[i][0] + " in new data");
-                        changed = true;
-                    }
-                }
-                if (changed) {
-                    Scanner scanIn = new Scanner(System.in);
-                    System.out.println("Do you want to save the new data?");
-                    String input = "";
-                    while (!input.equals("y") && !input.equals("yes") && !input.equals("n") && !input.equals("no") && !input.equals("1") && !input.equals("0")) {
-                        System.out.print("  1: yes 0: no >> ");
-                        input = scanIn.next();
-                    }
-                    if (input.equals("y") || input.equals("yes") || input.equals("1")) {
-                        filename = "src/newCWEdata.txt";
-                    } else {
-                        filename = "noWrite";
-                    }
-                } else {
-                    System.out.println("Data up-to-date!");
-                }
-            }
             // file doesn't exist, creating file with data
             if (!filename.equals("noWrite")) {
                 BufferedWriter bw = new BufferedWriter(new FileWriter(filename));
-                for (int i = 0; i < NUM_CWE; i++) {
-                    bw.write(cwe[i][0] + " " + cwe[i][1]);
-                    bw.newLine();
-                    bw.write(desc[i]);
-                    bw.newLine();
-                    bw.newLine();
-                }
+                bw.write("CWE-"+cwe + ": " +name);
+                bw.newLine();
+                bw.write(desc);
+                bw.newLine();
+                bw.newLine();
                 bw.close();
-                System.out.println("Data saved in newCWEdata.txt");
+                System.out.println("Data saved in "+filename);
             }
         } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
         }
-        System.out.println("");
     }
 
     /*
@@ -164,6 +131,28 @@ public class Extracting_Vulnerabilities {
         }
         return desc;
     }
+
+    /*
+    Gets entire description for each CWE
+     */
+    public static String getFullDesc(String url) {
+        String desc = "";
+        Document doc;
+        try {
+            //Get Document object after parsing the html from given url.
+            doc = Jsoup.connect(url).get();
+            Elements elements = doc.select("div[class=indent]");
+            for(Element element: elements){
+                desc += element.text();
+                desc += "\n";
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return desc;
+    }
+
 
     /*
     Gets CWE, it's name, and it's url for use later
