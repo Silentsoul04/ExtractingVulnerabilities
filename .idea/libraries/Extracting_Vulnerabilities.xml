@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Extracting_Vulnerabilities">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/Extracting_Vulnerabilities.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

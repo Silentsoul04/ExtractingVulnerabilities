@@ -1,0 +1,75 @@
+CWE-89 Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')
+The software constructs all or part of an SQL command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended SQL command when it is sent to a downstream component.
+
+CWE-78 Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')
+The software constructs all or part of an OS command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended OS command when it is sent to a downstream component.
+
+CWE-120 Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')
+The program copies an input buffeto an output buffer without verifying that the size of the input buffer is less than the size of the output buffer, leading to a buffer overflow.
+
+CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
+The software does not neutralize or incorrectly neutralizes user-controllable input before it is placed in output that is used as a web page that is served to other users.
+
+CWE-306 Missing Authentication for Critical Function
+The software does not perform any authentication for functionality that requires a provable user identity or consumes a significant amount of resources.
+
+CWE-862 Missing Authorization
+The software does not perform an authorization check when an actor attempts to access a resource or perform an action.
+
+CWE-798 Use of Hard-coded Credentials
+The software contains hard-coded credentials, such as a password or cryptographic key, which it uses for its own inbound authentication, outbound communication to external components, or encryption of internal data.
+
+CWE-311 Missing Encryption of Sensitive Data
+The software does not encrypt sensitive or critical information before storage or transmission.
+
+CWE-434 Unrestricted Upload of File with Dangerous Type
+The software allows the attacker to upload or transfer files of dangerous types that can be automatically processed within the product's environment.
+
+CWE-807 Reliance on Untrusted Inputs in a Security Decision
+The application uses a protection mechanism that relies on the existence or values of an input, but the input can be modified by an untrusted actor in a way that bypasses the protection mechanism.
+
+CWE-250 Execution with Unnecessary Privileges
+The software performs an operation at a privilege level that is higher than the minimum level required, which creates new weaknesses or amplifies the consequences of other weaknesses.
+
+CWE-352 Cross-Site Request Forgery (CSRF)
+The web application does not, or can not, sufficiently verify whether a well-formed, valid, consistent request was intentionally provided by the user who submitted the request.
+
+CWE-22 Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')
+The software uses external input to construct a pathname that is intended to identify a file or directory that is located underneath a restricted parent directory, but the software does not properly neutralize special elements within the pathname that can cause the pathname to resolve to a location that is outside of the restricted directory.
+
+CWE-494 Download of Code Without Integrity Check
+The product downloads source code or an executable from a remote location and executes the code without sufficiently verifying the origin and integrity of the code.
+
+CWE-863 Incorrect Authorization
+The software performs an authorization check when an actor attempts to access a resource or perform an action, but it does not correctly perform the check. This allows attackers to bypass intended access restrictions.
+
+CWE-829 Inclusion of Functionality from Untrusted Control Sphere
+The software imports, requires, or includes executable functionality (such as a library) from a source that is outside of the intended control sphere.
+
+CWE-732 Incorrect Permission Assignment for Critical Resource
+The software specifies permissions for a security-critical resource in a way that allows that resource to be read or modified by unintended actors.
+
+CWE-676 Use of Potentially Dangerous Function
+The program invokes a potentially dangerous function that could introduce a vulnerability if it is used incorrectly, but the function can also be used safely.
+
+CWE-327 Use of a Broken or Risky Cryptographic Algorithm
+The use of a broken or risky cryptographic algorithm is an unnecessary risk that may result in the exposure of sensitive information.
+
+CWE-131 Incorrect Calculation of Buffer Size
+The software does not correctly calculate the size to be used when allocating a buffer, which could lead to a buffer overflow.
+
+CWE-307 Improper Restriction of Excessive Authentication Attempts
+The software does not implement sufficient measures to prevent multiple failed authentication attempts within in a short time frame, making it more susceptible to brute force attacks.
+
+CWE-601 URL Redirection to Untrusted Site ('Open Redirect')
+A web application accepts a user-controlled input that specifies a link to an external site, and uses that link in a Redirect. This simplifies phishing attacks.
+
+CWE-134 Uncontrolled Format String
+The software uses a function that accepts a format string as an argument, but the format string originates from an external source.
+
+CWE-190 Integer Overflow or Wraparound
+The software performs a calculation that can produce an integer overflow or wraparound, when the logic assumes that the resulting value will always be larger than the original value. This can introduce other weaknesses when the calculation is used for resource management or execution control.
+
+CWE-759 Use of a One-Way Hash without a Salt
+The software uses a one-way cryptographic hash against an input that should not be reversible, such as a password, but the software does not also use a salt as part of the input.
+
