@@ -37,7 +37,7 @@ public class Extracting_Vulnerabilities {
             String[] num = cwe[cweIndex][0].split("-");
             String url2 = "https://cwe.mitre.org/data/definitions/" + num[1] + ".html";
             String desc = getFullDesc(url2);
-            exportTextToFile(num[1],num[1],desc);
+            exportTextToFile(num[1],cwe[cweIndex][1],desc);
         }
 //        String[] relatedCWE = getRelated(); // unfinished
 
@@ -141,7 +141,7 @@ public class Extracting_Vulnerabilities {
         try {
             //Get Document object after parsing the html from given url.
             doc = Jsoup.connect(url).get();
-            Elements elements = doc.select("div[class=indent]");
+            Elements elements = doc.select("div[class=heading],div[class=indent]");
             for(Element element: elements){
                 desc += element.text();
                 desc += "\n";

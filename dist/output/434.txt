@@ -1,0 +1,190 @@
+CWE-434: Unrestricted Upload of File with Dangerous Type
+Description
+The software allows the attacker to upload or transfer files of dangerous types that can be automatically processed within the product's environment.
+Alternate Terms
+Unrestricted File Upload: The "unrestricted file upload" term is used in vulnerability databases and elsewhere, but it is insufficiently precise. The phrase could be interpreted as the lack of restrictions on the size or number of uploaded files, which is a resource consumption issue.
+The "unrestricted file upload" term is used in vulnerability databases and elsewhere, but it is insufficiently precise. The phrase could be interpreted as the lack of restrictions on the size or number of uploaded files, which is a resource consumption issue.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOf and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that the user may want to explore. Relevant to the view "Research Concepts" (CWE-1000) Nature Type ID Name ChildOf Class - a weakness that is described in a very abstract fashion, typically independent of any specific language or technology. More specific than a Pillar Weakness, but more general than a Base Weakness. Class level weaknesses typically describe issues in terms of 1 or 2 of the following dimensions: behavior, property, and resource. 669 Incorrect Resource Transfer Between Spheres PeerOf Base - a weakness that is still mostly independent of a resource or technology, but with sufficient details to provide specific methods for detection and prevention. Base level weaknesses typically describe issues in terms of 2 or 3 of the following dimensions: behavior, property, technology, language, and resource. 351 Insufficient Type Distinction PeerOf Class - a weakness that is described in a very abstract fashion, typically independent of any specific language or technology. More specific than a Pillar Weakness, but more general than a Base Weakness. Class level weaknesses typically describe issues in terms of 1 or 2 of the following dimensions: behavior, property, and resource. 436 Interpretation Conflict PeerOf Base - a weakness that is still mostly independent of a resource or technology, but with sufficient details to provide specific methods for detection and prevention. Base level weaknesses typically describe issues in terms of 2 or 3 of the following dimensions: behavior, property, technology, language, and resource. 430 Deployment of Wrong Handler CanFollow Base - a weakness that is still mostly independent of a resource or technology, but with sufficient details to provide specific methods for detection and prevention. Base level weaknesses typically describe issues in terms of 2 or 3 of the following dimensions: behavior, property, technology, language, and resource. 73 External Control of File Name or Path CanFollow Base - a weakness that is still mostly independent of a resource or technology, but with sufficient details to provide specific methods for detection and prevention. Base level weaknesses typically describe issues in terms of 2 or 3 of the following dimensions: behavior, property, technology, language, and resource. 183 Permissive List of Allowed Inputs CanFollow Base - a weakness that is still mostly independent of a resource or technology, but with sufficient details to provide specific methods for detection and prevention. Base level weaknesses typically describe issues in terms of 2 or 3 of the following dimensions: behavior, property, technology, language, and resource. 184 Incomplete List of Disallowed Inputs Relevant to the view "Software Development" (CWE-699) Nature Type ID Name MemberOf Category - a CWE entry that contains a set of other entries that share a common characteristic. 429 Handler Errors Relevant to the view "Weaknesses for Simplified Mapping of Published Vulnerabilities" (CWE-1003) Nature Type ID Name ChildOf Class - a weakness that is described in a very abstract fashion, typically independent of any specific language or technology. More specific than a Pillar Weakness, but more general than a Base Weakness. Class level weaknesses typically describe issues in terms of 1 or 2 of the following dimensions: behavior, property, and resource. 669 Incorrect Resource Transfer Between Spheres Relevant to the view "Architectural Concepts" (CWE-1008) Nature Type ID Name MemberOf Category - a CWE entry that contains a set of other entries that share a common characteristic. 1011 Authorize Actors
+Nature Type ID Name ChildOf Class - a weakness that is described in a very abstract fashion, typically independent of any specific language or technology. More specific than a Pillar Weakness, but more general than a Base Weakness. Class level weaknesses typically describe issues in terms of 1 or 2 of the following dimensions: behavior, property, and resource. 669 Incorrect Resource Transfer Between Spheres PeerOf Base - a weakness that is still mostly independent of a resource or technology, but with sufficient details to provide specific methods for detection and prevention. Base level weaknesses typically describe issues in terms of 2 or 3 of the following dimensions: behavior, property, technology, language, and resource. 351 Insufficient Type Distinction PeerOf Class - a weakness that is described in a very abstract fashion, typically independent of any specific language or technology. More specific than a Pillar Weakness, but more general than a Base Weakness. Class level weaknesses typically describe issues in terms of 1 or 2 of the following dimensions: behavior, property, and resource. 436 Interpretation Conflict PeerOf Base - a weakness that is still mostly independent of a resource or technology, but with sufficient details to provide specific methods for detection and prevention. Base level weaknesses typically describe issues in terms of 2 or 3 of the following dimensions: behavior, property, technology, language, and resource. 430 Deployment of Wrong Handler CanFollow Base - a weakness that is still mostly independent of a resource or technology, but with sufficient details to provide specific methods for detection and prevention. Base level weaknesses typically describe issues in terms of 2 or 3 of the following dimensions: behavior, property, technology, language, and resource. 73 External Control of File Name or Path CanFollow Base - a weakness that is still mostly independent of a resource or technology, but with sufficient details to provide specific methods for detection and prevention. Base level weaknesses typically describe issues in terms of 2 or 3 of the following dimensions: behavior, property, technology, language, and resource. 183 Permissive List of Allowed Inputs CanFollow Base - a weakness that is still mostly independent of a resource or technology, but with sufficient details to provide specific methods for detection and prevention. Base level weaknesses typically describe issues in terms of 2 or 3 of the following dimensions: behavior, property, technology, language, and resource. 184 Incomplete List of Disallowed Inputs
+Nature Type ID Name MemberOf Category - a CWE entry that contains a set of other entries that share a common characteristic. 429 Handler Errors
+Nature Type ID Name ChildOf Class - a weakness that is described in a very abstract fashion, typically independent of any specific language or technology. More specific than a Pillar Weakness, but more general than a Base Weakness. Class level weaknesses typically describe issues in terms of 1 or 2 of the following dimensions: behavior, property, and resource. 669 Incorrect Resource Transfer Between Spheres
+Nature Type ID Name MemberOf Category - a CWE entry that contains a set of other entries that share a common characteristic. 1011 Authorize Actors
+Modes Of Introduction
+The different Modes of Introduction provide information about how and when this weakness may be introduced. The Phase identifies a point in the life cycle at which introduction may occur, while the Note provides a typical scenario related to introduction during the given phase. Phase Note Implementation Architecture and Design OMISSION: This weakness is caused by missing a security tactic during the architecture and design phase.
+Applicable Platforms
+The listings below show possible areas for which the given weakness could appear. These may be for specific named Languages, Operating Systems, Architectures, Paradigms, Technologies, or a class of such platforms. The platform is listed along with how frequently the given weakness appears for that instance. Languages ASP.NET (Sometimes Prevalent) PHP (Often Prevalent) Class: Language-Independent (Undetermined Prevalence) Technologies Web Server (Sometimes Prevalent)
+ASP.NET (Sometimes Prevalent)
+PHP (Often Prevalent)
+Class: Language-Independent (Undetermined Prevalence)
+Web Server (Sometimes Prevalent)
+Common Consequences
+The table below specifies different individual consequences associated with the weakness. The Scope identifies the application security area that is violated, while the Impact describes the negative technical impact that arises if an adversary succeeds in exploiting this weakness. The Likelihood provides information about how likely the specific consequence is expected to be seen relative to the other consequences in the list. For example, there may be high likelihood that a weakness will be exploited to achieve a certain impact, but a low likelihood that it will be exploited to achieve a different impact. Scope Impact Likelihood Integrity Confidentiality Availability Technical Impact: Execute Unauthorized Code or Commands Arbitrary code execution is possible if an uploaded file is interpreted and executed as code by the recipient. This is especially true for .asp and .php extensions uploaded to web servers because these file types are often treated as automatically executable, even when file system permissions do not specify execution. For example, in Unix environments, programs typically cannot run unless the execute bit is set, but PHP programs may be executed by the web server without directly invoking them on the operating system.
+Likelihood Of Exploit
+Medium
+Demonstrative Examples
+Example 1 The following code intends to allow a user to upload a picture to the web server. The HTML code that drives the form on the user end has an input field of type "file". (good code) Example Language: HTML <form action="upload_picture.php" method="post" enctype="multipart/form-data"> Choose a file to upload: <input type="file" name="filename"/> <br/> <input type="submit" name="submit" value="Submit"/> </form> Once submitted, the form above sends the file to upload_picture.php on the web server. PHP stores the file in a temporary location until it is retrieved (or discarded) by the server side code. In this example, the file is moved to a more permanent pictures/ directory. (bad code) Example Language: PHP // Define the target location where the picture being // uploaded is going to be saved. $target = "pictures/" . basename($_FILES['uploadedfile']['name']); // Move the uploaded file to the new location. if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target)) { echo "The picture has been successfully uploaded."; } else { echo "There was an error uploading the picture, please try again."; } The problem with the above code is that there is no check regarding type of file being uploaded. Assuming that pictures/ is available in the web document root, an attacker could upload a file with the name: (attack code) malicious.php Since this filename ends in ".php" it can be executed by the web server. In the contents of this uploaded file, the attacker could use: (attack code) Example Language: PHP <?php system($_GET['cmd']); ?> Once this file has been installed, the attacker can enter arbitrary commands to execute using a URL such as: (attack code) http://server.example.com/upload_dir/malicious.php?cmd=ls%20-l which runs the "ls -l" command - or any other type of command that the attacker wants to specify. Example 2 The following code demonstrates the unrestricted upload of a file with a Java servlet and a path traversal vulnerability. The HTML code is the same as in the previous example with the action attribute of the form sending the upload file request to the Java servlet instead of the PHP code. (good code) Example Language: HTML <form action="FileUploadServlet" method="post" enctype="multipart/form-data"> Choose a file to upload: <input type="file" name="filename"/> <br/> <input type="submit" name="submit" value="Submit"/> </form> When submitted the Java servlet's doPost method will receive the request, extract the name of the file from the Http request header, read the file contents from the request and output the file to the local upload directory. (bad code) Example Language: Java public class FileUploadServlet extends HttpServlet { ... protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { response.setContentType("text/html"); PrintWriter out = response.getWriter(); String contentType = request.getContentType(); // the starting position of the boundary header int ind = contentType.indexOf("boundary="); String boundary = contentType.substring(ind+9); String pLine = new String(); String uploadLocation = new String(UPLOAD_DIRECTORY_STRING); //Constant value // verify that content type is multipart form data if (contentType != null && contentType.indexOf("multipart/form-data") != -1) { // extract the filename from the Http header BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream())); ... pLine = br.readLine(); String filename = pLine.substring(pLine.lastIndexOf("\\"), pLine.lastIndexOf("\"")); ... // output the file to the local upload directory try { BufferedWriter bw = new BufferedWriter(new FileWriter(uploadLocation+filename, true)); for (String line; (line=br.readLine())!=null; ) { if (line.indexOf(boundary) == -1) { bw.write(line); bw.newLine(); bw.flush(); } } //end of for loop bw.close(); } catch (IOException ex) {...} // output successful upload response HTML page } // output unsuccessful upload response HTML page else {...} } ... } As with the previous example this code does not perform a check on the type of the file being uploaded. This could allow an attacker to upload any executable file or other file with malicious code. Additionally, the creation of the BufferedWriter object is subject to relative path traversal (CWE-22, CWE-23). Depending on the executing environment, the attacker may be able to specify arbitrary files to write to, leading to a wide variety of consequences, from code execution, XSS (CWE-79), or system crash.
+Observed Examples
+Reference Description CVE-2001-0901 Web-based mail product stores ".shtml" attachments that could contain SSI CVE-2002-1841 PHP upload does not restrict file types CVE-2005-1868 upload and execution of .php file CVE-2005-1881 upload file with dangerous extension CVE-2005-0254 program does not restrict file types CVE-2004-2262 improper type checking of uploaded files CVE-2006-4558 Double "php" extension leaves an active php extension in the generated filename. CVE-2006-6994 ASP program allows upload of .asp files by bypassing client-side checks CVE-2005-3288 ASP file upload CVE-2006-2428 ASP file upload
+Web-based mail product stores ".shtml" attachments that could contain SSI
+PHP upload does not restrict file types
+upload and execution of .php file
+upload file with dangerous extension
+program does not restrict file types
+improper type checking of uploaded files
+Double "php" extension leaves an active php extension in the generated filename.
+ASP program allows upload of .asp files by bypassing client-side checks
+ASP file upload
+ASP file upload
+Potential Mitigations
+Phase: Architecture and Design Generate a new, unique filename for an uploaded file instead of using the user-supplied filename, so that no external input is used at all.[REF-422] [REF-423] Phase: Architecture and Design Strategy: Enforcement by Conversion When the set of acceptable objects, such as filenames or URLs, is limited or known, create a mapping from a set of fixed input values (such as numeric IDs) to the actual filenames or URLs, and reject all other inputs. Phase: Architecture and Design Consider storing the uploaded files outside of the web document root entirely. Then, use other mechanisms to deliver the files dynamically. [REF-423] Phase: Implementation Strategy: Input Validation Assume all input is malicious. Use an "accept known good" input validation strategy, i.e., use a list of acceptable inputs that strictly conform to specifications. Reject any input that does not strictly conform to specifications, or transform it into something that does. When performing input validation, consider all potentially relevant properties, including length, type of input, the full range of acceptable values, missing or extra inputs, syntax, consistency across related fields, and conformance to business rules. As an example of business rule logic, "boat" may be syntactically valid because it only contains alphanumeric characters, but it is not valid if the input is only expected to contain colors such as "red" or "blue." Do not rely exclusively on looking for malicious or malformed inputs. This is likely to miss at least one undesirable input, especially if the code's environment changes. This can give attackers enough room to bypass the intended validation. However, denylists can be useful for detecting potential attacks or determining which inputs are so malformed that they should be rejected outright. For example, limiting filenames to alphanumeric characters can help to restrict the introduction of unintended file extensions. Phase: Architecture and Design Define a very limited set of allowable extensions and only generate filenames that end in these extensions. Consider the possibility of XSS (CWE-79) before allowing .html or .htm file types. Phase: Implementation Strategy: Input Validation Ensure that only one extension is used in the filename. Some web servers, including some versions of Apache, may process files based on inner extensions so that "filename.php.gif" is fed to the PHP interpreter.[REF-422] [REF-423] Phase: Implementation When running on a web server that supports case-insensitive filenames, perform case-insensitive evaluations of the extensions that are provided. Phase: Architecture and Design For any security checks that are performed on the client side, ensure that these checks are duplicated on the server side, in order to avoid CWE-602. Attackers can bypass the client-side checks by modifying values after the checks have been performed, or by changing the client to remove the client-side checks entirely. Then, these modified values would be submitted to the server. Phase: Implementation Do not rely exclusively on sanity checks of file contents to ensure that the file is of the expected type and size. It may be possible for an attacker to hide code in some file segments that will still be executed by the server. For example, GIF images may contain a free-form comments field. Phase: Implementation Do not rely exclusively on the MIME content type or filename attribute when determining how to render a file. Validating the MIME content type and ensuring that it matches the extension is only a partial solution. Phases: Architecture and Design; Operation Strategy: Environment Hardening Run your code using the lowest privileges that are required to accomplish the necessary tasks [REF-76]. If possible, create isolated accounts with limited privileges that are only used for a single task. That way, a successful attack will not immediately give the attacker access to the rest of the software or its environment. For example, database applications rarely need to run as the database administrator, especially in day-to-day operations. Phases: Architecture and Design; Operation Strategy: Sandbox or Jail Run the code in a "jail" or similar sandbox environment that enforces strict boundaries between the process and the operating system. This may effectively restrict which files can be accessed in a particular directory or which commands can be executed by the software. OS-level examples include the Unix chroot jail, AppArmor, and SELinux. In general, managed code may provide some protection. For example, java.io.FilePermission in the Java SecurityManager allows the software to specify restrictions on file operations. This may not be a feasible solution, and it only limits the impact to the operating system; the rest of the application may still be subject to compromise. Be careful to avoid CWE-243 and other weaknesses related to jails. Effectiveness: Limited Note: The effectiveness of this mitigation depends on the prevention capabilities of the specific sandbox or jail being used and might only help to reduce the scope of an attack, such as restricting the attacker to certain system calls or limiting the portion of the file system that can be accessed.
+Generate a new, unique filename for an uploaded file instead of using the user-supplied filename, so that no external input is used at all.[REF-422] [REF-423]
+Strategy: Enforcement by Conversion
+When the set of acceptable objects, such as filenames or URLs, is limited or known, create a mapping from a set of fixed input values (such as numeric IDs) to the actual filenames or URLs, and reject all other inputs.
+Consider storing the uploaded files outside of the web document root entirely. Then, use other mechanisms to deliver the files dynamically. [REF-423]
+Strategy: Input Validation
+
+Assume all input is malicious. Use an "accept known good" input validation strategy, i.e., use a list of acceptable inputs that strictly conform to specifications. Reject any input that does not strictly conform to specifications, or transform it into something that does.
+
+When performing input validation, consider all potentially relevant properties, including length, type of input, the full range of acceptable values, missing or extra inputs, syntax, consistency across related fields, and conformance to business rules. As an example of business rule logic, "boat" may be syntactically valid because it only contains alphanumeric characters, but it is not valid if the input is only expected to contain colors such as "red" or "blue."
+
+Do not rely exclusively on looking for malicious or malformed inputs. This is likely to miss at least one undesirable input, especially if the code's environment changes. This can give attackers enough room to bypass the intended validation. However, denylists can be useful for detecting potential attacks or determining which inputs are so malformed that they should be rejected outright.
+
+For example, limiting filenames to alphanumeric characters can help to restrict the introduction of unintended file extensions.
+
+Define a very limited set of allowable extensions and only generate filenames that end in these extensions. Consider the possibility of XSS (CWE-79) before allowing .html or .htm file types.
+Strategy: Input Validation
+Ensure that only one extension is used in the filename. Some web servers, including some versions of Apache, may process files based on inner extensions so that "filename.php.gif" is fed to the PHP interpreter.[REF-422] [REF-423]
+When running on a web server that supports case-insensitive filenames, perform case-insensitive evaluations of the extensions that are provided.
+For any security checks that are performed on the client side, ensure that these checks are duplicated on the server side, in order to avoid CWE-602. Attackers can bypass the client-side checks by modifying values after the checks have been performed, or by changing the client to remove the client-side checks entirely. Then, these modified values would be submitted to the server.
+Do not rely exclusively on sanity checks of file contents to ensure that the file is of the expected type and size. It may be possible for an attacker to hide code in some file segments that will still be executed by the server. For example, GIF images may contain a free-form comments field.
+Do not rely exclusively on the MIME content type or filename attribute when determining how to render a file. Validating the MIME content type and ensuring that it matches the extension is only a partial solution.
+Strategy: Environment Hardening
+Run your code using the lowest privileges that are required to accomplish the necessary tasks [REF-76]. If possible, create isolated accounts with limited privileges that are only used for a single task. That way, a successful attack will not immediately give the attacker access to the rest of the software or its environment. For example, database applications rarely need to run as the database administrator, especially in day-to-day operations.
+Strategy: Sandbox or Jail
+
+Run the code in a "jail" or similar sandbox environment that enforces strict boundaries between the process and the operating system. This may effectively restrict which files can be accessed in a particular directory or which commands can be executed by the software.
+
+OS-level examples include the Unix chroot jail, AppArmor, and SELinux. In general, managed code may provide some protection. For example, java.io.FilePermission in the Java SecurityManager allows the software to specify restrictions on file operations.
+
+This may not be a feasible solution, and it only limits the impact to the operating system; the rest of the application may still be subject to compromise.
+
+Be careful to avoid CWE-243 and other weaknesses related to jails.
+
+Effectiveness: Limited
+Note: The effectiveness of this mitigation depends on the prevention capabilities of the specific sandbox or jail being used and might only help to reduce the scope of an attack, such as restricting the attacker to certain system calls or limiting the portion of the file system that can be accessed.
+Weakness Ordinalities
+Ordinality Description Primary This can be primary when there is no check at all. (where the weakness is a quality issue that might indirectly make it easier to introduce security-relevant weaknesses or make them more difficult to detect) Resultant This is frequently resultant when use of double extensions (e.g. ".php.gif") bypasses a sanity check. (where the weakness is a quality issue that might indirectly make it easier to introduce security-relevant weaknesses or make them more difficult to detect) Resultant This can be resultant from client-side enforcement (CWE-602); some products will include web script in web clients to check the filename, without verifying on the server side. (where the weakness is a quality issue that might indirectly make it easier to introduce security-relevant weaknesses or make them more difficult to detect)
+This can be primary when there is no check at all. (where the weakness is a quality issue that might indirectly make it easier to introduce security-relevant weaknesses or make them more difficult to detect)
+This is frequently resultant when use of double extensions (e.g. ".php.gif") bypasses a sanity check. (where the weakness is a quality issue that might indirectly make it easier to introduce security-relevant weaknesses or make them more difficult to detect)
+This can be resultant from client-side enforcement (CWE-602); some products will include web script in web clients to check the filename, without verifying on the server side. (where the weakness is a quality issue that might indirectly make it easier to introduce security-relevant weaknesses or make them more difficult to detect)
+Detection Methods
+Dynamic Analysis with Automated Results Interpretation According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Web Application Scanner Web Services Scanner Database Scanners Effectiveness: SOAR Partial Dynamic Analysis with Manual Results Interpretation According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Fuzz Tester Framework-based Fuzzer Effectiveness: SOAR Partial Manual Static Analysis - Source Code According to SOAR, the following detection techniques may be useful: Highly cost effective: Focused Manual Spotcheck - Focused manual analysis of source Manual Source Code Review (not inspections) Effectiveness: High Automated Static Analysis - Source Code According to SOAR, the following detection techniques may be useful: Highly cost effective: Source code Weakness Analyzer Context-configured Source Code Weakness Analyzer Effectiveness: High Architecture or Design Review According to SOAR, the following detection techniques may be useful: Highly cost effective: Formal Methods / Correct-By-Construction Cost effective for partial coverage: Inspection (IEEE 1028 standard) (can apply to requirements, design, source code, etc.) Effectiveness: High
+
+According to SOAR, the following detection techniques may be useful:
+
+
+Cost effective for partial coverage:
+
+
+
+Web Application Scanner
+
+Web Services Scanner
+
+Database Scanners
+
+
+
+
+Effectiveness: SOAR Partial
+
+According to SOAR, the following detection techniques may be useful:
+
+
+Cost effective for partial coverage:
+
+
+
+Fuzz Tester
+
+Framework-based Fuzzer
+
+
+
+
+Effectiveness: SOAR Partial
+
+According to SOAR, the following detection techniques may be useful:
+
+
+Highly cost effective:
+
+
+
+Focused Manual Spotcheck - Focused manual analysis of source
+
+Manual Source Code Review (not inspections)
+
+
+
+
+Effectiveness: High
+
+According to SOAR, the following detection techniques may be useful:
+
+
+Highly cost effective:
+
+
+
+Source code Weakness Analyzer
+
+Context-configured Source Code Weakness Analyzer
+
+
+
+
+Effectiveness: High
+
+According to SOAR, the following detection techniques may be useful:
+
+
+Highly cost effective:
+
+
+
+Formal Methods / Correct-By-Construction
+
+
+
+Cost effective for partial coverage:
+
+
+
+Inspection (IEEE 1028 standard) (can apply to requirements, design, source code, etc.)
+
+
+
+
+Effectiveness: High
+Functional Areas
+File Processing
+Affected Resources
+File or Directory
+Memberships
+This MemberOf Relationships table shows additional CWE Categories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources. Nature Type ID Name MemberOf Category - a CWE entry that contains a set of other entries that share a common characteristic. 714 OWASP Top Ten 2007 Category A3 - Malicious File Execution MemberOf Category - a CWE entry that contains a set of other entries that share a common characteristic. 801 2010 Top 25 - Insecure Interaction Between Components MemberOf Category - a CWE entry that contains a set of other entries that share a common characteristic. 813 OWASP Top Ten 2010 Category A4 - Insecure Direct Object References MemberOf Category - a CWE entry that contains a set of other entries that share a common characteristic. 864 2011 Top 25 - Insecure Interaction Between Components MemberOf View - a subset of CWE entries that provides a way of examining CWE content. The two main view structures are Slices (flat lists) and Graphs (containing relationships between entries). 884 CWE Cross-section MemberOf Category - a CWE entry that contains a set of other entries that share a common characteristic. 1131 CISQ Quality Measures - Security MemberOf View - a subset of CWE entries that provides a way of examining CWE content. The two main view structures are Slices (flat lists) and Graphs (containing relationships between entries). 1200 Weaknesses in the 2019 CWE Top 25 Most Dangerous Software Errors MemberOf Category - a CWE entry that contains a set of other entries that share a common characteristic. 1308 CISQ Quality Measures - Security MemberOf View - a subset of CWE entries that provides a way of examining CWE content. The two main view structures are Slices (flat lists) and Graphs (containing relationships between entries). 1350 Weaknesses in the 2020 CWE Top 25 Most Dangerous Software Weaknesses
+Notes
+Relationship This can have a chaining relationship with incomplete denylist / permissive allowlist errors when the product tries, but fails, to properly limit which types of files are allowed (CWE-183, CWE-184). This can also overlap multiple interpretation errors for intermediaries, e.g. anti-virus products that do not remove or quarantine attachments with certain file extensions that can be processed by client systems. Research Gap PHP applications are most targeted, but this likely applies to other languages that support file upload, as well as non-web technologies. ASP applications have also demonstrated this problem.
+This can have a chaining relationship with incomplete denylist / permissive allowlist errors when the product tries, but fails, to properly limit which types of files are allowed (CWE-183, CWE-184). This can also overlap multiple interpretation errors for intermediaries, e.g. anti-virus products that do not remove or quarantine attachments with certain file extensions that can be processed by client systems.
+PHP applications are most targeted, but this likely applies to other languages that support file upload, as well as non-web technologies. ASP applications have also demonstrated this problem.
+Taxonomy Mappings
+Mapped Taxonomy Name Node ID Fit Mapped Node Name PLOVER Unrestricted File Upload OWASP Top Ten 2007 A3 CWE More Specific Malicious File Execution OMG ASCSM ASCSM-CWE-434
+Related Attack Patterns
+CAPEC-ID Attack Pattern Name CAPEC-1 Accessing Functionality Not Properly Constrained by ACLs
+References
+[REF-422] Richard Stanway (r1CH). "Dynamic File Uploads, Security and You". <http://shsc.info/FileUploadSecurity>. [REF-423] Johannes Ullrich. "8 Basic Rules to Implement Secure File Uploads". 2009-12-28. <http://blogs.sans.org/appsecstreetfighter/2009/12/28/8-basic-rules-to-implement-secure-file-uploads/>. [REF-424] Johannes Ullrich. "Top 25 Series - Rank 8 - Unrestricted Upload of Dangerous File Type". SANS Software Security Institute. 2010-02-25. <http://blogs.sans.org/appsecstreetfighter/2010/02/25/top-25-series-rank-8-unrestricted-upload-of-dangerous-file-type/>. [REF-76] Sean Barnum and Michael Gegick. "Least Privilege". 2005-09-14. <https://buildsecurityin.us-cert.gov/daisy/bsi/articles/knowledge/principles/351.html>. [REF-62] Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". Chapter 17, "File Uploading", Page 1068. 1st Edition. Addison Wesley. 2006. [REF-962] Object Management Group (OMG). "Automated Source Code Security Measure (ASCSM)". ASCSM-CWE-434. 2016-01. <http://www.omg.org/spec/ASCSM/1.0/>.
+Content History
+Submissions Submission Date Submitter Organization 2006-07-19 PLOVER Modifications Modification Date Modifier Organization 2008-07-01 Eric Dalci Cigital updated Time_of_Introduction 2008-09-08 CWE Content Team MITRE updated Alternate_Terms, Relationships, Other_Notes, Taxonomy_Mappings 2009-01-12 CWE Content Team MITRE updated Relationships 2009-12-28 CWE Content Team MITRE updated Applicable_Platforms, Functional_Areas, Likelihood_of_Exploit, Potential_Mitigations, Time_of_Introduction 2010-02-16 CWE Content Team MITRE converted from Compound_Element to Weakness 2010-02-16 CWE Content Team MITRE updated Alternate_Terms, Applicable_Platforms, Common_Consequences, Demonstrative_Examples, Name, Other_Notes, Potential_Mitigations, References, Related_Attack_Patterns, Relationship_Notes, Relationships, Type, Weakness_Ordinalities 2010-04-05 CWE Content Team MITRE updated Related_Attack_Patterns 2010-06-21 CWE Content Team MITRE updated References, Relationship_Notes 2010-09-27 CWE Content Team MITRE updated Potential_Mitigations 2010-12-13 CWE Content Team MITRE updated Potential_Mitigations 2011-06-27 CWE Content Team MITRE updated Relationships 2011-09-13 CWE Content Team MITRE updated Potential_Mitigations, References, Relationships 2012-05-11 CWE Content Team MITRE updated References, Relationships 2012-10-30 CWE Content Team MITRE updated Potential_Mitigations 2014-07-30 CWE Content Team MITRE updated Detection_Factors 2015-12-07 CWE Content Team MITRE updated Relationships 2017-11-08 CWE Content Team MITRE updated Affected_Resources, Applicable_Platforms, Likelihood_of_Exploit, Modes_of_Introduction, References, Relationships, Weakness_Ordinalities 2019-01-03 CWE Content Team MITRE updated References, Relationships, Taxonomy_Mappings 2019-06-20 CWE Content Team MITRE updated Related_Attack_Patterns 2019-09-19 CWE Content Team MITRE updated Relationships 2020-02-24 CWE Content Team MITRE updated Applicable_Platforms, Potential_Mitigations 2020-06-25 CWE Content Team MITRE updated Potential_Mitigations, Relationship_Notes 2020-08-20 CWE Content Team MITRE updated Relationships Previous Entry Names Change Date Previous Entry Name 2010-02-16 Unrestricted File Upload
+
+
