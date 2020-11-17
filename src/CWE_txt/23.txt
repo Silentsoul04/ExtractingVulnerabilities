@@ -1,0 +1,91 @@
+CWE-23: Relative Path Traversal
+Description
+The software uses external input to construct a pathname that should be within a restricted directory, but it does not properly neutralize sequences such as ".." that can resolve to a location that is outside of that directory.
+Extended Description
+This allows attackers to traverse the file system to access files or directories that are outside of the restricted directory.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+  Path Traversal Path Traversal
+                                        42
+CWE-23: Relative Path Traversal
+Relevant to the view "Research Concepts" (CWE-1000)
+CWE Version 4.2
+CWE-23: Relative Path Traversal
+Name Page
+Improper Limitation of a Pathname to a Restricted Directory 31 ('Path Traversal')
+Path Traversal: '../filedir' 48 Path Traversal: '/../filedir' 50 Path Traversal: '/dir/../filename' 51 Path Traversal: 'dir/../../filename' 53 Path Traversal: '..\filedir' 55 Path Traversal: '\..\filename' 56 Path Traversal: '\dir\..\filename' 58 Path Traversal: 'dir\..\..\filename' 60 Path Traversal: '...' (Triple Dot) 62 Path Traversal: '....' (Multiple Dot) 64 Path Traversal: '....//' 66 Path Traversal: '.../...//' 68
+         Nature
+ChildOf
+ParentOf ParentOf ParentOf ParentOf ParentOf ParentOf ParentOf ParentOf ParentOf ParentOf ParentOf ParentOf
+Type ID
+22
+      24
+      25
+      26
+      27
+      28
+      29
+      30
+      31
+      32
+      33
+      34
+      35
+                                                                                                                                                     Relevant to the view "Software Development" (CWE-699)
+Nature Type ID Name Page
+                  MemberOf
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+1219 File Handling Issues 2049
+        Scope Impact   Likelihood
+        Integrity Confidentiality Availability
+Execute Unauthorized Code or Commands
+The attacker may be able to create or overwrite critical files that are used to execute code, such as programs or libraries.
+        Integrity
+Modify Files or Directories
+The attacker may be able to overwrite or create critical files, such as programs, libraries, or important data. If the targeted file is used for a security mechanism, then the attacker may be able to bypass that mechanism. For example, appending a new account at the end
+of a password file may allow an attacker to bypass authentication.
+        Confidentiality
+Read Files or Directories
+The attacker may be able read the contents of unexpected files and expose sensitive data. If the targeted file is used for a security mechanism, then the attacker may be able to bypass that mechanism. For example, by reading a password file, the attacker could conduct brute force password guessing attacks in order to break into an account on the system.
+        Availability
+DoS: Crash, Exit, or Restart
+The attacker may be able to overwrite, delete, or corrupt unexpected critical files such as programs, libraries,
+or important data. This may prevent the software from working at all and in the case of a protection mechanisms
+ 43
+CWE-23: Relative Path Traversal
+
+Scope Impact Likelihood
+CWE Version 4.2
+CWE-23: Relative Path Traversal
+such as authentication, it has the potential to lockout every user of the software.
+Potential Mitigations
+Phase: Implementation
+Strategy = Input Validation
+Assume all input is malicious. Use an "accept known good" input validation strategy, i.e., use
+a list of acceptable inputs that strictly conform to specifications. Reject any input that does not strictly conform to specifications, or transform it into something that does. When performing
+input validation, consider all potentially relevant properties, including length, type of input, the
+full range of acceptable values, missing or extra inputs, syntax, consistency across related
+fields, and conformance to business rules. As an example of business rule logic, "boat" may
+be syntactically valid because it only contains alphanumeric characters, but it is not valid if
+the input is only expected to contain colors such as "red" or "blue." Do not rely exclusively on looking for malicious or malformed inputs. This is likely to miss at least one undesirable input, especially if the code's environment changes. This can give attackers enough room to bypass the intended validation. However, denylists can be useful for detecting potential attacks or determining which inputs are so malformed that they should be rejected outright. When validating filenames, use stringent allowlists that limit the character set to be used. If feasible, only allow a single "." character in the filename to avoid weaknesses such as CWE-23, and exclude directory separators such as "/" to avoid CWE-36. Use a list of allowable file extensions, which will help
+to avoid CWE-434. Do not rely exclusively on a filtering mechanism that removes potentially dangerous characters. This is equivalent to a denylist, which may be incomplete (CWE-184). For example, filtering "/" is insufficient protection if the filesystem also supports the use of "\" as a directory separator. Another possible error could occur when the filtering is applied in a way that still produces dangerous data (CWE-182). For example, if "../" sequences are removed from the ".../...//" string in a sequential fashion, two instances of "../" would be removed from the original string, but the remaining characters would still form the "../" string.
+Phase: Implementation
+Strategy = Input Validation
+Inputs should be decoded and canonicalized to the application's current internal representation before being validated (CWE-180). Make sure that the application does not decode the same input twice (CWE-174). Such errors could be used to bypass allowlist validation schemes by introducing dangerous inputs after they have been checked. Use a built-in path canonicalization function (such as realpath() in C) that produces the canonical version of the pathname, which effectively removes ".." sequences and symbolic links (CWE-23, CWE-59). This includes: realpath() in C getCanonicalPath() in Java GetFullPath() in ASP.NET realpath() or abs_path() in Perl realpath() in PHP
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+         MemberOf 884 MemberOf 981
+Taxonomy Mappings
+PLOVER
+Software Fault Patterns
+Related Attack Patterns
+CWE Cross-section
+SFP Secondary Cluster: Path Traversal
+884 2070 888 1981
+                           SFP16
+Relative Path Traversal Path Traversal
+    76 Manipulating Web Input to File System Calls 139 Relative Path Traversal
+References
+      [REF-192]OWASP. "OWASP Attack listing". < http://www.owasp.org/index.php/ Relative_Path_Traversal >.
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.

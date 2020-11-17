@@ -1,0 +1,72 @@
+CWE-66: Improper Handling of File Names that Identify Virtual Resources
+Description
+The product does not handle or incorrectly handles a file name that identifies a "virtual" resource that is not directly specified within the directory that is associated with the file name, causing the product to perform file-based operations on a resource that is not a file.
+Extended Description
+Virtual file names are represented like normal file names, but they are effectively aliases for other resources that do not behave like normal files. Depending on their functionality, they could be alternate entities. They are not necessarily listed in directories.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+   ChildOf 706 ParentOf 67 ParentOf 69
+ParentOf 72
+Use of Incorrectly-Resolved Name or Reference 1363 Improper Handling of Windows Device Names 120 Improper Handling of Windows ::DATA Alternate Data 122 Stream
+Improper Handling of Apple HFS+ Alternate Data Stream 124 Path
+                                      Relevant to the view "Software Development" (CWE-699)
+MemberOf 1219 File Handling Issues 2049
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Other Other
+           118
+CWE-66: Improper Handling of File Names that Identify Virtual Resources
+CWE Version 4.2
+CWE-66: Improper Handling of File Names that Identify Virtual Resources
+Automated Static Analysis - Binary or Bytecode
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Bytecode Weakness Analysis - including disassembler + source code weakness analysis
+Effectiveness = SOAR Partial
+Manual Static Analysis - Binary or Bytecode
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Binary / Bytecode disassembler - then use manual analysis for vulnerabilities & anomalies
+Effectiveness = SOAR Partial
+Dynamic Analysis with Automated Results Interpretation
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Web Application Scanner Web Services Scanner Database Scanners
+Effectiveness = SOAR Partial
+Dynamic Analysis with Manual Results Interpretation
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Fuzz Tester Framework-based Fuzzer
+Effectiveness = SOAR Partial
+Manual Static Analysis - Source Code
+According to SOAR, the following detection techniques may be useful: Highly cost effective: Focused Manual Spotcheck - Focused manual analysis of source Manual Source Code Review (not inspections)
+Effectiveness = High
+Automated Static Analysis - Source Code
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Source code Weakness Analyzer Context-configured Source Code Weakness Analyzer
+Effectiveness = SOAR Partial
+Architecture or Design Review
+According to SOAR, the following detection techniques may be useful: Highly cost effective: Formal Methods / Correct-By-Construction Cost effective for partial coverage: Inspection (IEEE 1028 standard) (can apply to requirements, design, source code, etc.)
+Effectiveness = High
+Functional Areas
+• File Processing
+Affected Resources
+• File or Directory
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+  Detection Methods
+  119
+CWE-66: Improper Handling of File Names that Identify Virtual Resources
+
+ Nature
+Type ID Name
+Page
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+Abstraction : Variant
+ 
+Nature
+Type ID Name
+Page
+Scope
+Impact
+Likelihood
+CWE Version 4.2
+CWE-67: Improper Handling of Windows Device Names
+MemberOf 981 SFP Secondary Cluster: Path Traversal 888 1981
+Taxonomy Mappings
+PLOVER Virtual Files

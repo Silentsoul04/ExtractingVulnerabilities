@@ -1,0 +1,40 @@
+CWE-46: Path Equivalence: 'filename ' (Trailing Space)
+Description
+A software system that accepts path input in the form of trailing space ('filedir ') without appropriate validation can lead to ambiguous path resolution and allow an attacker to traverse the file system to unintended locations or access arbitrary files.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Scope
+Confidentiality Integrity
+Observed Examples
+Reference
+CVE-2001-0693 CVE-2001-0778 CVE-2001-1248 CVE-2004-0280 CVE-2004-2213 CVE-2005-0622 CVE-2005-1656 CVE-2002-1603
+CVE-2002-1451
+Impact
+Read Files or Directories Modify Files or Directories
+Description
+Source disclosure via trailing encoded space "%20"
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0693
+Source disclosure via trailing encoded space "%20"
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0778
+Source disclosure via trailing encoded space "%20"
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-1248
+Source disclosure via trailing encoded space "%20"
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0280
+Source disclosure via trailing encoded space "%20"
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-2213
+Source disclosure via trailing encoded space "%20"
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-0622
+Source disclosure via trailing encoded space "%20"
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1656
+Source disclosure via trailing encoded space "%20"
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1603
+Likelihood
+   
+                            
+CVE-2001-0054 Multi-Factor Vulnerability (MVF). directory traversal and other issues in FTP server using Web encodings such as "%20"; certain manipulations have
+unusual side effects.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0054
+Trailing space ("+" in query string) leads to source code disclosure.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1451

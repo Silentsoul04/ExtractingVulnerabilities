@@ -1,0 +1,102 @@
+CWE-67: Improper Handling of Windows Device Names
+Description
+The software constructs pathnames from user input, but it does not handle or incorrectly handles a pathname containing a Windows device name such as AUX or CON. This typically leads to denial of service or an information exposure when the application attempts to process the pathname as a regular file.
+Extended Description
+Not properly handling virtual filenames (e.g. AUX, CON, PRN, COM1, LPT1) can result in different types of vulnerabilities. In some cases an attacker can request a device via injection of a virtual filename in a URL, which may cause an error that leads to a denial of service or an error page that reveals sensitive information. A software system that allows device names to bypass filtering runs the risk of an attacker injecting malicious code in a file with the name of a device.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 66 Improper Handling of File Names that Identify Virtual 118 Resources
+Weakness Ordinalities
+Resultant :
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined)
+Operating_System : Windows (Prevalence = Undetermined) Background Details
+Historically, there was a bug in the Windows operating system that caused a blue screen of death. Even after that issue was fixed DOS device names continue to be a factor.
+Likelihood Of Exploit
+High
+Common Consequences
+Availability DoS: Crash, Exit, or Restart Confidentiality Read Application Data
+                      120
+CWE-67: Improper Handling of Windows Device Names
+      Scope Impact
+Other Other
+Potential Mitigations
+Phase: Implementation
+CWE Version 4.2
+CWE-67: Improper Handling of Windows Device Names
+Likelihood
+         Be familiar with the device names in the operating system where your system is deployed. Check input for these device names.
+ Observed Examples
+Reference
+CVE-2002-0106
+CVE-2002-0200
+CVE-2002-1052
+CVE-2001-0493
+CVE-2001-0558
+CVE-2001-0492
+Description
+Server allows remote attackers to cause a denial of service via a series of requests to .JSP files that contain an MS-DOS device name. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0106
+Server allows remote attackers to cause a denial of service via an HTTP request for an MS-DOS device name. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0200
+Product allows remote attackers to use MS-DOS device names in HTTP requests to cause a denial of service or obtain the physical path of the server. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1052
+Server allows remote attackers to cause a denial of service via a URL that contains an MS-DOS device name. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0493
+Server allows a remote attacker to create a denial of service via a URL request which includes a MS-DOS device name. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0558
+Server allows remote attackers to determine the physical path of the server via a URL containing MS-DOS device names. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0492
+                             CVE-2000-0168 Microsoft Windows 9x operating systems allow an attacker to cause a denial of service via a pathname that includes file device names, aka the "DOS Device
+in Path Name" vulnerability.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2000-0168
+          CVE-2004-0552 Product does not properly handle files whose names contain reserved MS- DOS device names, which can allow malicious code to bypass detection when
+it is installed, copied, or executed.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0552
+      CVE-2005-2195 Server allows remote attackers to cause a denial of service (application crash) via a URL with a filename containing a .cgi extension and an MS-DOS device
+name.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-2195
+  Affected Resources
+• File or Directory
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+        Nature
+MemberOf MemberOf
+Type ID
+743 857
+Name Page
+             CERT C Secure Coding Standard (2008) Chapter 10 - Input Output (FIO)
+The CERT Oracle Secure Coding Standard for Java (2011) Chapter 14 - Input Output (FIO)
+734 1920 844 1940
+                    121
+CWE-67: Improper Handling of Windows Device Names
+
+Nature Type ID Name     Page
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+Abstraction : Variant
+ 
+Nature Type ID Name   Page
+CWE Version 4.2
+CWE-69: Improper Handling of Windows ::DATA Alternate Data Stream
+   MemberOf 877
+MemberOf 981 MemberOf 1147
+MemberOf 1163
+Taxonomy Mappings
+PLOVER
+CERT C Secure Coding
+The CERT Oracle Secure Coding Standard for Java (2011)
+Software Fault Patterns
+References
+CERT C++ Secure Coding Section 09 - Input Output (FIO)
+SFP Secondary Cluster: Path Traversal
+SEI CERT Oracle Secure Coding Standard for Java - Guidelines 13. Input Output (FIO)
+SEI CERT C Coding Standard - Guidelines 09. Input Output (FIO)
+868 1950
+888 1981 1133 2022
+1154 2031
+                                                     FIO32-C CWE More Specific FIO00-J
+SFP16
+Windows MS-DOS device names
+Do not perform operations on devices that are only appropriate for files
+Do not operate on files in shared directories
+Path Traversal
+                    [REF-7]Michael Howard and David LeBlanc. "Writing Secure Code". 2nd Edition. 2002 December 4. Microsoft Press. < https://www.microsoftpressstore.com/store/writing-secure- code-9780735617223 >.
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.

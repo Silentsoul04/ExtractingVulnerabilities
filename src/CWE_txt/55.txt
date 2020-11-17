@@ -1,0 +1,68 @@
+CWE-55: Path Equivalence: '/./' (Single Dot Directory)
+Description
+A software system that accepts path input in the form of single dot directory exploit ('/./') without appropriate validation can lead to ambiguous path resolution and allow an attacker to traverse the file system to unintended locations or access arbitrary files.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+Nature Type ID Name
+Page
+81
+ 
+ ChildOf
+Applicable Platforms
+41 Improper Resolution of Path Equivalence
+     Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Scope
+Confidentiality Integrity
+Potential Mitigations
+Impact
+Read Files or Directories Modify Files or Directories
+Likelihood
+   Phase: Implementation
+Strategy = Input Validation
+Inputs should be decoded and canonicalized to the application's current internal representation before being validated (CWE-180). Make sure that the application does not decode the same input twice (CWE-174). Such errors could be used to bypass allowlist validation schemes by introducing dangerous inputs after they have been checked.
+Observed Examples
+Reference
+CVE-2000-0004
+CVE-2002-0304
+BID:6042 CVE-1999-1083 CVE-2004-0815 CVE-2002-0112
+Description
+Server allows remote attackers to read source code for executable files by inserting a . (dot) into the URL. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2000-0004
+Server allows remote attackers to read password-protected files via a /./ in the HTTP request.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0304
+Input Validation error
+http://www.securityfocus.com/bid/6042
+Possibly (could be a cleansing error)
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-1999-1083
+"/./////etc" cleansed to ".///etc" then "/etc"
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0815
+Server allows remote attackers to view password protected files via /./ in the URL.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0112
+                      MemberOf Relationships
+ 101
+CWE-55: Path Equivalence: '/./' (Single Dot Directory)
+ Nature
+Type ID Name
+Page
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+ 
+Nature
+Scope
+Type ID Name
+Impact
+Page
+Likelihood
+Reference
+Description
+CWE Version 4.2
+CWE-56: Path Equivalence: 'filedir*' (Wildcard)
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+   MemberOf 981
+Taxonomy Mappings
+PLOVER
+Software Fault Patterns
+SFP Secondary Cluster: Path Traversal
+/./ (single dot directory) SFP16 Path Traversal

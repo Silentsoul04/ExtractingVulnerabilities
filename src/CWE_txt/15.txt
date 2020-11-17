@@ -1,0 +1,46 @@
+CWE-15: External Control of System or Configuration Setting
+Description
+One or more system settings or configuration elements can be externally controlled by a user.
+Extended Description
+Allowing external control of system settings can disrupt service or cause an application to behave in unexpected, and potentially malicious ways.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Potential Mitigations
+Phase: Architecture and Design
+Strategy = Separation of Privilege
+   Compartmentalize the system to have "safe" areas where trust boundaries can be unambiguously drawn. Do not allow sensitive data to go outside of the trust boundary and always be careful when interfacing with a compartment outside of the safe area. Ensure that appropriate compartmentalization is built into the system design and that the compartmentalization serves to allow for and further reinforce privilege separation functionality. Architects and designers should rely on the principle of least privilege to decide when it is appropriate to use and to drop system privileges.
+
+Phase: Implementation
+Phase: Architecture and Design
+Because setting manipulation covers a diverse set of functions, any attempt at illustrating it
+will inevitably be incomplete. Rather than searching for a tight-knit relationship between the functions addressed in the setting manipulation category, take a step back and consider the sorts of system values that an attacker should not be allowed to control.
+Phase: Implementation
+Phase: Architecture and Design
+In general, do not allow user-provided or otherwise untrusted data to control sensitive values. The leverage that an attacker gains by controlling these values is not always immediately obvious, but do not underestimate the creativity of the attacker.
+
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+   MemberOf 994
+Taxonomy Mappings
+7 Pernicious Kingdoms Software Fault Patterns
+SFP Secondary Cluster: Tainted Input to Variable
+Setting Manipulation SFP25 Tainted input to variable
+888 1989
+                   18
+CWE-15: External Control of System or Configuration Setting
+Related Attack Patterns
+CWE Version 4.2
+CWE-20: Improper Input Validation
+  
+CAPEC-ID
+Attack Pattern Name
+13 Subverting Environment Variable Values 69 Target Programs with Elevated Privileges
+76 Manipulating Web Input to File System Calls
+77 Manipulating User-Controlled Variables
+146 XML Schema Poisoning
+176 Configuration/Environment Manipulation 203 Manipulate Registry Information
+270 Modification of Registry Run Keys
+271 Schema Poisoning
+References
+                    
+              [REF-6]Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. 2005 November 7. NIST. < https://samate.nist.gov/SSATTM_Content/ papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security %20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf >.

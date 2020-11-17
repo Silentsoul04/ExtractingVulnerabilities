@@ -1,0 +1,13 @@
+CWE-47: Path Equivalence: ' filename' (Leading Space)
+Description
+   A software system that accepts path input in the form of leading space (' filedir') without appropriate validation can lead to ambiguous path resolution and allow an attacker to traverse the file system to unintended locations or access arbitrary files.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+
+ChildOf 41 Improper Resolution of Path Equivalence 81
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Confidentiality Read Files or Directories Integrity Modify Files or Directories
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+MemberOf 981 SFP Secondary Cluster: Path Traversal 888 1981

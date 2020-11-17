@@ -1,0 +1,66 @@
+CWE-69: Improper Handling of Windows ::DATA Alternate Data Stream
+Description
+The software does not properly prevent access to, or detect usage of, alternate data streams (ADS).
+Extended Description
+An attacker can use an ADS to hide information about a file (e.g. size, the name of the process) from a system or file browser tools such as Windows Explorer and 'dir' at the command line utility. Alternately, the attacker might be able to bypass intended access restrictions for the associated data fork.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 66 Improper Handling of File Names that Identify Virtual 118 Resources
+Applicable Platforms
+         122
+CWE-69: Improper Handling of Windows ::DATA Alternate Data Stream
+CWE Version 4.2
+CWE-69: Improper Handling of Windows ::DATA Alternate Data Stream
+Language : Language-Independent (Prevalence = Undetermined)
+Operating_System : Windows (Prevalence = Undetermined) Background Details
+Alternate data streams (ADS) were first implemented in the Windows NT operating system
+to provide compatibility between NTFS and the Macintosh Hierarchical File System (HFS). In HFS, data and resource forks are used to store information about a file. The data fork provides information about the contents of the file while the resource fork stores metadata such as file type.
+Common Consequences
+Potential Mitigations
+Phase: Testing
+Software tools are capable of finding ADSs on your system.
+Phase: Implementation
+Ensure that the source code correctly parses the filename to read or write to the correct stream.
+      Scope Impact   Likelihood
+        Access Control Non-Repudiation Other
+Bypass Protection Mechanism Hide Activities
+Other
+   Observed Examples
+Reference
+CVE-1999-0278
+CVE-2000-0927
+Affected Resources
+• System Process
+Description
+In IIS, remote attackers can obtain source code for ASP files by appending ":: $DATA" to the URL. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-1999-0278
+Product does not properly record file sizes if they are stored in alternative data streams, which allows users to bypass quota restrictions. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2000-0927
+             MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+Nature Type ID Name Page
+MemberOf 904 SFP Primary Cluster: Malware 888 1959
+Notes
+Theoretical
+This and similar problems exist because the same resource can have multiple identifiers that dictate which behavior can be performed on the resource.
+                           Taxonomy Mappings
+PLOVER
+Related Attack Patterns
+168 Windows ::DATA Alternate Data Stream
+Windows ::DATA alternate data stream
+  Mapped Taxonomy Name
+    Node ID
+    Fit
+    Mapped Node Name
+        CAPEC-ID
+    Attack Pattern Name
+    References
+ 123
+CWE-69: Improper Handling of Windows ::DATA Alternate Data Stream
+
+Abstraction : Variant
+ 
+Nature Type ID Name   Page
+CWE Version 4.2
+CWE-72: Improper Handling of Apple HFS+ Alternate Data Stream Path
+[REF-562]Don Parker. "Windows NTFS Alternate Data Streams". 2005 February 6. < http:// www.securityfocus.com/infocus/1822 >.
+[REF-7]Michael Howard and David LeBlanc. "Writing Secure Code". 2nd Edition. 2002 December 4. Microsoft Press. < https://www.microsoftpressstore.com/store/writing-secure- code-9780735617223 >.

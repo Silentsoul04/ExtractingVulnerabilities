@@ -1,0 +1,111 @@
+CWE-77: Improper Neutralization of Special Elements used in a Command ('Command Injection')
+Description
+The software constructs all or part of a command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended command when it is sent to a downstream component.
+Extended Description
+Command injection vulnerabilities typically occur when:
+1. Data enters the application from an untrusted source.
+2. The data is part of a string that is executed as a command by the application.
+3. By executing the command, the application gives an attacker a privilege or capability that the attacker would not otherwise have.
+Command injection is a common problem with wrapper programs.
+                  136
+CWE-77: Improper Neutralization of Special Elements used in a Command ('Command Injection')
+CWE Version 4.2
+CWE-77: Improper Neutralization of Special Elements used in a Command ('Command Injection')
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+         Nature
+ChildOf
+ParentOf
+ParentOf
+ParentOf ParentOf
+Type ID
+74
+78
+88
+624 917
+Name Page
+Improper Neutralization of Special Elements in Output Used 130 by a Downstream Component ('Injection')
+Improper Neutralization of Special Elements used in an OS 141 Command ('OS Command Injection')
+Improper Neutralization of Argument Delimiters in a 181 Command ('Argument Injection')
+Executable Regular Expression Error 1239 Improper Neutralization of Special Elements used in an 1601 Expression Language Statement ('Expression Language Injection')
+                                                             Relevant to the view "Weaknesses for Simplified Mapping of Published Vulnerabilities" (CWE-1003)
+Nature Type ID Name Page
+ChildOf 74 Improper Neutralization of Special Elements in Output Used 130 by a Downstream Component ('Injection')
+Relevant to the view "Architectural Concepts" (CWE-1008)
+Nature Type ID Name Page
+                                          MemberOf
+Weakness Ordinalities
+Primary :
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Likelihood Of Exploit
+High
+Common Consequences
+Potential Mitigations
+Phase: Architecture and Design
+If at all possible, use library calls rather than external processes to recreate the desired functionality.
+Phase: Implementation
+If possible, ensure that all external commands called from the program are statically created.
+1019 Validate Inputs 2005
+        Scope Impact   Likelihood
+        Integrity Confidentiality Availability
+Execute Unauthorized Code or Commands
+If a malicious user injects a character (such as a semi- colon) that delimits the end of one command and the beginning of another, it may be possible to then insert an entirely new and unrelated command that was not intended to be executed.
+    137
+CWE-77: Improper Neutralization of Special Elements used in a Command ('Command Injection')
+
+int main(int argc, char** argv) {
+char cmd[CMD_MAX] = "/usr/bin/cat "; strcat(cmd, argv[1]);
+system(cmd);
+}
+  ...
+String btype = request.getParameter("backuptype"); String cmd = new String("cmd.exe /K \"
+CWE Version 4.2
+CWE-77: Improper Neutralization of Special Elements used in a Command ('Command Injection')
+Phase: Implementation
+Strategy = Input Validation
+Assume all input is malicious. Use an "accept known good" input validation strategy, i.e., use
+a list of acceptable inputs that strictly conform to specifications. Reject any input that does not strictly conform to specifications, or transform it into something that does. When performing input validation, consider all potentially relevant properties, including length, type of input, the full range of acceptable values, missing or extra inputs, syntax, consistency across related fields, and conformance to business rules. As an example of business rule logic, "boat" may be syntactically valid because it only contains alphanumeric characters, but it is not valid if the input is only expected to contain colors such as "red" or "blue." Do not rely exclusively on looking for malicious or malformed inputs. This is likely to miss at least one undesirable input, especially if the code's environment changes. This can give attackers enough room to bypass the intended validation. However, denylists can be useful for detecting potential attacks or determining which inputs are so malformed that they should be rejected outright.
+Phase: Operation
+Run time: Run time policy enforcement may be used in an allowlist fashion to prevent use of any non-sanctioned commands.
+Phase: System Configuration
+Assign permissions to the software system that prevents the user from accessing/opening privileged files.
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+   MemberOf MemberOf MemberOf MemberOf MemberOf MemberOf MemberOf
+Notes
+Terminology
+713 OWASP Top Ten 2007 Category A2 - Injection Flaws 629 1903 722 OWASP Top Ten 2004 Category A1 - Unvalidated Input 711 1907 727 OWASP Top Ten 2004 Category A6 - Injection Flaws 711 1910 929 OWASP Top Ten 2013 Category A1 - Injection 928 1961 990 SFP Secondary Cluster: Tainted Input to Command 888 1985 1005 7PK - Input Validation and Representation 700 1993 1027 OWASP Top Ten 2017 Category A1 - Injection 1026 2007
+                                                                                    The "command injection" phrase carries different meanings to different people. For
+it refers to refers to any type of attack that can allow the attacker to execute commands of
+their own choosing, regardless of how those commands are inserted. The command injection could thus be resultant from another weakness. This usage also includes cases in which the functionality allows the user to specify an entire command, which is then executed; within CWE, this situation might be better regarded as an authorization problem (since an attacker should not be able to specify arbitrary commands.) Another common usage, which includes CWE-77 and its descendants, involves cases in which the attacker injects separators into the command being constructed.
+Taxonomy Mappings
+7 Pernicious Kingdoms
+CLASP
+OWASP Top Ten 2007 A2 OWASP Top Ten 2004 A1 OWASP Top Ten 2004 A6 Software Fault Patterns SFP24 SEI CERT Perl Coding IDS34- Standard PL
+Related Attack Patterns
+CWE More Specific CWE More Specific CWE More Specific
+CWE More Specific
+Command Injection
+Command injection
+Injection Flaws
+Unvalidated Input
+Injection Flaws
+Tainted input to command
+Do not pass untrusted, unsanitized data to a command interpreter
+some people,
+                                                    15 Command Delimiters
+40 Manipulating Writeable Terminal Devices
+       140
+CWE-77: Improper Neutralization of Special Elements used in a Command ('Command Injection')
+CWE Version 4.2
+CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')
+43 Exploiting Multiple Input Interpretation Layers
+75 Manipulating Writeable Configuration Files
+76 Manipulating Web Input to File System Calls
+136 LDAP Injection
+183 IMAP/SMTP Command Injection 248 Command Injection
+References
+[REF-6]Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. 2005 November 7. NIST. < https://samate.nist.gov/SSATTM_Content/ papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security %20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf >.
+[REF-140]Greg Hoglund and Gary McGraw. "Exploiting Software: How to Break Code". 2004 February 7. Addison-Wesley. < https://www.amazon.com/Exploiting-Software-How-Break-Code/ dp/0201786958 >.
+[REF-44]Michael Howard, David LeBlanc and John Viega. "24 Deadly Sins of Software Security". McGraw-Hill. 2010.

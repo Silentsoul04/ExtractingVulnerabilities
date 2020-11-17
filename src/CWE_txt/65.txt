@@ -1,0 +1,75 @@
+CWE-65: Windows Hard Link
+Description
+The software, when opening a file or directory, does not sufficiently handle when the name is associated with a hard link to a target that is outside of the intended control sphere. This could allow an attacker to cause the software to operate on unauthorized files.
+Extended Description
+Failure for a system to check for hard links can result in vulnerability to different types of attacks. For example, an attacker can escalate their privileges if a file used by a privileged program is replaced with a hard link to a sensitive file (e.g. AUTOEXEC.BAT). When the process opens the
+ 116
+CWE-65: Windows Hard Link
+CWE Version 4.2
+CWE-65: Windows Hard Link
+file, the attacker can assume the privileges of that process, or prevent the program from accurately processing data.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+Nature Type ID Name Page
+                     ChildOf
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined)
+Operating_System : Windows (Prevalence = Undetermined) Common Consequences
+59 Improper Link Resolution Before File Access ('Link 106 Following')
+         Scope
+Confidentiality Integrity
+Potential Mitigations
+Impact
+Read Files or Directories Modify Files or Directories
+Likelihood
+         Phase: Architecture and Design
+Strategy = Separation of Privilege
+Follow the principle of least privilege when assigning access rights to entities in a software system. Denying access to a file can prevent an attacker from replacing that file with a link to a sensitive file. Ensure good compartmentalization in the system to provide protected areas that can be trusted.
+Observed Examples
+CVE-2003-0844 Web server plugin allows local users to overwrite arbitrary files via a symlink attack on predictable temporary filenames.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0844
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+   Reference Description
+      CVE-2002-0725 File system allows local attackers to hide file usage activities via a hard link to the target file, which causes the link to be recorded in the audit trail instead of
+the target file.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0725
+              Nature Type ID
+MemberOf 743 MemberOf 877 MemberOf 980
+Name Page
+             CERT C Secure Coding Standard (2008) Chapter 10 - Input Output (FIO)
+CERT C++ Secure Coding Section 09 - Input Output (FIO)
+SFP Secondary Cluster: Link in Resource Name Resolution
+734 1920 868 1950 888 1981
+                                Notes
+ 117
+
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+  Weakness ID : 66 Status: Draft Structure : Simple
+Abstraction : Base
+ 
+Nature
+Nature
+Scope
+Type ID Name
+Type ID Name
+Impact
+Page
+Page
+Likelihood
+CWE Version 4.2
+CWE-66: Improper Handling of File Names that Identify Virtual Resources
+  Research Gap
+Under-studied
+Taxonomy Mappings
+PLOVER
+CERT C Secure Coding Software Fault Patterns
+References
+FIO05-C SFP18
+Windows hard link
+Identify files using multiple file attributes Link in resource name resolution
+                    [REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.

@@ -1,0 +1,23 @@
+CWE-54: Path Equivalence: 'filedir\' (Trailing Backslash)
+Description
+A software system that accepts path input in the form of trailing backslash ('filedir\') without appropriate validation can lead to ambiguous path resolution and allow an attacker to traverse the file system to unintended locations or access arbitrary files.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 162 Improper Neutralization of Trailing Special Elements 386 ChildOf 41 Improper Resolution of Path Equivalence 81
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Confidentiality Read Files or Directories Integrity Modify Files or Directories
+Potential Mitigations
+Phase: Implementation
+Strategy = Input Validation
+Inputs should be decoded and canonicalized to the application's current internal representation before being validated (CWE-180). Make sure that the application does not decode the same input twice (CWE-174). Such errors could be used to bypass allowlist validation schemes by introducing dangerous inputs after they have been checked.
+Observed Examples
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+                        MemberOf 981
+Taxonomy Mappings
+PLOVER
+Software Fault Patterns
+SFP Secondary Cluster: Path Traversal
+filedir\ (trailing backslash) SFP16 Path Traversal

@@ -1,0 +1,172 @@
+CWE-74: Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')
+Description
+The software constructs all or part of a command, data structure, or record using externally- influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify how it is parsed or interpreted when it is sent to a downstream component.
+Extended Description
+Software has certain assumptions about what constitutes data and control respectively. It is the lack of verification of these assumptions for user-controlled input that leads to injection problems. Injection problems encompass a wide variety of issues -- all mitigated in very different ways
+and usually attempted in order to alter the control flow of the process. For this reason, the most effective way to discuss these weaknesses is to note the distinct features which classify them as injection weaknesses. The most important issue to note is that all injection problems share one
+                                              130
+CWE-74: Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')
+CWE Version 4.2
+CWE-74: Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')
+thing in common -- i.e., they allow for the injection of control plane data into the user-controlled data plane. This means that the execution of the process may be altered by sending code in through legitimate data channels, using no other mechanism. While buffer overflows, and many other flaws, involve the use of some further issue to gain execution, injection problems need only for the data
+to be parsed. The most classic instantiations of this category of weakness are SQL injection and format string vulnerabilities.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+          Nature
+ChildOf ParentOf
+ParentOf ParentOf
+ParentOf ParentOf
+ParentOf ParentOf
+ParentOf
+ParentOf CanFollow CanFollow
+Type ID
+707 75
+77 79
+91 93
+94 99
+943
+1236 20 116
+Name Page
+Improper Neutralization 1365 Failure to Sanitize Special Elements into a Different Plane 134 (Special Element Injection)
+Improper Neutralization of Special Elements used in a 136 Command ('Command Injection')
+Improper Neutralization of Input During Web Page 152 Generation ('Cross-site Scripting')
+XML Injection (aka Blind XPath Injection) 200 Improper Neutralization of CRLF Sequences ('CRLF 202 Injection')
+Improper Control of Generation of Code ('Code Injection') 204 Improper Control of Resource Identifiers ('Resource 225 Injection')
+Improper Neutralization of Special Elements in Data Query 1628 Logic
+Improper Neutralization of Formula Elements in a CSV File 1759 Improper Input Validation 19 Improper Encoding or Escaping of Output 260
+                                                                                                                                         Relevant to the view "Weaknesses for Simplified Mapping of Published Vulnerabilities" (CWE-1003)
+        Nature
+ParentOf
+ParentOf
+ParentOf
+ParentOf
+ParentOf
+ParentOf ParentOf ParentOf
+ParentOf
+Type ID
+77 78 79 88 89
+91 94 917
+1236
+Name Page
+Improper Neutralization of Special Elements used in a 136 Command ('Command Injection')
+Improper Neutralization of Special Elements used in an OS 141 Command ('OS Command Injection')
+Improper Neutralization of Input During Web Page 152 Generation ('Cross-site Scripting')
+Improper Neutralization of Argument Delimiters in a 181 Command ('Argument Injection')
+Improper Neutralization of Special Elements used in an SQL 187 Command ('SQL Injection')
+XML Injection (aka Blind XPath Injection) 200 Improper Control of Generation of Code ('Code Injection') 204 Improper Neutralization of Special Elements used in an 1601 Expression Language Statement ('Expression Language Injection')
+Improper Neutralization of Formula Elements in a CSV File 1759
+                                                                                                        Relevant to the view "Architectural Concepts" (CWE-1008)
+  131
+CWE-74: Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')
+
+     Nature Type ID Name   Page
+              Scope Impact   Likelihood
+        Confidentiality Read Application Data
+Many injection attacks involve the disclosure of important information -- in terms of both data sensitivity and usefulness in further exploitation.
+        Access Control Bypass Protection Mechanism
+In some cases, injectable code controls authentication; this may lead to a remote vulnerability.
+        Other Alter Execution Logic
+Injection attacks are characterized by the ability to significantly change the flow of a given process, and in some cases, to the execution of arbitrary code.
+        Integrity Other
+Other
+Data injection attacks lead to loss of data integrity in nearly all cases as the control-plane data injected is always incidental to data recall or writing.
+        Non-Repudiation Hide Activities
+Often the actions performed by injected control code are unlogged.
+         Nature Type ID Name     Page
+            CWE Version 4.2
+CWE-74: Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')
+MemberOf 1019 Validate Inputs 2005
+Weakness Ordinalities
+Primary :
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Likelihood Of Exploit
+High
+Common Consequences
+        Potential Mitigations
+Phase: Requirements
+Programming languages and supporting technologies might be chosen which are not subject to these issues.
+Phase: Implementation
+Utilize an appropriate mix of allowlist and denylist parsing to filter control-plane syntax from all input.
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ MemberOf MemberOf MemberOf MemberOf
+727 OWASP Top Ten 2004 Category A6 - Injection Flaws 929 OWASP Top Ten 2013 Category A1 - Injection
+990 SFP Secondary Cluster: Tainted Input to Command 1003 Weaknesses for Simplified Mapping of Published
+711 1910 928 1961 888 1985 1003 2079
+                                       Vulnerabilities
+       132
+CWE-74: Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')
+
+CWE Version 4.2
+CWE-74: Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')
+Notes
+Theoretical
+Many people treat injection only as an input validation problem (CWE-20) because many people do not distinguish between the consequence/attack (injection) and the protection mechanism that prevents the attack from succeeding. However, input validation is only one potential protection mechanism (output encoding is another), and there is a chaining relationship between improper input validation and the improper enforcement of the structure of messages to other components. Other issues not directly related to input validation, such as race conditions, could similarly impact message structure.
+   Taxonomy Mappings
+CLASP
+OWASP Top Ten 2004 A6 Software Fault Patterns SFP24
+Related Attack Patterns
+Injection problem ('data' used as
+something else) CWE More Specific Injection Flaws
+Tainted input to command
+  Mapped Taxonomy Name
+    Node ID
+    Fit
+    Mapped Node Name
+                        CAPEC-ID
+    Attack Pattern Name
+  3 Using Leading 'Ghost' Character Sequences to Bypass Input Filters
+6 Argument Injection
+7 Blind SQL Injection
+8 Buffer Overflow in an API Call
+9 Buffer Overflow in Local Command-Line Utilities
+10 Buffer Overflow via Environment Variables
+13 Subverting Environment Variable Values
+14 Client-side Injection-induced Buffer Overflow
+24 Filter Failure through Buffer Overflow 28 Fuzzing
+34 HTTP Response Splitting
+42 MIME Conversion
+43 Exploiting Multiple Input Interpretation Layers
+45 Buffer Overflow via Symbolic Links
+46 Overflow Variables and Tags
+47 Buffer Overflow via Parameter Expansion
+51 Poison Web Service Registry
+52 Embedding NULL Bytes
+53 Postfix, Null Terminate, and Backslash
+64 Using Slashes and URL Encoding Combined to Bypass Validation Logic
+66 SQL Injection
+67 String Format Overflow in syslog()
+71 Using Unicode Encoding to Bypass Validation Logic
+72 URL Encoding
+76 Manipulating Web Input to File System Calls
+78 Using Escaped Slashes in Alternate Encoding
+79 Using Slashes in Alternate Encoding
+80 Using UTF-8 Encoding to Bypass Validation Logic
+83 XPath Injection
+84 XQuery Injection
+101 Server Side Include (SSI) Injection
+108 Command Line Execution through SQL Injection 120 Double Encoding
+135 Format String Injection
+                                                                                                                                       133
+CWE-74: Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')
+
+CAPEC-ID
+Attack Pattern Name
+Abstraction : Class
+ 
+Nature
+Nature
+Scope
+Type ID Name
+Type ID Name
+Impact
+Page
+Page
+Likelihood
+CWE Version 4.2
+CWE-75: Failure to Sanitize Special Elements into a Different Plane (Special Element Injection)
+250 XML Injection
+267 Leverage Alternate Encoding 273 HTTP Response Smuggling
+References
+[REF-18]Secure Software, Inc.. "The CLASP Application Security Process". 2005. < https:// cwe.mitre.org/documents/sources/TheCLASPApplicationSecurityProcess.pdf >.

@@ -1,0 +1,67 @@
+CWE-14: Compiler Removal of Code to Clear Buffers
+Description
+Sensitive memory is cleared according to the source code, but compiler optimizations leave the memory untouched when it is not read from again, aka "dead store removal."
+Extended Description
+This compiler optimization error occurs when:
+• 1. Secret data are stored in memory.
+• 2. The secret data are scrubbed from memory by overwriting its contents.
+• 3. The source code is compiled using an optimizing compiler, which identifies and removes
+the function that overwrites the contents as a dead store because the memory is not used subsequently.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Applicable Platforms
+Language : C (Prevalence = Undetermined)
+Language : C++ (Prevalence = Undetermined) Common Consequences
+Confidentiality Read Memory
+Access Control Bypass Protection Mechanism
+           14
+CWE-14: Compiler Removal of Code to Clear Buffers
+CWE Version 4.2
+CWE-14: Compiler Removal of Code to Clear Buffers
+  
+Scope Impact   Likelihood
+This weakness will allow data that has not been cleared from memory to be read. If this data contains sensitive password information, then an attacker can read the password and use the information to bypass protection mechanisms.
+Detection Methods
+Black Box
+This specific weakness is impossible to detect using black box methods. While an analyst could examine memory to see that it has not been scrubbed, an analysis of the executable would
+not be successful. This is because the compiler has already removed the relevant code. Only the source code shows whether the programmer intended to clear the memory or not, so this weakness is indistinguishable from others.
+White Box
+This weakness is only detectable using white box methods (see black box detection factor). Careful analysis is required to determine if the code is likely to be removed by the compiler.
+Potential Mitigations
+Phase: Implementation
+Store the sensitive data in a "volatile" memory location if available.
+Phase: Build and Compilation
+If possible, configure your compiler so that it does not remove dead stores.
+Phase: Architecture and Design
+Where possible, encrypt sensitive data that are used by a software system.
+Affected Resources
+• Memory
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+   MemberOf 2 MemberOf 729 MemberOf 747
+MemberOf 883
+MemberOf 884 MemberOf 963
+Taxonomy Mappings
+7 Pernicious Kingdoms PLOVER
+OWASP Top Ten 2004 CERT C Secure Coding
+Software Fault Patterns
+References
+7PK - Environment 700 1880 OWASP Top Ten 2004 Category A8 - Insecure Storage 711 1911 CERT C Secure Coding Standard (2008) Chapter 14 - 734 1923 Miscellaneous (MSC)
+CERT C++ Secure Coding Section 49 - Miscellaneous 868 1953 (MSC)
+CWE Cross-section 884 2070 SFP Secondary Cluster: Exposed Data 888 1973
+                                                                                       A8 CWE More Specific MSC06-
+C
+SFP23
+Insecure Compiler Optimization Sensitive memory uncleared by compiler optimization
+Insecure Storage
+Be aware of compiler optimization when dealing with sensitive data
+Exposed Data
+                    [REF-6]Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. 2005 November 7. NIST. < https://samate.nist.gov/SSATTM_Content/ papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security %20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf >.
+[REF-7]Michael Howard and David LeBlanc. "Writing Secure Code". 2nd Edition. 2002 December 4. Microsoft Press. < https://www.microsoftpressstore.com/store/writing-secure- code-9780735617223 >.
+[REF-124]Michael Howard. "When scrubbing secrets in memory doesn't work". BugTraq. 2002 November 5. < http://cert.uni-stuttgart.de/archive/bugtraq/2002/11/msg00046.html >.
+[REF-125]Michael Howard. "Some Bad News and Some Good News". 2002 October 1. Microsoft. < http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncode/html/secure10102002.asp >.
+ 16
+CWE-14: Compiler Removal of Code to Clear Buffers
+CWE Version 4.2
+CWE-15: External Control of System or Configuration Setting
+[REF-126]Joseph Wagner. "GNU GCC: Optimizer Removes Code Necessary for Security". Bugtraq. 2002 November 6. < http://www.derkeiler.com/Mailing-Lists/securityfocus/ bugtraq/2002-11/0257.html >.

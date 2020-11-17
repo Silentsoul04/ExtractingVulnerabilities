@@ -1,0 +1,37 @@
+CWE-12: ASP.NET Misconfiguration: Missing Custom Error Page
+Description
+An ASP .NET application must enable custom error pages in order to prevent attackers from mining information from the framework's built-in responses.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Applicable Platforms
+756 Missing Custom Error Page 1393
+     Language : ASP.NET (Prevalence = Undetermined) Background Details
+The mode attribute of the <customErrors> tag defines whether custom or default error pages are used.
+Common Consequences
+Scope Impact   Likelihood
+Confidentiality
+Read Application Data
+Default error pages gives detailed information about the error that occurred, and should not be used in production environments. Attackers can leverage the additional information provided by a default error page to mount attacks targeted on the framework, database, or other resources used by the application.
+Potential Mitigations
+Phase: System Configuration
+Handle exceptions appropriately in source code. ASP .NET applications should be configured to use custom error pages instead of the framework default page.
+Phase: Architecture and Design
+Do not attempt to process an error or attempt to mask it.
+Phase: Implementation
+Verify return values are correct and do not supply sensitive information about the system.
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+   MemberOf 2 MemberOf 731
+MemberOf 963
+Taxonomy Mappings
+7 Pernicious Kingdoms
+References
+7PK - Environment
+OWASP Top Ten 2004 Category A10 - Insecure Configuration Management
+SFP Secondary Cluster: Exposed Data
+700 1880 711 1912
+888 1973
+                                ASP.NET Misconfiguration: Missing Custom Error Handling
+    [REF-6]Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. 2005 November 7. NIST. < https://samate.nist.gov/SSATTM_Content/ papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security %20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf >.
+[REF-65]M. Howard, D. LeBlanc and J. Viega. "19 Deadly Sins of Software Security". 2005 July 6. McGraw-Hill/Osborne.
+[REF-66]OWASP, Fortify Software. "ASP.NET Misconfiguration: Missing Custom Error Handling". < http://www.owasp.org/index.php/ASP.NET_Misconfiguration:_Missing_Custom_Error_Handling >.

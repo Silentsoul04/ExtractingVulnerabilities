@@ -1,0 +1,199 @@
+CWE-59: Improper Link Resolution Before File Access ('Link Following')
+Description
+The software attempts to access a file based on the filename, but it does not properly prevent that filename from identifying a link or shortcut that resolves to an unintended resource.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+    ChildOf ParentOf ParentOf ParentOf ParentOf CanFollow CanFollow
+706 Use of Incorrectly-Resolved Name or Reference 1363 61 UNIX Symbolic Link (Symlink) Following 110 62 UNIX Hard Link 112 64 Windows Shortcut Following (.LNK) 114 65 Windows Hard Link 116 73 External Control of File Name or Path 125 363 Race Condition Enabling Link Following 803
+                                                                       Relevant to the view "Weaknesses for Simplified Mapping of Published Vulnerabilities" (CWE-1003)
+ChildOf 706 Use of Incorrectly-Resolved Name or Reference 1363
+Relevant to the view "Architectural Concepts" (CWE-1008)
+MemberOf 1019 Validate Inputs 2005
+Relevant to the view "Software Development" (CWE-699)
+MemberOf 1219 File Handling Issues 2049
+Weakness Ordinalities
+Resultant :
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Operating_System : Windows (Prevalence = Sometimes) Operating_System : Unix (Prevalence = Often)
+Background Details
+Soft links are a UNIX term that is synonymous with simple shortcuts on windows based platforms.
+Alternate Terms
+insecure temporary file : Some people use the phrase "insecure temporary file" when referring to a link following weakness, but other weaknesses can produce insecure temporary files without any symlink involvement at all.
+Likelihood Of Exploit
+                       106
+CWE-59: Improper Link Resolution Before File Access ('Link Following')
+Medium
+Common Consequences
+CWE Version 4.2
+CWE-59: Improper Link Resolution Before File Access ('Link Following')
+     Scope Impact   Likelihood
+        Confidentiality Integrity Access Control
+Read Files or Directories Modify Files or Directories Bypass Protection Mechanism
+An attacker may be able to traverse the file system to unintended locations and read or overwrite the contents of unexpected files. If the files are used for a security mechanism then an attacker may be able to bypass the mechanism.
+        Other Execute Unauthorized Code or Commands
+Windows simple shortcuts, sometimes referred to as soft links, can be exploited remotely since a ".LNK" file can be uploaded like a normal file. This can enable remote execution.
+    Detection Methods
+Automated Static Analysis - Binary or Bytecode
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Bytecode Weakness Analysis - including disassembler + source code weakness analysis
+Effectiveness = SOAR Partial
+Manual Static Analysis - Binary or Bytecode
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Binary / Bytecode disassembler - then use manual analysis for vulnerabilities & anomalies
+Effectiveness = SOAR Partial
+Dynamic Analysis with Automated Results Interpretation
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Web Application Scanner Web Services Scanner Database Scanners
+Effectiveness = SOAR Partial
+Dynamic Analysis with Manual Results Interpretation
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Fuzz Tester Framework-based Fuzzer
+Effectiveness = SOAR Partial
+Manual Static Analysis - Source Code
+According to SOAR, the following detection techniques may be useful: Highly cost effective: Focused Manual Spotcheck - Focused manual analysis of source Manual Source Code Review (not inspections)
+Effectiveness = High
+Automated Static Analysis - Source Code
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Source code Weakness Analyzer Context-configured Source Code Weakness Analyzer
+Effectiveness = SOAR Partial
+ 107
+CWE-59: Improper Link Resolution Before File Access ('Link Following')
+
+    Reference Description
+          CVE-2004-0689 Window manager does not properly handle when certain symbolic links point to "stale" locations, which could allow local users to create or truncate arbitrary
+files.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0689
+    CWE Version 4.2
+CWE-59: Improper Link Resolution Before File Access ('Link Following')
+Architecture or Design Review
+According to SOAR, the following detection techniques may be useful: Highly cost effective: Formal Methods / Correct-By-Construction Cost effective for partial coverage: Inspection (IEEE 1028 standard) (can apply to requirements, design, source code, etc.)
+Effectiveness = High
+Potential Mitigations
+Phase: Architecture and Design
+Strategy = Separation of Privilege
+Follow the principle of least privilege when assigning access rights to entities in a software system. Denying access to a file can prevent an attacker from replacing that file with a link to a sensitive file. Ensure good compartmentalization in the system to provide protected areas that can be trusted.
+  Observed Examples
+CVE-1999-1386
+CVE-2000-1178
+CVE-2004-0217
+CVE-2003-0517
+CVE-2005-1879 CVE-2005-1880 CVE-2005-1916 CVE-2000-0972
+CVE-2005-0824 CVE-2001-1494
+CVE-2002-0793
+CVE-2003-0578
+CVE-1999-0783
+Some versions of Perl follows symbolic links when running with the -e option, which allows local users to overwrite arbitrary files via a symlink attack. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-1999-1386
+Text editor follows symbolic links when creating a rescue copy during an abnormal exit, which allows local users to overwrite the files of other users. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2000-1178
+Antivirus update allows local users to create or append to arbitrary files via a symlink attack on a logfile. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0217
+Symlink attack allows local users to overwrite files. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0517
+Second-order symlink vulnerabilities
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1879
+Second-order symlink vulnerabilities
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1880
+Symlink in Python program
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1916
+Setuid product allows file reading by replacing a file being edited with a symlink to the targeted file, leaking the result in error messages when parsing fails. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2000-0972
+Signal causes a dump that follows symlinks. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-0824
+Hard link attack, file overwrite; interesting because program checks against soft links
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-1494
+Hard link and possibly symbolic link following vulnerabilities in embedded operating system allow local users to overwrite arbitrary files. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0793
+Server creates hard links and unlinks files as root, which allows local users to gain privileges by deleting and overwriting arbitrary files. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0578
+Operating system allows local users to conduct a denial of service by creating a hard link from a device special file to a file on an NFS file system.
+                                             108
+CWE-59: Improper Link Resolution Before File Access ('Link Following')
+
+     Reference
+CWE Version 4.2
+CWE-59: Improper Link Resolution Before File Access ('Link Following')
+Description
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-1999-0783
+Web hosting manager follows hard links, which allows local users to read or modify arbitrary files. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-1603
+Package listing system allows local users to overwrite arbitrary files via a hard link attack on the lockfiles. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-1901
+Hard link race condition
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1111
+FTP server allows remote attackers to read arbitrary files and directories by uploading a .lnk (link) file that points to the target file. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-1042
+FTP server allows remote attackers to read arbitrary files and directories by uploading a .lnk (link) file that points to the target file. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-1043
+".LNK." - .LNK with trailing dot
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-1386
+Rootkits can bypass file access restrictions to Windows kernel directories using NtCreateSymbolicLinkObject function to create symbolic link https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-1233
+Web server plugin allows local users to overwrite arbitrary files via a symlink attack on predictable temporary filenames. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0844
+        CVE-2004-1603
+CVE-2004-1901
+CVE-2005-1111
+CVE-2001-1042
+CVE-2001-1043
+CVE-2001-1386 CVE-2003-1233
+CVE-2003-0844
+Functional Areas
+• File Processing
+Affected Resources
+• File or Directory
+               CVE-2000-0342 Mail client allows remote attackers to bypass the user warning for executable attachments such as .exe, .com, and .bat by using a .lnk file that refers to the
+attachment, aka "Stealth Attachment."
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2000-0342
+              CVE-2005-0587 Browser allows remote malicious web sites to overwrite arbitrary files by tricking the user into downloading a .LNK (link) file twice, which overwrites the
+file that was referenced in the first .LNK file.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-0587
+              CVE-2002-0725 File system allows local attackers to hide file usage activities via a hard link to the target file, which causes the link to be recorded in the audit trail instead of
+the target file.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0725
+      MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+        Nature
+MemberOf MemberOf
+MemberOf MemberOf
+Type ID
+635 743
+748 808
+Name Page
+Weaknesses Originally Used by NVD from 2008 to 2016 635 2054
+                          CERT C Secure Coding Standard (2008) Chapter 10 - Input Output (FIO)
+CERT C Secure Coding Standard (2008) Appendix - POSIX (POS)
+2010 Top 25 - Weaknesses On the Cusp
+734 1920 734 1924 800 1928
+                                 109
+CWE-59: Improper Link Resolution Before File Access ('Link Following')
+
+Nature Type ID Name     Page
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+CAPEC-ID
+Attack Pattern Name
+  Weakness ID : 61 Status: Incomplete Structure : Composite
+Abstraction : Compound
+ 
+Nature Type ID Name   Page
+CWE Version 4.2
+
+MemberOf 884 MemberOf 980
+Notes
+Relationship
+CERT C++ Secure Coding Section 09 - Input Output (FIO)
+CWE Cross-section
+SFP Secondary Cluster: Link in Resource Name Resolution
+868 1950
+884 2070 888 1981
+                                Link following vulnerabilities are Multi-factor Vulnerabilities (MFV). They are the combination
+of multiple elements: file or directory permissions, filename predictability, race conditions, and in some cases, a design limitation in which there is no mechanism for performing atomic file creation operations. Some potential factors are race conditions, permissions, and predictability.
+Research Gap
+UNIX hard links, and Windows hard/soft links are under-studied and under-reported.
+Taxonomy Mappings
+PLOVER
+CERT C Secure Coding
+CERT C Secure Coding
+SEI CERT Perl Coding Standard
+Software Fault Patterns
+Related Attack Patterns
+FIO02-C
+POS01-
+C
+FIO01- CWE More Specific PL
+SFP18
+Link Following
+Canonicalize path names originating from untrusted sources
+Check for the existence of links when dealing with files
+Do not operate on files that can be modified by untrusted users
+Link in resource name resolution
+                                    17 Using Malicious Files
+35 Leverage Executable Code in Non-Executable Files 76 Manipulating Web Input to File System Calls
+132 Symlink Attack
+References
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.

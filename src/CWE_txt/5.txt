@@ -1,0 +1,44 @@
+CWE-5: J2EE Misconfiguration: Data Transmission Without Encryption
+Description
+Information sent over a network can be compromised while in transit. An attacker may be able to read or modify the contents if the data are sent in plaintext or are weakly encrypted.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+     Weakness ID : 5 Status: Draft Structure : Simple
+Abstraction : Variant
+ 
+Relevant to the view "Research Concepts" (CWE-1000)
+Nature Type ID Name
+Page
+708
+ 
+ ChildOf
+Applicable Platforms
+319 Cleartext Transmission of Sensitive Information
+     Language : Java (Prevalence = Undetermined) Common Consequences
+Scope
+Confidentiality Integrity
+Potential Mitigations
+Impact
+Read Application Data Modify Application Data
+Likelihood
+         Phase: System Configuration
+The application configuration should ensure that SSL or an encryption mechanism of equivalent strength and vetted reputation is used for all access-controlled pages.
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ Nature Type ID
+MemberOf 2 MemberOf 731
+MemberOf 963
+Notes
+Other
+Name Page
+ 7PK - Environment
+OWASP Top Ten 2004 Category A10 - Insecure Configuration Management
+SFP Secondary Cluster: Exposed Data
+700 1880 711 1912
+888 1973
+                                If an application uses SSL to guarantee confidential communication with client browsers, the application configuration should make it impossible to view any access controlled page without SSL. There are three common ways for SSL to be bypassed: A user manually enters URL and types "HTTP" rather than "HTTPS". Attackers intentionally send a user to an insecure URL.
+A programmer erroneously creates a relative link to a page in the application, which does not switch from HTTP to HTTPS. (This is particularly easy to do when the link moves between public and secured areas on a web site.)
+Taxonomy Mappings
+7 Pernicious Kingdoms J2EE Misconfiguration: Insecure Transport
+References
+[REF-6]Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. 2005 November 7. NIST. < https://samate.nist.gov/SSATTM_Content/ papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security %20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf >.

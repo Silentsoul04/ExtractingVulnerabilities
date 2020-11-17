@@ -1,0 +1,70 @@
+CWE-50: Path Equivalence: '//multiple/leading/slash'
+Description
+A software system that accepts path input in the form of multiple leading slash ('//multiple/leading/ slash') without appropriate validation can lead to ambiguous path resolution and allow an attacker to traverse the file system to unintended locations or access arbitrary files.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+  Weakness ID : 50 Status: Incomplete Structure : Simple
+Abstraction : Variant
+  
+Nature
+ChildOf ChildOf
+Type ID
+161 41
+Name Page
+Improper Neutralization of Multiple Leading Special 384 Elements
+            Improper Resolution of Path Equivalence
+81
+     Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Scope
+Confidentiality Integrity
+Observed Examples
+Reference
+CVE-2002-1483
+Impact
+Read Files or Directories Modify Files or Directories
+Description
+Read files with full pathname using multiple internal slash.
+Likelihood
+   
+ 95
+CWE-50: Path Equivalence: '//multiple/leading/slash'
+Reference Description
+CVE-2002-1238 Server allows remote attackers to bypass access restrictions for files via an HTTP request with a sequence of multiple / (slash) characters such as http://
+www.example.com///file/.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1238
+CVE-2004-1878 Product allows remote attackers to bypass authentication, obtain sensitive information, or gain access via a direct request to admin/user.pl preceded by //
+(double leading slash).
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-1878
+Nature Type ID Name     Page
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+CVE-2004-0578
+CVE-2002-0275
+CVE-2004-1032
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1483
+Server allows remote attackers to read arbitrary files via a GET request with more than one leading / (slash) character in the filename. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-1999-1456
+Server allows remote attackers to read arbitrary files via leading slash (//) characters in a URL request. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0578
+Server allows remote attackers to bypass authentication and read restricted files via an extra / (slash) in the requested URL. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0275
+Product allows local users to delete arbitrary files or create arbitrary empty files via a target filename with a large number of leading slash (/) characters. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-1032
+Server allows remote attackers to execute arbitrary commands via a URL with multiple leading "/" (slash) characters and ".." sequences. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1365
+Access directory using multiple leading slash. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2000-1050
+Bypass access restrictions via multiple leading slash, which causes a regular expression to fail.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-1072
+Archive extracts to arbitrary files using multiple leading slash in filenames in the archive.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0235
+            CVE-2005-1365
+CVE-2000-1050 CVE-2001-1072
+CVE-2004-0235
+              MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ MemberOf 981
+Taxonomy Mappings
+PLOVER
+Software Fault Patterns
+SFP Secondary Cluster: Path Traversal 888 1981
+//multiple/leading/slash ('multiple
+leading slash') SFP16 Path Traversal

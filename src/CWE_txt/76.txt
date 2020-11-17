@@ -1,0 +1,47 @@
+CWE-76: Improper Neutralization of Equivalent Special Elements
+Description
+The software may have a fixed list of special characters it believes is complete. However, there may be alternate encodings, or representations that also have the same meaning. For example, the software may filter out a leading slash (/) to prevent absolute path names, but does not account for a tilde (~) followed by a user name, which on some *nix systems could be expanded to an absolute pathname. Alternately, the software might filter a dangerous "-e" command-line switch when calling an external program, but it might not account for "--exec" or other switches that have the same semantics.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+Nature Type ID Name Page
+ChildOf 75 Failure to Sanitize Special Elements into a Different Plane 134 (Special Element Injection)
+Relevant to the view "Architectural Concepts" (CWE-1008)
+Nature Type ID Name Page
+MemberOf 1019 Validate Inputs 2005
+Relevant to the view "Software Development" (CWE-699)
+Nature Type ID Name Page
+ 
+       
+       
+ MemberOf
+137 Data Neutralization Issues 1883
+     Weakness Ordinalities
+ 135
+CWE-76: Improper Neutralization of Equivalent Special Elements
+Scope Impact Likelihood
+ Nature Type ID Name
+Page
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+Abstraction : Class
+ CWE Version 4.2
+CWE-77: Improper Neutralization of Special Elements used in a Command ('Command Injection')
+Primary :
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Likelihood Of Exploit
+High
+Common Consequences
+Other Other
+Potential Mitigations
+Phase: Requirements
+Programming languages and supporting technologies might be chosen which are not subject to these issues.
+Phase: Implementation
+Utilize an appropriate mix of allowlist and denylist parsing to filter equivalent special element syntax from all input.
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+MemberOf 990 SFP Secondary Cluster: Tainted Input to Command 888 1985
+Taxonomy Mappings
+PLOVER Equivalent Special Element Injection

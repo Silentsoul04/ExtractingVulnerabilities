@@ -1,0 +1,48 @@
+CWE-13: ASP.NET Misconfiguration: Password in Configuration File
+Description
+Storing a plaintext password in a configuration file allows anyone who can read the file access to the password-protected resource making them an easy target for attackers.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+  
+Relevant to the view "Research Concepts" (CWE-1000)
+ 
+Nature Type ID
+ChildOf 260
+Common Consequences
+Scope Impact
+Name
+Password in Configuration File
+Page
+575
+      
+Likelihood
+Access Control Gain Privileges or Assume Identity
+Potential Mitigations
+Phase: Implementation
+   Credentials stored in configuration files should be encrypted, Use standard APIs and industry accepted algorithms to encrypt the credentials stored in configuration files.
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ Nature Type ID
+MemberOf 2 MemberOf 731
+MemberOf 963
+Taxonomy Mappings
+7 Pernicious Kingdoms
+Name Page
+ 7PK - Environment
+OWASP Top Ten 2004 Category A10 - Insecure Configuration Management
+SFP Secondary Cluster: Exposed Data
+700 1880 711 1912
+888 1973
+                                
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+ASP.NET Misconfiguration: Password in Configuration File
+
+
+References
+[REF-6]Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. 2005 November 7. NIST. < https://samate.nist.gov/SSATTM_Content/ papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security %20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf >.
+[REF-103]Microsoft Corporation. "How To: Encrypt Configuration Sections in ASP.NET 2.0 Using DPAPI". < http://msdn.microsoft.com/en-us/library/ms998280.aspx >.
+[REF-104]Microsoft Corporation. "How To: Encrypt Configuration Sections in ASP.NET 2.0 Using RSA". < http://msdn.microsoft.com/en-us/library/ms998283.aspx >.
+[REF-105]Microsoft Corporation. ".NET Framework Developer's Guide - Securing Connection Strings". < http://msdn.microsoft.com/en-us/library/89211k9b(VS.80).aspx >.

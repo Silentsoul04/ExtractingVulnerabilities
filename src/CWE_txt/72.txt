@@ -1,0 +1,43 @@
+CWE-72: Improper Handling of Apple HFS+ Alternate Data Stream Path
+Description
+The software does not properly handle special paths that may identify the data or resource fork of a file on the HFS+ file system.
+Extended Description
+If the software chooses actions to take based on the file name, then if an attacker provides the data or resource fork, the software may take unexpected actions. Further, if the software intends to restrict access to a file, then an attacker might still be able to bypass intended access restrictions by requesting the data or resource fork for that file.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 66 Improper Handling of File Names that Identify Virtual 118 Resources
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined)
+Operating_System : macOS (Prevalence = Undetermined) Background Details
+The Apple HFS+ file system permits files to have multiple data input streams, accessible through special paths. The Mac OS X operating system provides a way to access the different data input streams through special paths and as an extended attribute:
+- Resource fork: file/..namedfork/rsrc, file/rsrc (deprecated), xattr:com.apple.ResourceFork - Data fork: file/..namedfork/data (only versions prior to Mac OS X v10.5)
+Additionally, on filesystems that lack native support for multiple streams, the resource fork and file metadata may be stored in a file with "._" prepended to the name.
+Forks can also be accessed through non-portable APIs.
+Forks inherit the file system access controls of the file they belong to.
+Programs need to control access to these paths, if the processing of a file system object is dependent on the structure of its path.
+           124
+CWE-72: Improper Handling of Apple HFS+ Alternate Data Stream Path
+  Common Consequences
+CWE Version 4.2
+CWE-73: External Control of File Name or Path
+Likelihood
+Scope
+Confidentiality Integrity
+Impact
+Read Files or Directories Modify Files or Directories
+   Demonstrative Examples
+Example 1:
+A web server that interprets FILE.cgi as processing instructions could disclose the source code for FILE.cgi by requesting FILE.cgi/..namedfork/data. This might occur because the web server invokes the default handler which may return the contents of the file.
+Observed Examples
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+Nature Type ID Name Page
+MemberOf 981 SFP Secondary Cluster: Path Traversal 888 1981
+Notes
+Theoretical
+This and similar problems exist because the same resource can have multiple identifiers that dictate which behavior can be performed on the resource.
+Research Gap
+Under-studied
+References
+[REF-578]NetSec. "NetSec Security Advisory: Multiple Vulnerabilities Resulting From Use Of Apple OSX HFS+". BugTraq. 2005 February 6. < http://seclists.org/bugtraq/2005/Feb/309 >.

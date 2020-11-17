@@ -1,0 +1,45 @@
+CWE-7: J2EE Misconfiguration: Missing Custom Error Page
+Description
+The default error page of a web application should not display sensitive information about the software system.
+Extended Description
+A Web application must define a default error page for 4xx errors (e.g. 404), 5xx (e.g. 500) errors and catch java.lang.Throwable exceptions to prevent attackers from mining information from the application container's built-in error response.
+When an attacker explores a web site looking for vulnerabilities, the amount of information that the site provides is crucial to the eventual success or failure of any attempted attacks.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to 
+similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+pplicable Platforms
+756 Missing Custom Error Page 1393
+     Language : Java (Prevalence = Undetermined) Common Consequences
+Potential Mitigations
+Phase: Implementation
+Handle exceptions appropriately in source code.
+Phase: Implementation Phase: System Configuration
+Always define appropriate error pages. The application configuration should specify a default error page in order to guarantee that the application will never leak error messages to an attacker. Handling standard HTTP error codes is useful and user-friendly in addition to being a good security practice, and a good configuration will also define a last-chance error handler that catches any exception that could possibly be thrown by the application.
+Phase: Implementation
+Do not attempt to process an error or attempt to mask it.
+Phase: Implementation
+Verify return values are correct and do not supply sensitive information about the system.
+Demonstrative Examples
+Example 1:
+In the snippet below, an unchecked runtime exception thrown from within the try block may cause the container to display its default error page (which may contain a full stack trace, among other things).
+Example Language: Java (bad)
+MemberOf Relationships
+Scope Impact   Likelihood
+Confidentiality
+Read Application Data
+A stack trace might show the attacker a malformed SQL query string, the type of database being used, and the version of the application container. This information enables the attacker to target known vulnerabilities in these components.
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+   MemberOf 2 MemberOf 728
+MemberOf 731 MemberOf 963
+Taxonomy Mappings
+7 Pernicious Kingdoms
+References
+7PK - Environment
+OWASP Top Ten 2004 Category A7 - Improper Error Handling
+OWASP Top Ten 2004 Category A10 - Insecure Configuration Management
+SFP Secondary Cluster: Exposed Data
+700 1880 711 1910
+711 1912 888 1973
+                                             J2EE Misconfiguration: Missing Error Handling
+    [REF-6]Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. 2005 November 7. NIST. < https://samate.nist.gov/SSATTM_Content/ papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security %20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf >.
+[REF-65]M. Howard, D. LeBlanc and J. Viega. "19 Deadly Sins of Software Security". 2005 July 6. McGraw-Hill/Osborne.

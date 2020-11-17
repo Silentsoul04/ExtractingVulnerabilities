@@ -1,0 +1,47 @@
+CWE-75: Failure to Sanitize Special Elements into a Different Plane (Special Element Injection)
+Description
+The software does not adequately filter user-controlled input for special elements with control implications.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 74 Improper Neutralization of Special Elements in Output Used 130 by a Downstream Component ('Injection')
+ParentOf 76 Improper Neutralization of Equivalent Special Elements 135
+Relevant to the view "Architectural Concepts" (CWE-1008)
+MemberOf 1019 Validate Inputs 2005
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Integrity Modify Application Data
+Confidentiality Execute Unauthorized Code or Commands Availability
+Potential Mitigations
+Phase: Requirements
+Programming languages and supporting technologies might be chosen which are not subject to these issues.
+Phase: Implementation
+Utilize an appropriate mix of allowlist and denylist parsing to filter special element syntax from all input.
+MemberOf Relationships
+                                          134
+CWE-75: Failure to Sanitize Special Elements into a Different Plane (Special Element Injection)
+CWE Version 4.2
+CWE-76: Improper Neutralization of Equivalent Special Elements
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+  
+ Nature Type ID
+Name Page
+ MemberOf
+Taxonomy Mappings
+PLOVER
+990
+SFP Secondary Cluster: Tainted Input to Command
+888 1985
+      
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+Related Attack Patterns
+81 Web Logs Tampering
+93 Log Injection-Tampering-Forging
+Special Element Injection
+    
+CAPEC-ID
+Attack Pattern Name
+      

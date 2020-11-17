@@ -1,0 +1,30 @@
+CWE-48: Path Equivalence: 'file name' (Internal Whitespace)
+Description
+A software system that accepts path input in the form of internal space ('file(SPACE)name') without appropriate validation can lead to ambiguous path resolution and allow an attacker to traverse the file system to unintended locations or access arbitrary files.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Applicable Platforms
+41 Improper Resolution of Path Equivalence
+     Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Scope
+Confidentiality Integrity
+Observed Examples
+Reference
+CVE-2000-0293
+CVE-2001-1567
+Impact
+Read Files or Directories Modify Files or Directories
+Description
+Likelihood
+   
+Filenames with spaces allow arbitrary file deletion when the product does not properly quote them; some overlap with path traversal. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2000-0293
+"+" characters in query string converted to spaces before sensitive file/ extension (internal space), leading to bypass of access restrictions to the file. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-1567
+      MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+Nature Type ID Name Page
+MemberOf 981 SFP Secondary Cluster: Path Traversal 888 1981
+Notes
+Relationship
+This weakness is likely to overlap quoting problems, e.g. the "Program Files" unquoted search path (CWE-428). It also could be an equivalence issue if filtering removes all extraneous spaces.
+Relationship
+Whitespace can be a factor in other weaknesses not directly related to equivalence. It can also be used to spoof icons or hide files with dangerous names (see icon manipulation and visual truncation in CWE-451).

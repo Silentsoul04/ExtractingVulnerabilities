@@ -1,0 +1,66 @@
+CWE-82: Improper Neutralization of Script in Attributes of IMG Tags in a Web Page
+Description
+The web application does not neutralize or incorrectly neutralizes scripting elements within attributes of HTML IMG tags, such as the src attribute.
+Extended Description
+Attackers can embed XSS exploits into the values for IMG attributes (e.g. SRC) that is streamed and then executed in a victim's browser. Note that when the page is loaded into a user's browsers, the exploit will automatically execute.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 83 Improper Neutralization of Script in Attributes in a Web Page 172
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Confidentiality Read Application Data
+Integrity Execute Unauthorized Code or Commands Availability
+Potential Mitigations
+            170
+CWE-82: Improper Neutralization of Script in Attributes of IMG Tags in a Web Page
+CWE Version 4.2
+CWE-82: Improper Neutralization of Script in Attributes of IMG Tags in a Web Page
+Phase: Implementation
+Strategy = Output Encoding
+Use and specify an output encoding that can be handled by the downstream component that
+is reading the output. Common encodings include ISO-8859-1, UTF-7, and UTF-8. When an encoding is not specified, a downstream component may choose a different encoding, either
+by assuming a default encoding or automatically inferring which encoding is being used, which can be erroneous. When the encodings are inconsistent, the downstream component might treat some character or byte sequences as special, even if they are not special in the original encoding. Attackers might then be able to exploit this discrepancy and conduct injection attacks; they even might be able to bypass protection mechanisms that assume the original encoding is also being used by the downstream component. The problem of inconsistent output encodings often arises in web pages. If an encoding is not specified in an HTTP header, web browsers often guess about which encoding is being used. This can open up the browser to subtle XSS attacks.
+Phase: Implementation
+Strategy = Attack Surface Reduction
+To help mitigate XSS attacks against the user's session cookie, set the session cookie to be HttpOnly. In browsers that support the HttpOnly feature (such as more recent versions of Internet Explorer and Firefox), this attribute can prevent the user's session cookie from being accessible to malicious client-side scripts that use document.cookie. This is not a complete solution, since HttpOnly is not supported by all browsers. More importantly, XMLHTTPRequest and other powerful browser technologies provide read access to HTTP headers, including the Set-Cookie header in which the HttpOnly flag is set.
+Effectiveness = Defense in Depth
+   Observed Examples
+Reference
+CVE-2006-3211
+CVE-2002-1649 CVE-2002-1803 CVE-2002-1804 CVE-2002-1805 CVE-2002-1806 CVE-2002-1807 CVE-2002-1808
+Description
+Stored XSS in a guestbook application using a javascript: URI in a bbcode img tag.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-3211
+javascript URI scheme in IMG tag. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1649
+javascript URI scheme in IMG tag.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1803
+javascript URI scheme in IMG tag.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1804
+javascript URI scheme in IMG tag.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1805
+javascript URI scheme in IMG tag.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1806
+javascript URI scheme in IMG tag.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1807
+javascript URI scheme in IMG tag.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1808
+                                     MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+Nature Type ID Name Page
+MemberOf 990 SFP Secondary Cluster: Tainted Input to Command 888 1985
+                            171
+CWE-82: Improper Neutralization of Script in Attributes of IMG Tags in a Web Page
+
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+  Weakness ID : 83 Status: Draft Structure : Simple
+Abstraction : Variant
+ 
+Nature Type ID Name Page
+Scope Impact Likelihood
+CWE Version 4.2
+Taxonomy Mappings
+PLOVER Script in IMG tags Software Fault Patterns SFP24 Tainted input to command

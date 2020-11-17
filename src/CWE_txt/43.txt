@@ -1,0 +1,34 @@
+CWE-43: Path Equivalence: 'filename....' (Multiple Trailing Dot)
+Description
+A software system that accepts path input in the form of multiple trailing dot ('filedir....') without appropriate validation can lead to ambiguous path resolution and allow an attacker to traverse the file system to unintended locations or access arbitrary files.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 163 Improper Neutralization of Multiple Trailing Special Elements 387 ChildOf 42 Path Equivalence: 'filename.' (Trailing Dot) 87
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Confidentiality Read Files or Directories Integrity Modify Files or Directories
+Observed Examples
+BUGTRAQ:2004020A5pache + Resin Reveals JSP Source Code ... http://marc.info/?l=bugtraq&m=107605633904122&w=2
+CVE-2004-0281 Multiple trailing dot allows directory listing https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0281
+                            88
+CWE-43: Path Equivalence: 'filename....' (Multiple Trailing Dot)
+CWE Version 4.2
+CWE-44: Path Equivalence: 'file.name' (Internal Dot)
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+  MemberOf Relationships
+ Nature Type ID
+Name Page
+SFP Secondary Cluster: Path Traversal 888 1981
+Multiple Trailing Dot - 'filedir....' SFP16 Path Traversal
+ MemberOf
+Taxonomy Mappings
+981
+      
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+PLOVER
+Software Fault Patterns
+            

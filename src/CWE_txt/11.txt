@@ -1,0 +1,40 @@
+CWE-11: ASP.NET Misconfiguration: Creating Debug Binary
+Description
+Debugging messages help attackers learn about the system and plan a form of attack.
+Extended Description
+ASP .NET applications can be configured to produce debug binaries. These binaries give detailed debugging messages and should not be used in production environments. Debug binaries are meant to be used in a development or testing environment and can pose a security risk if they are deployed to production.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+Nature Type ID Name Page
+   Weakness ID : 11 Status: Draft Structure : Simple
+Abstraction : Variant
+  
+ ChildOf
+Applicable Platforms
+489 Active Debug Code 1045
+     Language : ASP.NET (Prevalence = Undetermined) Background Details
+The debug attribute of the <compilation> tag defines whether compiled binaries should include debugging information. The use of debug binaries causes an application to provide as much information about itself as possible to the user.
+Common Consequences
+ 9
+CWE-11: ASP.NET Misconfiguration: Creating Debug Binary
+Scope Impact   Likelihood
+Confidentiality Read Application Data
+Attackers can leverage the additional information they gain from debugging output to mount attacks targeted on the framework, database, or other resources used by the application.
+Potential Mitigations
+Phase: System Configuration
+Avoid releasing debug binaries into the production environment. Change the debug mode to false when the application is deployed into production.
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ MemberOf 2 MemberOf 731
+MemberOf 963
+Taxonomy Mappings
+7 Pernicious Kingdoms
+References
+7PK - Environment
+OWASP Top Ten 2004 Category A10 - Insecure Configuration Management
+SFP Secondary Cluster: Exposed Data
+700 1880 711 1912
+888 1973
+                                ASP.NET Misconfiguration: Creating Debug Binary
+    [REF-6]Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. 2005 November 7. NIST. < https://samate.nist.gov/SSATTM_Content/ papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security %20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf >.

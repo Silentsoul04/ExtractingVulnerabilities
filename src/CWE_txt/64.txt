@@ -1,0 +1,78 @@
+CWE-64: Windows Shortcut Following (.LNK)
+Description
+  114
+CWE-64: Windows Shortcut Following (.LNK)
+CWE Version 4.2
+CWE-64: Windows Shortcut Following (.LNK)
+The software, when opening a file or directory, does not sufficiently handle when the file is a Windows shortcut (.LNK) whose target is outside of the intended control sphere. This could allow an attacker to cause the software to operate on unauthorized files.
+Extended Description
+The shortcut (file with the .lnk extension) can permit an attacker to read/write a file that they originally did not have permissions to access.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+          Nature Type ID
+Name Page
+Improper Link Resolution Before File Access ('Link 106 Following')
+           ChildOf
+Weakness Ordinalities
+Resultant :
+Applicable Platforms
+59
+     Language : Language-Independent (Prevalence = Undetermined)
+Operating_System : Windows (Prevalence = Undetermined) Alternate Terms
+Windows symbolic link following :
+symlink : Likelihood Of Exploit
+Low
+Common Consequences
+    Scope
+Confidentiality Integrity
+Potential Mitigations
+Impact
+Read Files or Directories Modify Files or Directories
+Likelihood
+         Phase: Architecture and Design
+Strategy = Separation of Privilege
+Follow the principle of least privilege when assigning access rights to entities in a software system. Denying access to a file can prevent an attacker from replacing that file with a link to a sensitive file. Ensure good compartmentalization in the system to provide protected areas that can be trusted.
+Observed Examples
+CVE-2001-1042 FTP server allows remote attackers to read arbitrary files and directories by uploading a .lnk (link) file that points to the target file.
+   Reference Description
+      CVE-2000-0342 Mail client allows remote attackers to bypass the user warning for executable attachments such as .exe, .com, and .bat by using a .lnk file that refers to the
+attachment, aka "Stealth Attachment."
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2000-0342
+     115
+CWE-64: Windows Shortcut Following (.LNK)
+
+Reference Description
+CVE-2005-0587 Browser allows remote malicious web sites to overwrite arbitrary files by tricking the user into downloading a .LNK (link) file twice, which overwrites the
+file that was referenced in the first .LNK file.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-0587
+Nature Type ID Name     Page
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+  Weakness ID : 65 Status: Incomplete Structure : Simple
+Abstraction : Variant
+ CWE Version 4.2
+      CVE-2001-1043
+CVE-2001-1386 CVE-2003-1233
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-1042
+FTP server allows remote attackers to read arbitrary files and directories by uploading a .lnk (link) file that points to the target file. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-1043
+".LNK." - .LNK with trailing dot
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-1386
+Rootkits can bypass file access restrictions to Windows kernel directories using NtCreateSymbolicLinkObject function to create symbolic link https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-1233
+      MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ MemberOf MemberOf MemberOf
+Notes
+Research Gap
+743 CERT C Secure Coding Standard (2008) Chapter 10 - Input Output (FIO)
+877 CERT C++ Secure Coding Section 09 - Input Output (FIO)
+980 SFP Secondary Cluster: Link in Resource Name Resolution
+734 1920 868 1950 888 1981
+                                Under-studied. Windows .LNK files are more "portable" than Unix symlinks and have been used in remote exploits. Some Windows API's will access LNK's as if they are regular files, so one would expect that they would be reported more frequently.
+Taxonomy Mappings
+PLOVER
+CERT C Secure Coding Software Fault Patterns
+FIO05-C SFP18
+Windows Shortcut Following (.LNK) Identify files using multiple file attributes Link in resource name resolution

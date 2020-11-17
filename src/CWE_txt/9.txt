@@ -1,0 +1,48 @@
+CWE-9: J2EE Misconfiguration: Weak Access Permissions for EJB Methods
+
+Description
+If elevated access rights are assigned to EJB methods, then an attacker can take advantage of the permissions to exploit the software system.
+Extended Description
+If the EJB deployment descriptor contains one or more method permissions that grant access to the special ANYONE role, it indicates that access control for the application has not been fully thought through or that the application is structured in such a way that reasonable access control restrictions are impossible.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 266 Incorrect Privilege Assignment 582
+Common Consequences
+Other Other
+Potential Mitigations
+Phase: Architecture and Design Phase: System Configuration
+Follow the principle of least privilege when assigning access rights to EJB methods. Permission to invoke EJB methods should not be granted to the ANYONE role.
+Demonstrative Examples
+Example 1:
+The following deployment descriptor grants ANYONE permission to invoke the Employee EJB's method named getSalary().
+Example Language: XML (bad)
+            MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ 8
+CWE-9: J2EE Misconfiguration: Weak Access Permissions for EJB Methods
+  
+ Nature
+MemberOf MemberOf
+MemberOf MemberOf
+Type ID
+2 723
+731 901
+CWE Version 4.2
+CWE-11: ASP.NET Misconfiguration: Creating Debug Binary
+Name Page
+ 7PK - Environment
+OWASP Top Ten 2004 Category A2 - Broken Access Control
+OWASP Top Ten 2004 Category A10 - Insecure Configuration Management
+SFP Primary Cluster: Privilege
+700 1880 711 1907
+711 1912 888 1958
+                                             Taxonomy Mappings
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+7 Pernicious Kingdoms
+References
+J2EE Misconfiguration: Weak Access Permissions
+    [REF-6]Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. 2005 November 7. NIST. < https://samate.nist.gov/SSATTM_Content/ papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security %20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf >.

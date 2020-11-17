@@ -1,0 +1,43 @@
+CWE-8: J2EE Misconfiguration: Entity Bean Declared Remote
+
+Description
+When an application exposes a remote interface for an entity bean, it might also expose methods that get or set the bean's data. These methods could be leveraged to read sensitive information, or to change data in ways that violate the application's expectations, potentially leading to other vulnerabilities.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Common Consequences
+Confidentiality Read Application Data Integrity Modify Application Data
+Potential Mitigations
+            6
+CWE-8: J2EE Misconfiguration: Entity Bean Declared Remote
+CWE Version 4.2
+CWE-9: J2EE Misconfiguration: Weak Access Permissions for EJB Methods
+  Phase: Implementation
+Declare Java beans "local" when possible. When a bean must be remotely accessible, make sure that sensitive information is not exposed, and ensure that the application logic performs appropriate validation of any data that might be modified by an attacker.
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ Nature
+MemberOf MemberOf
+MemberOf
+Notes
+Other
+Type ID
+2 731
+963
+Name Page
+ 7PK - Environment
+OWASP Top Ten 2004 Category A10 - Insecure Configuration Management
+SFP Secondary Cluster: Exposed Data
+700 1880 711 1912
+888 1973
+                                Entity beans that expose a remote interface become part of an application's attack surface. For performance reasons, an application should rarely use remote entity beans, so there is a good chance that a remote entity bean declaration is an error.
+Taxonomy Mappings
+7 Pernicious Kingdoms
+Software Fault Patterns SFP23
+References
+J2EE Misconfiguration: Unsafe Bean Declaration
+Exposed Data
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+            [REF-6]Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. 2005 November 7. NIST. < https://samate.nist.gov/SSATTM_Content/ papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security %20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf >.

@@ -1,0 +1,16 @@
+CWE-42: Path Equivalence: 'filename.' (Trailing Dot)
+Description
+A software system that accepts path input in the form of trailing dot ('filedir.') without appropriate validation can lead to ambiguous path resolution and allow an attacker to traverse the file system to unintended locations or access arbitrary files.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined)
+
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+         MemberOf 981
+Taxonomy Mappings
+PLOVER
+Software Fault Patterns
+SFP Secondary Cluster: Path Traversal
+Trailing Dot - 'filedir.' SFP16 Path Traversal

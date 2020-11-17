@@ -1,0 +1,78 @@
+CWE-84: Improper Neutralization of Encoded URI Schemes in a Web Page
+Description
+The web application improperly neutralizes user-controlled input for executable script disguised with URI encodings.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 79 Improper Neutralization of Input During Web Page 152 Generation ('Cross-site Scripting')
+Weakness Ordinalities
+Primary :
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Integrity Unexpected State
+Potential Mitigations
+Phase: Implementation
+Strategy = Input Validation
+Resolve all URIs to absolute or canonical representations before processing.
+Phase: Implementation
+Strategy = Input Validation
+Carefully check each input parameter against a rigorous positive specification (allowlist) defining the specific characters and format allowed. All input should be neutralized, not just parameters that the user is supposed to specify, but all data in the request, including tag attributes, hidden fields, cookies, headers, the URL itself, and so forth. A common mistake that leads to continuing
+           174
+CWE-84: Improper Neutralization of Encoded URI Schemes in a Web Page
+CWE Version 4.2
+CWE-84: Improper Neutralization of Encoded URI Schemes in a Web Page
+XSS vulnerabilities is to validate only fields that are expected to be redisplayed by the site. We often encounter data from the request that is reflected by the application server or the application that the development team did not anticipate. Also, a field that is not currently reflected may be used by a future developer. Therefore, validating ALL parts of the HTTP request is recommended.
+Phase: Implementation
+Strategy = Output Encoding
+Use and specify an output encoding that can be handled by the downstream component that
+is reading the output. Common encodings include ISO-8859-1, UTF-7, and UTF-8. When an encoding is not specified, a downstream component may choose a different encoding, either
+by assuming a default encoding or automatically inferring which encoding is being used, which can be erroneous. When the encodings are inconsistent, the downstream component might treat some character or byte sequences as special, even if they are not special in the original encoding. Attackers might then be able to exploit this discrepancy and conduct injection attacks; they even might be able to bypass protection mechanisms that assume the original encoding is also being used by the downstream component. The problem of inconsistent output encodings often arises in web pages. If an encoding is not specified in an HTTP header, web browsers often guess about which encoding is being used. This can open up the browser to subtle XSS attacks.
+Phase: Implementation
+With Struts, write all data from form beans with the bean's filter attribute set to true.
+Phase: Implementation
+Strategy = Attack Surface Reduction
+To help mitigate XSS attacks against the user's session cookie, set the session cookie to be HttpOnly. In browsers that support the HttpOnly feature (such as more recent versions of Internet Explorer and Firefox), this attribute can prevent the user's session cookie from being accessible to malicious client-side scripts that use document.cookie. This is not a complete solution, since HttpOnly is not supported by all browsers. More importantly, XMLHTTPRequest and other powerful browser technologies provide read access to HTTP headers, including the Set-Cookie header in which the HttpOnly flag is set.
+Effectiveness = Defense in Depth
+   Observed Examples
+   Reference Description
+      CVE-2005-0563 Cross-site scripting (XSS) vulnerability in Microsoft Outlook Web Access (OWA) component in Exchange Server 5.5 allows remote attackers to inject
+arbitrary web script or HTML via an email message with an encoded javascript: URL ("jav&#X41sc&#0010;ript:") in an IMG tag. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-0563
+      CVE-2005-2276 Cross-site scripting (XSS) vulnerability in Novell Groupwise WebAccess 6.5 before July 11, 2005 allows remote attackers to inject arbitrary web
+script or HTML via an e-mail message with an encoded javascript URI (e.g. "j&#X41vascript" in an IMG tag). https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-2276
+    CVE-2005-0692 CVE-2002-0117 CVE-2002-0118
+Encoded script within BBcode IMG tag.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-0692
+Encoded "javascript" in IMG tag.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0117
+Encoded "javascript" in IMG tag.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0118
+          MemberOf Relationships
+ 175
+CWE-84: Improper Neutralization of Encoded URI Schemes in a Web Page
+
+ Nature
+Type ID Name
+Page
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+  Weakness ID : 85 Status: Draft Structure : Simple
+Abstraction : Variant
+ 
+Nature
+Type ID Name
+Page
+Scope
+Impact
+Likelihood
+CWE Version 4.2
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+   MemberOf 990
+Taxonomy Mappings
+PLOVER
+Software Fault Patterns
+SFP Secondary Cluster: Tainted Input to Command 888 1985
+              SFP24
+XSS using Script Via Encoded URI Schemes
+Tainted input to command
