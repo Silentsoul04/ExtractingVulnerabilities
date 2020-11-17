@@ -1,0 +1,10 @@
+Name: CVE-2020-16244
+Status: Candidate
+Reference: MISC:https://us-cert.cisa.gov/ics/advisories/icsa-20-266-01
+Reference: URL:https://us-cert.cisa.gov/ics/advisories/icsa-20-266-01
+
+GE Digital APM Classic, Versions 4.4 and prior. Salt is not used for
+hash calculation of passwords, making it possible to decrypt
+passwords. This design flaw, along with the IDOR vulnerability, puts
+the entire platform at high risk because an authenticated user can
+retrieve all user account data and then retrieve the actual passwords.
