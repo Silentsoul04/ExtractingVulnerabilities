@@ -1,0 +1,95 @@
+CWE-128: Wrap-around Error
+Description
+Wrap around errors occur whenever a value is incremented past the maximum value for its type and therefore "wraps around" to a very small, negative, or undefined value.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+CWE Version 4.2
+CWE-128: Wrap-around Error
+  CWE-128: Wrap-around Error
+Description
+ 
+Nature
+ChildOf PeerOf CanPrecede
+Type ID
+682 190 119
+Name Page
+Incorrect Calculation 1329 Integer Overflow or Wraparound 438 Improper Restriction of Operations within the Bounds of a 272 Memory Buffer
+                            Relevant to the view "Software Development" (CWE-699)
+Nature Type ID Name Page
+ 
+ MemberOf
+Weakness Ordinalities
+Primary :
+Applicable Platforms
+189 Numeric Errors 1884
+     Language : C (Prevalence = Often)
+Language : C++ (Prevalence = Often) Background Details
+Due to how addition is performed by computers, if a primitive is incremented past the maximum value possible for its storage space, the system will not recognize this, and therefore increment each bit as if it still had extra space. Because of how negative numbers are represented in binary, primitives interpreted as signed may "wrap" to very large negative values.
+Likelihood Of Exploit
+Medium
+Common Consequences
+Scope Impact   Likelihood
+Availability
+DoS: Crash, Exit, or Restart
+DoS: Resource Consumption (CPU) DoS: Resource Consumption (Memory) DoS: Instability
+This weakness will generally lead to undefined behavior and therefore crashes. In the case of overflows involving loop index variables, the likelihood of infinite loops is also high.
+Integrity Modify Memory
+ 311
+CWE-128: Wrap-around Error
+Scope Impact   Likelihood
+If the value in question is important to data (as opposed to flow), simple data corruption has occurred. Also, if the wrap around results in other conditions such as buffer overflows, further memory corruption may occur.
+Confidentiality Availability Access Control
+Execute Unauthorized Code or Commands Bypass Protection Mechanism
+This weakness can sometimes trigger buffer overflows which can be used to execute arbitrary code. This is usually outside the scope of a program's implicit security policy.
+img_t table_ptr; /*struct containing img data, 10kB each*/ int num_imgs;
+...
+num_imgs = get_num_imgs();
+table_ptr = (img_t*)malloc(sizeof(img_t)*num_imgs); ...
+Nature Type ID Name     Page
+CWE Version 4.2
+CWE-128: Wrap-around Error
+  Potential Mitigations
+Requirements specification: The choice could be made to use a language that is not susceptible to these issues.
+Phase: Architecture and Design
+Provide clear upper and lower bounds on the scale of any protocols designed.
+Phase: Implementation
+Place sanity checks on all incremented variables to ensure that they remain within reasonable bounds.
+MemberOf Relationships
+(bad)
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ MemberOf
+MemberOf
+MemberOf
+Notes
+Relationship
+742 CERT C Secure Coding Standard (2008) Chapter 9 - Memory Management (MEM)
+876 CERT C++ Secure Coding Section 08 - Memory Management (MEM)
+998 SFP Secondary Cluster: Glitch in Computation
+734 1918 868 1949 888 1991
+                                 312
+CWE-128: Wrap-around Error
+CWE Version 4.2
+CWE-129: Improper Validation of Array Index
+The relationship between overflow and wrap-around needs to be examined more closely, since several entries (including CWE-190) are closely related.
+  Taxonomy Mappings
+CLASP
+CERT C Secure Coding
+Software Fault Patterns
+Related Attack Patterns
+Wrap-around error
+MEM07- Ensure that the arguments to calloc(),
+C when multiplied, can be represented as a size_t
+SFP1 Glitch in computation
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+        
+            
+CAPEC-ID
+Attack Pattern Name
+92 Forced Integer Overflow
+References
+[REF-44]Michael Howard, David LeBlanc and John Viega. "24 Deadly Sins of Software Security". McGraw-Hill. 2010.
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.

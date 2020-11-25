@@ -1,0 +1,29 @@
+CWE-109: Struts: Validator Turned Off
+Description
+Automatic filtering via a Struts bean has been turned off, which disables the Struts Validator and custom validation logic. This exposes the application to other weaknesses related to insufficient input validation.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 1173 Improper Use of Validation Framework 1725
+Relevant to the view "Seven Pernicious Kingdoms" (CWE-700)
+ChildOf 20 Improper Input Validation 19
+Weakness Ordinalities
+Primary :
+Applicable Platforms
+Language : Java (Prevalence = Undetermined) Common Consequences
+Access Control Bypass Protection Mechanism
+Potential Mitigations
+Phase: Implementation
+Ensure that an action form mapping enables validation. Set the validate field to true.
+
+Notes
+Other
+Type ID
+722 990
+Name Page
+OWASP Top Ten 2004 Category A1 - Unvalidated Input 711 1907 SFP Secondary Cluster: Tainted Input to Command 888 1985
+                    The Action Form mapping in the demonstrative example disables the form's validate() method. The Struts bean: write tag automatically encodes special HTML characters, replacing a < with "&lt;" and a > with "&gt;". This action can be disabled by specifying filter="false" as an attribute of the tag to disable specified JSP pages. However, being disabled makes these pages susceptible to cross-site scripting attacks. An attacker may be able to insert malicious scripts as user input to write to these JSP pages.
+Taxonomy Mappings
+7 Pernicious Kingdoms Struts: Validator Turned Off Software Fault Patterns SFP24 Tainted input to command
+References
+[REF-6]Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. 2005 November 7. NIST. < https://samate.nist.gov/SSATTM_Content/ papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security %20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf >.

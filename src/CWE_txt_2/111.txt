@@ -1,0 +1,76 @@
+CWE-111: Direct Use of Unsafe JNI
+Description
+   Weakness ID : 111 Status: Draft Structure : Simple
+Abstraction : Variant
+  247
+CWE-111: Direct Use of Unsafe JNI
+Nature
+Nature
+Scope
+Type ID Name
+Type ID Name
+Impact
+Page
+Page
+Likelihood
+CWE Version 4.2
+CWE-111: Direct Use of Unsafe JNI
+When a Java application uses the Java Native Interface (JNI) to call code written in another programming language, it can expose the application to weaknesses in that code, even if those weaknesses cannot occur in Java.
+Extended Description
+Many safety features that programmers may take for granted simply do not apply for native
+code, so you must carefully review all such code for potential problems. The languages used to implement native code may be more susceptible to buffer overflows and other attacks. Native code is unprotected by the security features enforced by the runtime environment, such as strong typing and array bounds checking.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 695 Use of Low-Level Functionality 1350
+Relevant to the view "Seven Pernicious Kingdoms" (CWE-700)
+ChildOf 20 Improper Input Validation 19
+Weakness Ordinalities
+Primary :
+Applicable Platforms
+Language : Java (Prevalence = Undetermined) Common Consequences
+Access Control Bypass Protection Mechanism
+Potential Mitigations
+Phase: Implementation
+Implement error handling around the JNI call.
+Phase: Implementation
+Strategy = Refactoring
+Do not use JNI calls if you don't trust the native library.
+Phase: Implementation
+Strategy = Refactoring
+Be reluctant to use JNI calls. A Java API equivalent may exist.
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ 249
+CWE-111: Direct Use of Unsafe JNI
+Nature Type ID Name     Page
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+SEI CERT Oracle Coding Standard for Java
+JNI01-J
+Safely invoke standard APIs that perform tasks using the immediate caller's class loader instance (loadLibrary)
+  Weakness ID : 112 Status: Draft Structure : Simple
+Abstraction : Base
+ CWE Version 4.2
+Taxonomy Mappings
+7 Pernicious Kingdoms
+The CERT Oracle Secure SEC08-J Coding Standard for Java
+(2011)
+SEI CERT Oracle Coding JNI00-J Standard for Java
+Software Fault Patterns SFP3
+References
+The CERT Oracle Secure Coding Standard for Java (2011) Chapter 16 - Platform Security (SEC)
+SFP Secondary Cluster: Use of an Improper API
+SEI CERT Oracle Secure Coding Standard for Java - Guidelines 17. Java Native Interface (JNI)
+844 1942
+888 1992 1133 2024
+                                        Imprecise
+Unsafe JNI
+Define wrappers around native methods
+Define wrappers around native methods
+Use of an improper API
+            [REF-6]Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. 2005 November 7. NIST. < https://samate.nist.gov/SSATTM_Content/ papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security %20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf >.
+[REF-41]Fortify Software. "Fortify Descriptions". < http://vulncat.fortifysoftware.com >.
+[REF-42]Beth Stearns. "The Java(TM) Tutorial: The Java Native Interface". 2005. Sun Microsystems. < http://www.eg.bucknell.edu/~mead/Java-tutorial/native1.1/index.html >.

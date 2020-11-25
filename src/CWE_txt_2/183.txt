@@ -1,0 +1,80 @@
+CWE-183: Permissive List of Allowed Inputs
+Description
+The product implements a protection mechanism that relies on a list of inputs (or properties of inputs) that are explicitly allowed by policy because the inputs are assumed to be safe, but the list is too permissive - that is, it allows an input that is unsafe, leading to resultant weaknesses.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+   Weakness ID : 183 Status: Draft Structure : Simple
+Abstraction : Base
+  
+Nature
+ChildOf ParentOf PeerOf PeerOf CanPrecede
+Type ID
+      697
+      942
+      625
+      627
+      434
+Name Page
+Incorrect Comparison 1353 Permissive Cross-domain Policy with Untrusted Domains 1625 Permissive Regular Expression 1240 Dynamic Variable Evaluation 1244 Unrestricted Upload of File with Dangerous Type 938
+                                                  Relevant to the view "Software Development" (CWE-699)
+Nature Type ID Name Page
+ 
+ MemberOf
+1215 Data Validation Issues 2048
+     Weakness Ordinalities
+ 425
+CWE-183: Permissive List of Allowed Inputs
+     Scope
+Reference
+Impact Likelihood
+Description
+                     Nature
+Type ID Name
+Page
+              Mapped Taxonomy Name
+    Node ID
+    Fit
+    Mapped Node Name
+    CAPEC-ID
+    Attack Pattern Name
+  CWE Version 4.2
+CWE-183: Permissive List of Allowed Inputs
+Primary :
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Alternate Terms
+Allowlist / Allow List : This is used by CWE and CAPEC instead of other commonly-used terms. Its counterpart is denylist.
+Safelist / Safe List : This is often used by security tools such as firewalls, email or web gateways, proxies, etc.
+Whitelist / White List : This term is frequently used, but usage has been declining as organizations have started to adopt other terms.
+Common Consequences
+  Access Control
+Observed Examples
+CVE-2019-12799
+CVE-2019-10458
+Bypass Protection Mechanism
+chain: bypass of untrusted deserialization issue (CWE-502) by using an assumed-trusted class (CWE-183) https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12799
+sandbox bypass using a method that is on an allowlist https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-10458
+           CVE-2017-1000095sandbox bypass using unsafe methods that are on an allowlist https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000095
+CVE-2019-10458 CI/CD pipeline feature has unsafe elements in allowlist, allowing bypass of script restrictions
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-10458
+CVE-2017-1000095Default allowlist includes unsafe methods, allowing bypass of sandbox https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000095
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+           MemberOf 722 MemberOf 990
+Taxonomy Mappings
+PLOVER
+Related Attack Patterns
+OWASP Top Ten 2004 Category A1 - Unvalidated Input 711 1907
+             SFP Secondary Cluster: Tainted Input to Command
+Permissive Whitelist
+888 1985
+          3 Using Leading 'Ghost' Character Sequences to Bypass Input Filters 43 Exploiting Multiple Input Interpretation Layers
+71 Using Unicode Encoding to Bypass Validation Logic
+120 Double Encoding
+References
+               426
+CWE-183: Permissive List of Allowed Inputs
+
+CWE Version 4.2
+CWE-184: Incomplete List of Disallowed Inputs
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.

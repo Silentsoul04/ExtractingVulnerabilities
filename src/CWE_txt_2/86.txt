@@ -1,0 +1,95 @@
+CWE-86: Improper Neutralization of Invalid Characters in Identifiers in Web Pages
+Weakness ID: 86
+Abstraction: Variant
+Structure: Simple	
+Status: Draft
+Presentation Filter:  
++ Description
+The software does not neutralize or incorrectly neutralizes invalid characters or byte sequences in the middle of tag names, URI schemes, and other identifiers.
++ Extended Description
+Some web browsers may remove these sequences, resulting in output that may have unintended control implications. For example, the software may attempt to remove a "javascript:" URI scheme, but a "java%00script:" URI may bypass this check and still be rendered as active javascript by some browsers, allowing XSS or other attacks.
++ Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOf and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that the user may want to explore.
++ Relevant to the view "Research Concepts" (CWE-1000)
+Nature	Type	ID	Name
+ChildOf	Class	436	Interpretation Conflict
+ChildOf	Base	79	Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
+PeerOf	Base	184	Incomplete List of Disallowed Inputs
++ Modes Of Introduction
+The different Modes of Introduction provide information about how and when this weakness may be introduced. The Phase identifies a point in the life cycle at which introduction may occur, while the Note provides a typical scenario related to introduction during the given phase.
+
+Phase	Note
+Implementation	
++ Applicable Platforms
+The listings below show possible areas for which the given weakness could appear. These may be for specific named Languages, Operating Systems, Architectures, Paradigms, Technologies, or a class of such platforms. The platform is listed along with how frequently the given weakness appears for that instance.
+Languages
+Class: Language-Independent (Undetermined Prevalence)
++ Common Consequences
+The table below specifies different individual consequences associated with the weakness. The Scope identifies the application security area that is violated, while the Impact describes the negative technical impact that arises if an adversary succeeds in exploiting this weakness. The Likelihood provides information about how likely the specific consequence is expected to be seen relative to the other consequences in the list. For example, there may be high likelihood that a weakness will be exploited to achieve a certain impact, but a low likelihood that it will be exploited to achieve a different impact.
+
+Scope	Impact	Likelihood
+Confidentiality
+Integrity
+Availability
+Technical Impact: Read Application Data; Execute Unauthorized Code or Commands
+
++ Observed Examples
+Reference	Description
+CVE-2004-0595
+XSS filter doesn't filter null characters before looking for dangerous tags, which are ignored by web browsers. Multiple Interpretation Error (MIE) and validate-before-cleanse.
++ Potential Mitigations
+Phase: Implementation
+Strategy: Output Encoding
+Use and specify an output encoding that can be handled by the downstream component that is reading the output. Common encodings include ISO-8859-1, UTF-7, and UTF-8. When an encoding is not specified, a downstream component may choose a different encoding, either by assuming a default encoding or automatically inferring which encoding is being used, which can be erroneous. When the encodings are inconsistent, the downstream component might treat some character or byte sequences as special, even if they are not special in the original encoding. Attackers might then be able to exploit this discrepancy and conduct injection attacks; they even might be able to bypass protection mechanisms that assume the original encoding is also being used by the downstream component.
+The problem of inconsistent output encodings often arises in web pages. If an encoding is not specified in an HTTP header, web browsers often guess about which encoding is being used. This can open up the browser to subtle XSS attacks.
+Phase: Implementation
+Strategy: Attack Surface Reduction
+To help mitigate XSS attacks against the user's session cookie, set the session cookie to be HttpOnly. In browsers that support the HttpOnly feature (such as more recent versions of Internet Explorer and Firefox), this attribute can prevent the user's session cookie from being accessible to malicious client-side scripts that use document.cookie. This is not a complete solution, since HttpOnly is not supported by all browsers. More importantly, XMLHTTPRequest and other powerful browser technologies provide read access to HTTP headers, including the Set-Cookie header in which the HttpOnly flag is set.
+Effectiveness: Defense in Depth
++ Memberships
+This MemberOf Relationships table shows additional CWE Categories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+Nature	Type	ID	Name
+MemberOf	Category	990	SFP Secondary Cluster: Tainted Input to Command
++ Taxonomy Mappings
+Mapped Taxonomy Name	Node ID	Fit	Mapped Node Name
+PLOVER			Invalid Characters in Identifiers
+Software Fault Patterns	SFP24		Tainted input to command
++ Related Attack Patterns
+CAPEC-ID	Attack Pattern Name
+CAPEC-247	XSS Using Invalid Characters
+CAPEC-73	User-Controlled Filename
+CAPEC-85	AJAX Fingerprinting
++ Content History
++ Submissions
+Submission Date	Submitter	Organization
+2006-07-19	PLOVER	
++ Modifications
+Modification Date	Modifier	Organization
+2008-07-01	Eric Dalci	Cigital
+updated Time_of_Introduction
+2008-09-08	CWE Content Team	MITRE
+updated Description, Name, Relationships, Other_Notes, Taxonomy_Mappings
+2009-10-29	CWE Content Team	MITRE
+updated Description, Other_Notes
+2010-04-05	CWE Content Team	MITRE
+updated Description, Name, Related_Attack_Patterns
+2010-06-21	CWE Content Team	MITRE
+updated Potential_Mitigations
+2011-06-01	CWE Content Team	MITRE
+updated Common_Consequences
+2012-05-11	CWE Content Team	MITRE
+updated Related_Attack_Patterns, Relationships
+2012-10-30	CWE Content Team	MITRE
+updated Potential_Mitigations
+2014-07-30	CWE Content Team	MITRE
+updated Relationships, Taxonomy_Mappings
+2017-05-03	CWE Content Team	MITRE
+updated Related_Attack_Patterns
+2017-11-08	CWE Content Team	MITRE
+updated Applicable_Platforms
+2020-02-24	CWE Content Team	MITRE
+updated Relationships
++ Previous Entry Names
+Change Date	Previous Entry Name
+2008-09-09	Invalid Characters in Identifiers
+2010-04-05	Failure to Sanitize Invalid Characters in Identifiers in Web Pages

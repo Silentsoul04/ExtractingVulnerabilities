@@ -1,0 +1,40 @@
+CWE-110: Struts: Validator Without Form Field
+Description
+Validation fields that do not appear in forms they are associated with indicate that the validation logic is out of date.
+Extended Description
+It is easy for developers to forget to update validation logic when they make changes to an ActionForm class. One indication that validation logic is not being properly maintained is inconsistencies between the action form and the validation form.
+Although J2EE applications are not generally susceptible to memory corruption attacks, if a J2EE application interfaces with native code that does not perform array bounds checking, an attacker may be able to use an input validation mistake in the J2EE application to launch a buffer overflow attack.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Weakness Ordinalities
+Primary :
+Applicable Platforms
+Language : Java (Prevalence = Undetermined) Common Consequences
+Scope Impact   Likelihood
+Other
+Other
+It is critically important that validation logic be maintained and kept in sync with the rest of the application. Unchecked input is the root cause of some of today's worst and most common software security problems. Cross-site scripting, SQL injection, and process control vulnerabilities
+Detection Methods
+Automated Static Analysis
+To find the issue in the implementation, manual checks or automated static analysis could be applied to the XML configuration files.
+Effectiveness = Moderate
+Manual Static Analysis
+To find the issue in the implementation, manual checks or automated static analysis could be applied to the XML configuration files.
+Effectiveness = Moderate
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ Nature Type ID
+Name Page
+SFP Secondary Cluster: Tainted Input to Command 888 1985
+Struts: Validator Without Form Field SFP24 Tainted input to command
+ MemberOf
+Taxonomy Mappings
+990
+      
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+7 Pernicious Kingdoms Software Fault Patterns
+References
+            [REF-6]Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. 2005 November 7. NIST. < https://samate.nist.gov/SSATTM_Content/ papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security %20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf >.

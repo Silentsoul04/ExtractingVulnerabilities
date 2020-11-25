@@ -1,0 +1,58 @@
+CWE-118: Incorrect Access of Indexable Resource ('Range Error')
+Description
+The software does not restrict or incorrectly restricts operations within the boundaries of a resource that is accessed using an index or pointer, such as memory or files.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+   
+  Weakness ID : 118 Status: Incomplete Structure : Simple
+Abstraction : Class
+  
+Nature
+ChildOf ParentOf
+Type ID
+664 119
+Name Page
+Improper Control of a Resource Through its Lifetime 1294 Improper Restriction of Operations within the Bounds of a 272 Memory Buffer
+                 Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined)
+Technology : Technology-Independent (Prevalence = Undetermined) Common Consequences
+Scope Impact
+Other Varies by Context
+MemberOf Relationships
+Likelihood
+   This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ Nature Type ID
+Name Page
+ MemberOf
+Taxonomy Mappings
+970
+SFP Secondary Cluster: Faulty Buffer Access
+888 1977
+      
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+Software Fault Patterns SFP8 Faulty Buffer Access
+Related Attack Patterns
+8 Buffer Overflow in an API Call
+9 Buffer Overflow in Local Command-Line Utilities
+10 Buffer Overflow via Environment Variables
+14 Client-side Injection-induced Buffer Overflow
+    
+CAPEC-ID
+Attack Pattern Name
+               271
+CWE-118: Incorrect Access of Indexable Resource ('Range Error')
+CAPEC-ID
+Attack Pattern Name
+  Weakness ID : 119 Status: Stable Structure : Simple
+Abstraction : Class
+ 
+Nature Type ID Name   Page
+CWE Version 4.2
+24 Filter Failure through Buffer Overflow
+45 Buffer Overflow via Symbolic Links
+46 Overflow Variables and Tags
+47 Buffer Overflow via Parameter Expansion

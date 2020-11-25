@@ -1,0 +1,71 @@
+CWE-103: Struts: Incomplete validate() Method Definition
+Weakness ID: 103
+Abstraction: Variant
+Structure: Simple	
+Status: Draft
+Presentation Filter:  
++ Description
+The application has a validator form that either does not define a validate() method, or defines a validate() method but does not call super.validate().
++ Extended Description
+If you do not call super.validate(), the Validation Framework cannot check the contents of the form against a validation form. In other words, the validation framework will be disabled for the given form.
++ Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOf and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that the user may want to explore.
++ Relevant to the view "Research Concepts" (CWE-1000)
+Nature	Type	ID	Name
+ChildOf	Class	573	Improper Following of Specification by Caller
++ Relevant to the view "Seven Pernicious Kingdoms" (CWE-700)
++ Background Details
+The Struts Validator uses a form's validate() method to check the contents of the form properties against the constraints specified in the associated validation form. That means the following classes have a validate() method that is part of the validation framework: ValidatorForm, ValidatorActionForm, DynaValidatorForm, and DynaValidatorActionForm. If you create a class that extends one of these classes, and if your class implements custom validation logic by overriding the validate() method, you must call super.validate() in your validate() implementation.
++ Modes Of Introduction
+The different Modes of Introduction provide information about how and when this weakness may be introduced. The Phase identifies a point in the life cycle at which introduction may occur, while the Note provides a typical scenario related to introduction during the given phase.
+
+Phase	Note
+Implementation	
++ Applicable Platforms
+The listings below show possible areas for which the given weakness could appear. These may be for specific named Languages, Operating Systems, Architectures, Paradigms, Technologies, or a class of such platforms. The platform is listed along with how frequently the given weakness appears for that instance.
+Languages
+Java (Undetermined Prevalence)
++ Common Consequences
+The table below specifies different individual consequences associated with the weakness. The Scope identifies the application security area that is violated, while the Impact describes the negative technical impact that arises if an adversary succeeds in exploiting this weakness. The Likelihood provides information about how likely the specific consequence is expected to be seen relative to the other consequences in the list. For example, there may be high likelihood that a weakness will be exploited to achieve a certain impact, but a low likelihood that it will be exploited to achieve a different impact.
+
+Scope	Impact	Likelihood
+Other
+Technical Impact: Other
+
+Disabling the validation framework for a form exposes the application to numerous types of attacks. Unchecked input is the root cause of vulnerabilities like cross-site scripting, process control, and SQL injection.
+Confidentiality
+Integrity
+Availability
+Other
+Technical Impact: Other
+
+Although J2EE applications are not generally susceptible to memory corruption attacks, if a J2EE application interfaces with native code that does not perform array bounds checking, an attacker may be able to use an input validation mistake in the J2EE application to launch a buffer overflow attack.
+
+Potential Mitigations
+Phase: Implementation
+Implement the validate() method and call super.validate() within that method.
++ Weakness Ordinalities
+Ordinality	Description
+Primary
+(where the weakness exists independent of other weaknesses)
++ Memberships
+This MemberOf Relationships table shows additional CWE Categories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+Nature	Type	ID	Name
+MemberOf	Category	722	OWASP Top Ten 2004 Category A1 - Unvalidated Input
+MemberOf	Category	990	SFP Secondary Cluster: Tainted Input to Command
++ Notes
+Maintenance
+The current description implies a loose composite of two separate weaknesses, so this node might need to be split or converted into a low-level category.
+Relationship
+This could introduce other weaknesses related to missing input validation.
++ Taxonomy Mappings
+Mapped Taxonomy Name	Node ID	Fit	Mapped Node Name
+7 Pernicious Kingdoms			Struts: Erroneous validate() Method
+Software Fault Patterns	SFP24		Tainted input to command
++ References
+[REF-6] Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. NIST. 2005-11-07. <https://samate.nist.gov/SSATTM_Content/papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security%20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf>.
++ Content History
++ Submissions
+Submission Date	Submitter	Organization
+2006-07-19	7 Pernicious Kingdoms	
++ Modifications

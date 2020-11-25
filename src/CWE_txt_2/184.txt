@@ -1,0 +1,129 @@
+CWE-184: Incomplete List of Disallowed Inputs
+Description
+The product implements a protection mechanism that relies on a list of inputs (or properties of inputs) that are not allowed by policy or otherwise require other action to neutralize before additional processing takes place, but the list is incomplete, leading to resultant weaknesses.
+Extended Description
+Developers often try to protect their products against malicious input by performing tests against inputs that are known to be bad, such as special characters that can invoke new commands. However, such lists often only account for the most well-known bad inputs. Attackers may be able to find other malicious inputs that were not expected by the developer, allowing them to bypass the intended protection mechanism.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+     Weakness ID : 184 Status: Draft Structure : Simple
+Abstraction : Base
+  
+Nature
+ChildOf ChildOf PeerOf
+PeerOf CanPrecede
+CanPrecede
+CanPrecede
+CanPrecede
+Type ID
+1023 693 86
+625 78
+79
+98
+434
+Name Page
+Incomplete Comparison with Missing Factors 1638 Protection Mechanism Failure 1347
+Improper Neutralization of Invalid Characters in Identifiers in 178 Web Pages
+Permissive Regular Expression 1240 Improper Neutralization of Special Elements used in an OS 141 Command ('OS Command Injection')
+Improper Neutralization of Input During Web Page 152 Generation ('Cross-site Scripting')
+Improper Control of Filename for Include/Require Statement 218 in PHP Program ('PHP Remote File Inclusion')
+Unrestricted Upload of File with Dangerous Type 938
+                                                                                   Relevant to the view "Software Development" (CWE-699)
+Nature Type ID Name Page
+ 
+ MemberOf
+Weakness Ordinalities
+Primary :
+Applicable Platforms
+1215 Data Validation Issues 2048
+     Language : Language-Independent (Prevalence = Undetermined) Alternate Terms
+Denylist / Deny List : This is used by CWE and CAPEC instead of other commonly-used terms. Its counterpart is allowlist.
+ Blocklist / Block List : This is often used by security tools such as firewalls, email or web gateways, proxies, etc.
+Blacklist / Black List : This term is frequently used, but usage has been declining as organizations have started to adopt other terms.
+Common Consequences
+Access Control Bypass Protection Mechanism
+Detection Methods
+Black Box
+Exploitation of a vulnerability with commonly-used manipulations might fail, but minor variations might succeed.
+Potential Mitigations
+Phase: Implementation
+Strategy = Input Validation
+Do not rely exclusively on detecting disallowed inputs. There are too many variants to encode a character, especially when different environments are used, so there is a high likelihood of missing some variants. Only use detection of disallowed inputs as a mechanism for detecting suspicious activity. Ensure that you are using other protection mechanisms that only identify "good" input - such as lists of allowed inputs - and ensure that you are properly encoding your outputs.
+Observed Examples
+CVE-2008-2309
+CVE-2005-2782
+CVE-2004-0542
+CVE-2004-0595
+CVE-2005-3287
+product uses a denylist to identify potentially dangerous content, allowing attacker to bypass a warning https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2309
+PHP remote file inclusion in web application that filters "http" and "https" URLs, but not "ftp".
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-2782
+Programming language does not filter certain shell metacharacters in Windows environment.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0542
+XSS filter doesn't filter null characters before looking for dangerous tags, which are ignored by web browsers. MIE and validate-before-cleanse. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0595
+Web-based mail product doesn't restrict dangerous extensions such as ASPX on a web server, even though others are prohibited.
+                 428
+CWE-184: Incomplete List of Disallowed Inputs
+Reference
+Description
+CWE Version 4.2
+CWE-184: Incomplete List of Disallowed Inputs
+             CVE-2004-2351 CVE-2005-2959
+CVE-2005-1824
+CVE-2007-1343
+CVE-2007-5727
+CVE-2006-4308
+CVE-2007-3572
+CVE-2002-0661
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-3287
+Resultant XSS when only <script> and <style> are checked.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-2351
+Privileged program does not clear sensitive environment variables that are used by bash. Overlaps multiple interpretation error. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-2959
+SQL injection protection scheme does not quote the "\" special character. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1824
+Product uses list of protected variables, but accidentally omits one dangerous variable, allowing external modification http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-1343
+Chain: product only removes SCRIPT tags (CWE-184), enabling XSS (CWE-79)
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-5727
+Chain: product only checks for use of "javascript:" tag (CWE-184), allowing XSS (CWE-79) using other tags https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-4308
+Chain: OS command injection (CWE-78) enabled by using an unexpected character that is not explicitly disallowed (CWE-184) https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-3572
+"\" not in list of disallowed values for web server, allowing path traversal attacks when the server is run on Windows and other OSes. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0661
+               CVE-2005-2184 Detection of risky filename extensions prevents users from automatically executing .EXE files, but .LNK is accepted, allowing resultant Windows
+symbolic link.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-2184
+                      MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+Nature Type ID Name Page
+MemberOf 990 SFP Secondary Cluster: Tainted Input to Command 888 1985
+Notes
+Relationship
+Multiple interpretation errors can indirectly introduce inputs that should be disallowed. For example, a list of dangerous shell metacharacters might not include a metacharacter that only has meaning in one particular shell, not all of them; or a check for XSS manipulations might ignore an unusual construct that is supported by one web browser, but not others.
+Taxonomy Mappings
+PLOVER Incomplete Blacklist
+Related Attack Patterns
+3 Using Leading 'Ghost' Character Sequences to Bypass Input Filters 6 Argument Injection
+15 Command Delimiters
+43 Exploiting Multiple Input Interpretation Layers
+71 Using Unicode Encoding to Bypass Validation Logic
+                             Mapped Taxonomy Name
+    Node ID
+    Fit
+    Mapped Node Name
+        CAPEC-ID
+    Attack Pattern Name
+                     429
+CWE-184: Incomplete List of Disallowed Inputs
+
+CAPEC-ID
+Attack Pattern Name
+Abstraction : Class
+ 
+Nature Type ID Name Page
+Scope Impact Likelihood
+CWE Version 4.2
+CWE-185: Incorrect Regular Expression
+73 User-Controlled Filename 85 AJAX Fingerprinting
+120 Double Encoding
+182 Flash Injection
+References
+[REF-140]Greg Hoglund and Gary McGraw. "Exploiting Software: How to Break Code". 2004 February 7. Addison-Wesley. < https://www.amazon.com/Exploiting-Software-How-Break-Code/ dp/0201786958 >.
+[REF-141]Steve Christey. "Blacklist defenses as a breeding ground for vulnerability variants". 2006 February 3. < http://seclists.org/fulldisclosure/2006/Feb/0040.html >.
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.

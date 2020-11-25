@@ -1,0 +1,220 @@
+CWE-131: Incorrect Calculation of Buffer Size
+
+Description
+       The software does not correctly calculate the size to be used when allocating a buffer, which could lead to a buffer overflow.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+  ChildOf 682 CanFollow 467 CanPrecede 119
+Incorrect Calculation 1329 Use of sizeof() on a Pointer Type 993 Improper Restriction of Operations within the Bounds of a 272 Memory Buffer
+                           Relevant to the view "Weaknesses for Simplified Mapping of Published Vulnerabilities" (CWE-1003)
+ChildOf 682 Incorrect Calculation 1329
+Relevant to the view "Software Development" (CWE-699)
+MemberOf 1218 Memory Buffer Errors 2049
+Applicable Platforms
+Language : C (Prevalence = Undetermined)
+Language : C++ (Prevalence = Undetermined) Likelihood Of Exploit
+High
+Common Consequences
+Scope Impact   Likelihood
+Integrity Availability Confidentiality
+DoS: Crash, Exit, or Restart
+Execute Unauthorized Code or Commands Read Memory
+Modify Memory
+If the incorrect calculation is used in the context of memory allocation, then the software may create a buffer that is smaller or larger than expected. If the allocated buffer
+is smaller than expected, this could lead to an out-of- bounds read or write (CWE-119), possibly causing a crash, allowing arbitrary code execution, or exposing sensitive data.
+Detection Methods
+Automated Static Analysis
+This weakness can often be detected using automated static analysis tools. Many modern tools use data flow analysis or constraint-based techniques to minimize the number of false positives. Automated static analysis generally does not account for environmental considerations when reporting potential errors in buffer calculations. This can make it difficult for users to determine which warnings should be investigated first. For example, an analysis tool might report buffer overflows that originate from command line arguments in a program that is not expected to run with setuid or other special privileges.
+Effectiveness = High
+Detection techniques for buffer-related errors are more mature than for most other weakness types.
+Automated Dynamic Analysis
+This weakness can be detected using dynamic tools and techniques that interact with the software using large test suites with many diverse inputs, such as fuzz testing (fuzzing), robustness testing, and fault injection. The software's operation may slow down, but it should not become unstable, crash, or generate incorrect results.
+Effectiveness = Moderate
+Without visibility into the code, black box methods may not be able to sufficiently distinguish this weakness from others, requiring follow-up manual methods to diagnose the underlying problem.
+Manual Analysis
+Manual analysis can be useful for finding this weakness, but it might not achieve desired code coverage within limited time constraints. This becomes difficult for weaknesses that must be considered for all inputs, since the attack surface can be too large.
+Manual Analysis
+This weakness can be detected using tools and techniques that require manual (human) analysis, such as penetration testing, threat modeling, and interactive tools that allow the tester to record and modify an active session. Specifically, manual static analysis is useful for evaluating the correctness of allocation calculations. This can be useful for detecting overflow conditions (CWE-190) or similar weaknesses that might have serious security impacts on the program.
+ 327
+CWE-131: Incorrect Calculation of Buffer Size
+CWE Version 4.2
+CWE-131: Incorrect Calculation of Buffer Size
+Effectiveness = High
+These may be more effective than strictly automated techniques. This is especially the case with weaknesses that are related to design and business rules.
+Automated Static Analysis - Binary or Bytecode
+According to SOAR, the following detection techniques may be useful: Highly cost effective: Bytecode Weakness Analysis - including disassembler + source code weakness analysis Binary Weakness Analysis - including disassembler + source code weakness analysis
+Effectiveness = High
+Manual Static Analysis - Binary or Bytecode
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Binary / Bytecode disassembler - then use manual analysis for vulnerabilities & anomalies
+Effectiveness = SOAR Partial
+Manual Static Analysis - Source Code
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Focused Manual Spotcheck - Focused manual analysis of source Manual Source Code Review (not inspections)
+Effectiveness = SOAR Partial
+Automated Static Analysis - Source Code
+According to SOAR, the following detection techniques may be useful: Highly cost effective: Source code Weakness Analyzer Context-configured Source Code Weakness Analyzer Cost effective for partial coverage: Source Code Quality Analyzer
+Effectiveness = High
+Architecture or Design Review
+According to SOAR, the following detection techniques may be useful: Highly cost effective: Formal Methods / Correct-By-Construction Cost effective for partial coverage: Inspection (IEEE 1028 standard) (can apply to requirements, design, source code, etc.)
+Effectiveness = High
+Potential Mitigations
+Phase: Implementation
+When allocating a buffer for the purpose of transforming, converting, or encoding an input, allocate enough memory to handle the largest possible encoding. For example, in a routine that converts "&" characters to "&amp;" for HTML entity encoding, the output buffer needs to be at least 5 times as large as the input buffer.
+Phase: Implementation
+Understand the programming language's underlying representation and how it interacts with numeric calculation (CWE-681). Pay close attention to byte size discrepancies, precision, signed/unsigned distinctions, truncation, conversion and casting between types, "not-a-number" calculations, and how the language handles numbers that are too large or too small for its underlying representation. [REF-7] Also be careful to account for 32-bit, 64-bit, and other potential differences that may affect the numeric representation.
+Phase: Implementation
+Strategy = Input Validation
+   CWE-131: Incorrect Calculation of Buffer Size
+ 328
+
+CWE Version 4.2
+CWE-131: Incorrect Calculation of Buffer Size
+Perform input validation on any numeric input by ensuring that it is within the expected range. Enforce that the input meets both the minimum and maximum requirements for the expected range.
+Phase: Architecture and Design
+For any security checks that are performed on the client side, ensure that these checks are duplicated on the server side, in order to avoid CWE-602. Attackers can bypass the client-side checks by modifying values after the checks have been performed, or by changing the client to remove the client-side checks entirely. Then, these modified values would be submitted to the server.
+Phase: Implementation
+When processing structured incoming data containing a size field followed by raw data, identify and resolve any inconsistencies between the size field and the actual size of the data (CWE-130).
+Phase: Implementation
+When allocating memory that uses sentinels to mark the end of a data structure - such as NUL bytes in strings - make sure you also include the sentinel in your calculation of the total amount of memory that must be allocated.
+Phase: Implementation
+Replace unbounded copy functions with analogous functions that support length arguments, such as strcpy with strncpy. Create these if they are not available.
+Effectiveness = Moderate
+This approach is still susceptible to calculation errors, including issues such as off-by-one errors (CWE-193) and incorrectly calculating buffer lengths (CWE-131). Additionally, this only addresses potential overflow issues. Resource consumption / exhaustion issues are still possible.
+Phase: Implementation
+Use sizeof() on the appropriate data type to avoid CWE-467.
+Phase: Implementation
+Use the appropriate type for the desired action. For example, in C/C++, only use unsigned types for values that could never be negative, such as height, width, or other numbers related to quantity. This will simplify sanity checks and will reduce surprises related to unexpected casting.
+Phase: Architecture and Design
+Strategy = Libraries or Frameworks
+Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid. Use libraries or frameworks that make it easier to handle numbers without unexpected consequences, or buffer allocation routines that automatically track buffer size. Examples include safe integer handling packages such as SafeInt (C++) or IntegerLib (C or C++). [REF-106]
+Phase: Build and Compilation
+Strategy = Compilation or Build Hardening
+Run or compile the software using features or extensions that automatically provide a protection mechanism that mitigates or eliminates buffer overflows. For example, certain compilers
+and extensions provide automatic buffer overflow detection mechanisms that are built into
+the compiled code. Examples include the Microsoft Visual Studio /GS flag, Fedora/Red Hat FORTIFY_SOURCE GCC flag, StackGuard, and ProPolice.
+   Effectiveness = Defense in Depth
+ 329
+CWE-131: Incorrect Calculation of Buffer Size
+
+CWE Version 4.2
+CWE-131: Incorrect Calculation of Buffer Size
+This is not necessarily a complete solution, since these mechanisms can only detect certain types of overflows. In addition, an attack could still cause a denial of service, since the typical response is to exit the application.
+Phase: Operation
+Strategy = Environment Hardening
+Run or compile the software using features or extensions that randomly arrange the positions of a program's executable and libraries in memory. Because this makes the addresses unpredictable, it can prevent an attacker from reliably jumping to exploitable code. Examples include Address Space Layout Randomization (ASLR) [REF-58] [REF-60] and Position- Independent Executables (PIE) [REF-64].
+Effectiveness = Defense in Depth
+This is not a complete solution. However, it forces the attacker to guess an unknown value that changes every program execution. In addition, an attack could still cause a denial of service, since the typical response is to exit the application.
+Phase: Operation
+Strategy = Environment Hardening
+Use a CPU and operating system that offers Data Execution Protection (NX) or its equivalent [REF-61] [REF-60].
+Effectiveness = Defense in Depth
+This is not a complete solution, since buffer overflows could be used to overwrite nearby variables to modify the software's state in dangerous ways. In addition, it cannot be used in cases in which self-modifying code is required. Finally, an attack could still cause a denial of service, since the typical response is to exit the application.
+Phase: Implementation
+Strategy = Compilation or Build Hardening
+Examine compiler warnings closely and eliminate problems with potential security implications, such as signed / unsigned mismatch in memory operations, or use of uninitialized variables. Even if the weakness is rarely exploitable, a single failure may lead to the compromise of the entire system.
+Phase: Architecture and Design Phase: Operation
+Strategy = Environment Hardening
+Run your code using the lowest privileges that are required to accomplish the necessary tasks [REF-76]. If possible, create isolated accounts with limited privileges that are only used for a single task. That way, a successful attack will not immediately give the attacker access to the rest of the software or its environment. For example, database applications rarely need to run as the database administrator, especially in day-to-day operations.
+Phase: Architecture and Design Phase: Operation
+Strategy = Sandbox or Jail
+Run the code in a "jail" or similar sandbox environment that enforces strict boundaries between the process and the operating system. This may effectively restrict which files can be accessed in a particular directory or which commands can be executed by the software. OS-level examples include the Unix chroot jail, AppArmor, and SELinux. In general, managed code may provide some protection. For example, java.io.FilePermission in the Java SecurityManager allows the software to specify restrictions on file operations. This may not be a feasible solution, and it
+   CWE-131: Incorrect Calculation of Buffer Size
+ 330
+
+CWE Version 4.2
+CWE-131: Incorrect Calculation of Buffer Size
+only limits the impact to the operating system; the rest of the application may still be subject to compromise. Be careful to avoid CWE-243 and other weaknesses related to jails.
+Effectiveness = Limited
+The effectiveness of this mitigation depends on the prevention capabilities of the specific sandbox or jail being used and might only help to reduce the scope of an attack, such as restricting the attacker to certain system calls or limiting the portion of the file system that can be accessed.
+Observed Examples
+Reference
+CVE-2004-1363
+CVE-2004-0747 CVE-2005-2103
+CVE-2005-3120
+CVE-2003-0899 CVE-2001-0334 CVE-2001-0248 CVE-2001-0249 CVE-2002-0184 CVE-2004-0434 CVE-2002-1347 CVE-2005-0490 CVE-2004-0940
+Description
+substitution overflow: buffer overflow using environment variables that are expanded after the length check is performed https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-1363
+substitution overflow: buffer overflow using expansion of environment variables https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0747
+substitution overflow: buffer overflow using a large number of substitution strings
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-2103
+transformation overflow: product adds extra escape characters to incoming data, but does not account for them in the buffer length https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-3120
+transformation overflow: buffer overflow when expanding ">" to "&gt;", etc.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0899
+expansion overflow: buffer overflow using wildcards
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0334
+expansion overflow: long pathname + glob = overflow
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0248
+expansion overflow: long pathname + glob = overflow
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0249
+special characters in argument are not properly expanded
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0184
+small length value leads to heap overflow
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0434
+multiple variants
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1347
+needs closer investigation, but probably expansion-based
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-0490
+needs closer investigation, but probably expansion-based
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0940
+                                                   333
+CWE-131: Incorrect Calculation of Buffer Size
+   Reference Description
+           Nature Type ID Name     Page
+              Mapped Taxonomy Name
+    Node ID
+    Fit
+    Mapped Node Name
+    CAPEC-ID
+    Attack Pattern Name
+  CWE Version 4.2
+CWE-131: Incorrect Calculation of Buffer Size
+CVE-2008-0599 Chain: Language interpreter calculates wrong buffer size (CWE-131) by using "size = ptr ? X : Y" instead of "size = (ptr ? X : Y)" expression.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0599
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+     MemberOf
+MemberOf MemberOf MemberOf
+MemberOf MemberOf
+MemberOf MemberOf
+Notes
+Maintenance
+742 CERT C Secure Coding Standard (2008) Chapter 9 - Memory Management (MEM)
+802 2010 Top 25 - Risky Resource Management 865 2011 Top 25 - Risky Resource Management 876 CERT C++ Secure Coding Section 08 - Memory
+Management (MEM) 884 CWE Cross-section
+974 SFP Secondary Cluster: Incorrect Buffer Length Computation
+1158 SEI CERT C Coding Standard - Guidelines 04. Integers (INT)
+1162 SEI CERT C Coding Standard - Guidelines 08. Memory Management (MEM)
+734 1918
+800 1927 900 1944 868 1949
+884 2070 888 1978
+1154 2028 1154 2030
+                                                                                                 This is a broad category. Some examples include: simple math errors, incorrectly updating parallel counters, not accounting for size differences when "transforming" one input to another format (e.g. URL canonicalization or other transformation that can generate a result that's larger than the original input, i.e. "expansion"). This level of detail is rarely available in public reports, so it is difficult to find good examples.
+Maintenance
+This weakness may be a composite or a chain. It also may contain layering or perspective differences. This issue may be associated with many different types of incorrect calculations (CWE-682), although the integer overflow (CWE-190) is probably the most prevalent. This can be primary to resource consumption problems (CWE-400), including uncontrolled memory allocation (CWE-789). However, its relationship with out-of-bounds buffer access (CWE-119) must also be considered.
+Taxonomy Mappings
+PLOVER
+CERT C Secure Coding
+CERT C Secure Coding
+Related Attack Patterns
+INT30-C Imprecise
+MEM35- CWE More C Abstract
+Other length calculation error
+Ensure that unsigned integer operations do not wrap
+Allocate sufficient memory for an object
+                    47 Buffer Overflow via Parameter Expansion 100 Overflow Buffers
+References
+       334
+CWE-131: Incorrect Calculation of Buffer Size
+
+CWE Version 4.2
+CWE-134: Use of Externally-Controlled Format String
+[REF-106]David LeBlanc and Niels Dekker. "SafeInt". < http://safeint.codeplex.com/ >.
+[REF-107]Jason Lam. "Top 25 Series - Rank 18 - Incorrect Calculation of Buffer Size". 2010 March 9. SANS Software Security Institute. < http://software-security.sans.org/blog/2010/03/19/top-25- series-rank-18-incorrect-calculation-of-buffer-size >.
+[REF-58]Michael Howard. "Address Space Layout Randomization in Windows Vista". < http:// blogs.msdn.com/michael_howard/archive/2006/05/26/address-space-layout-randomization-in- windows-vista.aspx >.
+[REF-61]Microsoft. "Understanding DEP as a mitigation technology part 1". < http:// blogs.technet.com/b/srd/archive/2009/06/12/understanding-dep-as-a-mitigation-technology- part-1.aspx >.
+[REF-60]"PaX". < http://en.wikipedia.org/wiki/PaX >.
+[REF-76]Sean Barnum and Michael Gegick. "Least Privilege". 2005 September 4. < https:// buildsecurityin.us-cert.gov/daisy/bsi/articles/knowledge/principles/351.html >.
+[REF-7]Michael Howard and David LeBlanc. "Writing Secure Code". 2nd Edition. 2002 December 4. Microsoft Press. < https://www.microsoftpressstore.com/store/writing-secure- code-9780735617223 >.
+[REF-44]Michael Howard, David LeBlanc and John Viega. "24 Deadly Sins of Software Security". McGraw-Hill. 2010.
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.
+[REF-64]Grant Murphy. "Position Independent Executables (PIE)". 2012 November 8. Red Hat. < https://securityblog.redhat.com/2012/11/28/position-independent-executables-pie/ >.

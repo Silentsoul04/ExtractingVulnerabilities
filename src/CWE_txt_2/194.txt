@@ -1,0 +1,90 @@
+CWE-194: Unexpected Sign Extension
+
+Description
+The software performs an operation on a number that causes it to be sign extended when it is transformed into a larger data type. When the original number is negative, this can produce unexpected values that lead to resultant weaknesses.
+   Weakness ID : 194 Status: Incomplete Structure : Simple
+Abstraction : Variant
+ Relationships
+ 455
+CWE-194: Unexpected Sign Extension
+Nature Type ID Name   Page
+Scope Impact   Likelihood
+Integrity Confidentiality Availability Other
+Read Memory Modify Memory Other
+When an unexpected sign extension occurs in code that operates directly on memory buffers, such as a size value or a memory index, then it could cause the program to write or read outside the boundaries of the intended buffer. If the numeric value is associated with an application-level resource, such as a quantity or price for a product in an e- commerce site, then the sign extension could produce a value that is much higher (or lower) than the application's allowable range.
+int GetUntrustedInt () { return(0x0000FFFF);
+}
+void main (int argc, char **argv) {
+char path[256];
+char *input;
+int i;
+short s;
+unsigned int sz;
+i = GetUntrustedInt(); s = i;
+CWE Version 4.2
+CWE-194: Unexpected Sign Extension
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 681 Incorrect Conversion between Numeric Types 1325
+Applicable Platforms
+Language : C (Prevalence = Undetermined)
+Language : C++ (Prevalence = Undetermined) Likelihood Of Exploit
+High
+Common Consequences
+Potential Mitigations
+Phase: Implementation
+Avoid using signed variables if you don't need to represent negative values. When negative values are needed, perform sanity checks after you save those values to larger data types, or before passing them to functions that are expecting unsigned values.
+Demonstrative Examples
+Example 1:
+The following code reads a maximum size and performs a sanity check on that size. It then performs a strncpy, assuming it will not exceed the boundaries of the array. While the use of "short s" is forced in this particular example, short int's are frequently used within real-world code, such as code that processes structured data.
+This code first exhibits an example of CWE-839, allowing "s" to be a negative number. When the negative short "s" is converted to an unsigned integer, it becomes an extremely large positive integer. When this converted integer is used by strncpy() it will lead to a buffer overflow (CWE-119).
+Observed Examples
+Reference
+CVE-2018-10887
+CVE-1999-0234
+Description
+Chain: unexpected sign extension (CWE-194) leads to integer overflow (CWE-190), causing an out-of-bounds read (CWE-125) https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10887
+Sign extension error produces -1 value that is treated as a command separator, enabling OS command injection. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-1999-0234
+    
+CVE-2003-0161
+Product uses "char" type for input character. When char is implemented as a signed type, ASCII value 0xFF (255), a sign extension produces a -1 value that is treated as a program-specific separator value, effectively disabling a length check and leading to a buffer overflow. This is also a multiple interpretation error.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0161
+CVE-2007-4988 chain: signed short width value in image processor is sign extended during conversion to unsigned int, which leads to integer overflow and heap-based
+buffer overflow.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-4988
+CVE-2006-1834
+CVE-2005-2753
+chain: signedness error allows bypass of a length check; later sign extension makes exploitation easier. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-1834
+Sign extension when manipulating Pascal-style strings leads to integer overflow and improper memory copy. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-2753
+      MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ Nature
+MemberOf MemberOf
+Notes
+Type ID
+998 1158
+Name Page
+SFP Secondary Cluster: Glitch in Computation 888 1991 SEI CERT C Coding Standard - Guidelines 04. Integers 1154 2028 (INT)
+                    Relationship
+ 457
+CWE-194: Unexpected Sign Extension
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+  Weakness ID : 195 Status: Draft Structure : Simple
+Abstraction : Variant
+ 
+Nature Type ID Name   Page
+CWE Version 4.2
+Sign extension errors can lead to buffer overflows and other memory-based problems. They are also likely to be factors in other weaknesses that are not based on memory operations, but rely on numeric calculation.
+Maintenance
+This entry is closely associated with signed-to-unsigned conversion errors (CWE-195) and other numeric errors. These relationships need to be more closely examined within CWE.
+  Taxonomy Mappings
+CLASP
+Software Fault Patterns CERT C Secure Coding
+References
+Sign extension error SFP1 Glitch in computation
+INT31-C CWE More Specific Ensure that integer conversions do not result in lost or misinterpreted data
+                    [REF-161]John McDonald, Mark Dowd and Justin Schuh. "C Language Issues for Application Security". 2008 January 5. < http://www.informit.com/articles/article.aspx?p=686170&seqNum=6 >.
+[REF-162]Robert Seacord. "Integral Security". 2006 November 3. < http://www.ddj.com/ security/193501774 >.

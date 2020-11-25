@@ -1,0 +1,65 @@
+CWE-192: Integer Coercion Error
+Description
+ 447
+CWE-192: Integer Coercion Error
+Nature Type ID Name   Page
+Nature Type ID Name   Page
+Scope Impact   Likelihood
+Availability DoS: Resource Consumption (CPU) DoS: Resource Consumption (Memory)
+DoS: Crash, Exit, or Restart
+Integer coercion often leads to undefined states of execution resulting in infinite loops or crashes.
+Integrity Confidentiality Availability
+Execute Unauthorized Code or Commands
+In some cases, integer coercion errors can lead to exploitable buffer overflow conditions, resulting in the execution of arbitrary code.
+Integrity Other
+Other
+Integer coercion errors result in an incorrect value being stored for the variable in question.
+CWE Version 4.2
+CWE-192: Integer Coercion Error
+Integer coercion refers to a set of flaws pertaining to the type casting, extension, or truncation of primitive data types.
+Extended Description
+Several flaws fall under the category of integer coercion errors. For the most part, these errors in and of themselves result only in availability and data integrity issues. However, in some circumstances, they may result in other, more complicated security related flaws, such as buffer overflow conditions.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 681 Incorrect Conversion between Numeric Types 1325
+Relevant to the view "Software Development" (CWE-699)
+MemberOf 189 Numeric Errors 1884
+Applicable Platforms
+Language : C (Prevalence = Undetermined) Language : C++ (Prevalence = Undetermined) Language : Java (Prevalence = Undetermined) Language : C# (Prevalence = Undetermined)
+Likelihood Of Exploit
+Medium
+Common Consequences
+Potential Mitigations
+Phase: Requirements
+A language which throws exceptions on ambiguous data casts might be chosen.
+Phase: Architecture and Design
+Design objects and program flow such that multiple or complex casts are unnecessary
+ 448
+CWE-192: Integer Coercion Error
+CWE Version 4.2
+CWE-192: Integer Coercion Error
+Ensure that any data type casting that you must used is entirely understood in order to reduce the plausibility of error in use.
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+   MemberOf 738
+CERT C Secure Coding Standard (2008) Chapter 5 - 734 1915 Integers (INT)
+CERT C++ Secure Coding Section 04 - Integers (INT) 868 1947
+             MemberOf 872
+MemberOf 1158 SEI CERT C Coding Standard - Guidelines 04. Integers 1154 2028
+             (INT)
+      Notes
+Maintenance
+Within C, it might be that "coercion" is semantically different than "casting", possibly depending on whether the programmer directly specifies the conversion, or if the compiler does it implicitly. This has implications for the presentation of this node and others, such as CWE-681, and whether there is enough of a difference for these nodes to be split.
+Taxonomy Mappings
+CLASP
+CERT C Secure Coding CERT C Secure Coding
+CERT C Secure Coding
+References
+INT02-C INT05-C
+INT31-C Exact
+Integer coercion error
+Understand integer conversion rules Do not use input functions to convert character data if they cannot handle all possible inputs
+Ensure that integer conversions do not result in lost or misinterpreted data
+                            [REF-44]Michael Howard, David LeBlanc and John Viega. "24 Deadly Sins of Software Security". McGraw-Hill. 2010.
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.

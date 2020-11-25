@@ -1,0 +1,54 @@
+CWE-97: Improper Neutralization of Server-Side Includes (SSI) Within a Web Page
+Weakness ID: 97
+Abstraction: Variant
+Structure: Simple	
+Status: Draft
+Presentation Filter:  
++ Description
+The software generates a web page, but does not neutralize or incorrectly neutralizes user-controllable input that could be interpreted as a server-side include (SSI) directive.
++ Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOf and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that the user may want to explore.
++ Relevant to the view "Research Concepts" (CWE-1000)
+Nature	Type	ID	Name
+ChildOf	Base	96	Improper Neutralization of Directives in Statically Saved Code ('Static Code Injection')
++ Relevant to the view "Architectural Concepts" (CWE-1008)
++ Modes Of Introduction
+The different Modes of Introduction provide information about how and when this weakness may be introduced. The Phase identifies a point in the life cycle at which introduction may occur, while the Note provides a typical scenario related to introduction during the given phase.
+
+Phase	Note
+Architecture and Design	
+Implementation	REALIZATION: This weakness is caused during implementation of an architectural security tactic.
++ Applicable Platforms
+The listings below show possible areas for which the given weakness could appear. These may be for specific named Languages, Operating Systems, Architectures, Paradigms, Technologies, or a class of such platforms. The platform is listed along with how frequently the given weakness appears for that instance.
+Languages
+Class: Language-Independent (Undetermined Prevalence)
++ Common Consequences
+The table below specifies different individual consequences associated with the weakness. The Scope identifies the application security area that is violated, while the Impact describes the negative technical impact that arises if an adversary succeeds in exploiting this weakness. The Likelihood provides information about how likely the specific consequence is expected to be seen relative to the other consequences in the list. For example, there may be high likelihood that a weakness will be exploited to achieve a certain impact, but a low likelihood that it will be exploited to achieve a different impact.
+
+Scope	Impact	Likelihood
+Confidentiality
+Integrity
+Availability
+Technical Impact: Execute Unauthorized Code or Commands
+
++ Memberships
+This MemberOf Relationships table shows additional CWE Categories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+Nature	Type	ID	Name
+MemberOf	Category	990	SFP Secondary Cluster: Tainted Input to Command
++ Notes
+Relationship
+This can be resultant from XSS/HTML injection because the same special characters can be involved. However, this is server-side code execution, not client-side.
++ Taxonomy Mappings
+Mapped Taxonomy Name	Node ID	Fit	Mapped Node Name
+PLOVER			Server-Side Includes (SSI) Injection
+WASC	36		SSI Injection
++ Related Attack Patterns
+CAPEC-ID	Attack Pattern Name
+CAPEC-101	Server Side Include (SSI) Injection
+CAPEC-35	Leverage Executable Code in Non-Executable Files
++ Content History
++ Submissions
+Submission Date	Submitter	Organization
+2006-07-19	PLOVER	
++ Modifications
++ Previous Entry Names

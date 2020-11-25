@@ -1,0 +1,63 @@
+CWE-196: Unsigned to Signed Conversion Error
+Description
+The software uses an unsigned primitive and performs a cast to a signed primitive, which can produce an unexpected value if the value of the unsigned primitive can not be represented using a signed primitive.
+Extended Description
+Although less frequent an issue than signed-to-unsigned conversion, unsigned-to-signed conversion can be the perfect precursor to dangerous buffer underwrite conditions that allow attackers to move down the stack where they otherwise might not have access in a normal buffer overflow condition. Buffer underwrites occur frequently when large unsigned values are cast to signed values, and then used as indexes into a buffer or for pointer arithmetic.
+Relationships
+   Weakness ID : 196 Status: Draft Structure : Simple
+Abstraction : Variant
+  461
+CWE-196: Unsigned to Signed Conversion Error
+Nature Type ID Name   Page
+Scope Impact   Likelihood
+Availability DoS: Crash, Exit, or Restart
+Incorrect sign conversions generally lead to undefined behavior, and therefore crashes.
+Integrity Modify Memory
+If a poor cast lead to a buffer overflow or similar condition, data integrity may be affected.
+Integrity Confidentiality Availability Access Control
+Execute Unauthorized Code or Commands Bypass Protection Mechanism
+Improper signed-to-unsigned conversions without proper checking can sometimes trigger buffer overflows which can be used to execute arbitrary code. This is usually outside the scope of a program's implicit security policy.
+Nature Type ID Name     Page
+CWE Version 4.2
+CWE-196: Unsigned to Signed Conversion Error
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+    ChildOf CanAlsoBe
+CanAlsoBe
+Applicable Platforms
+681 Incorrect Conversion between Numeric Types 1325 120 Buffer Copy without Checking Size of Input ('Classic Buffer 281
+Overflow')
+124 Buffer Underwrite ('Buffer Underflow') 300
+                           Language : C (Prevalence = Undetermined)
+Language : C++ (Prevalence = Undetermined) Likelihood Of Exploit
+Medium
+Common Consequences
+Potential Mitigations
+Phase: Requirements
+Choose a language which is not subject to these casting flaws.
+Phase: Architecture and Design
+Design object accessor functions to implicitly check values for valid sizes. Ensure that all functions which will be used as a size are checked previous to use as a size. If the language permits, throw exceptions rather than using in-band errors.
+Phase: Implementation
+Error check the return values of all functions. Be aware of implicit casts made, and use unsigned variables for sizes if at all possible.
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+MemberOf 998 SFP Secondary Cluster: Glitch in Computation 888 1991
+        462
+CWE-196: Unsigned to Signed Conversion Error
+  Taxonomy Mappings
+CWE Version 4.2
+CWE-197: Numeric Truncation Error
+Unsigned to signed conversion error Glitch in computation
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+CLASP
+Software Fault Patterns SFP1
+Related Attack Patterns
+92 Forced Integer Overflow
+References
+            
+CAPEC-ID
+Attack Pattern Name
+  [REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.

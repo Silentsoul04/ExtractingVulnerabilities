@@ -1,0 +1,87 @@
+CWE-201: Insertion of Sensitive Information Into Sent Data
+Description
+The code transmits data to another actor, but a portion of the data includes sensitive information that should not be accessible to that actor.
+Extended Description
+Sensitive information could include data that is sensitive in and of itself (such as credentials or private messages), or otherwise useful in the further exploitation of the system (such as internal file system structure).
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+                                                                                                              476
+CWE-201: Insertion of Sensitive Information Into Sent Data
+CWE Version 4.2
+CWE-201: Insertion of Sensitive Information Into Sent Data
+Relevant to the view "Research Concepts" (CWE-1000)
+         Nature
+ChildOf ParentOf CanAlsoBe CanAlsoBe
+CanFollow CanFollow
+Type ID
+      200
+      598
+      202
+      209
+212 226
+Name Page
+Exposure of Sensitive Information to an Unauthorized Actor 467 Use of GET Request Method With Sensitive Query Strings 1194 Exposure of Sensitive Information Through Data Queries 478 Generation of Error Message Containing Sensitive 492 Information
+Improper Removal of Sensitive Information Before Storage 502 or Transfer
+Sensitive Information in Resource Not Removed Before 519 Reuse
+                                                                        Relevant to the view "Architectural Concepts" (CWE-1008)
+Nature Type ID Name Page
+MemberOf 1015 Limit Access 2002
+Relevant to the view "Software Development" (CWE-699)
+Nature Type ID Name Page
+                                         MemberOf
+Applicable Platforms
+199 Information Management Errors 1885
+     Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Potential Mitigations
+Phase: Requirements
+Specify which data in the software should be regarded as sensitive. Consider which types of users should have access to which types of data.
+Phase: Implementation
+Ensure that any possibly sensitive data specified in the requirements is verified with designers to ensure that it is either a calculated risk or mitigated elsewhere. Any information that is not necessary to the functionality should be removed in order to lower both the overhead and the possibility of security sensitive data being sent.
+Phase: System Configuration
+Setup default error messages so that unexpected errors do not disclose sensitive information.
+Phase: Architecture and Design
+Strategy = Separation of Privilege
+Compartmentalize the system to have "safe" areas where trust boundaries can be unambiguously drawn. Do not allow sensitive data to go outside of the trust boundary and always be careful when interfacing with a compartment outside of the safe area. Ensure that appropriate compartmentalization is built into the system design and that the compartmentalization serves to allow for and further reinforce privilege separation functionality. Architects and designers should rely on the principle of least privilege to decide when it is appropriate to use and to drop system privileges.
+   Scope Impact   Likelihood
+        Confidentiality Read Files or Directories Read Memory
+Read Application Data
+Sensitive data may be exposed to attackers.
+    477
+CWE-201: Insertion of Sensitive Information Into Sent Data
+
+  Warning: mysql_pconnect(): Access denied for user: 'root@localhost' (Using password: N1nj4) in /usr/local/www/wi-data/ includes/database.inc on line 4
+ 
+Nature Type ID Name     Page
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+CAPEC-ID
+Attack Pattern Name
+Abstraction : Variant
+ CWE Version 4.2
+CWE-202: Exposure of Sensitive Information Through Data Queries
+Demonstrative Examples
+Example 1:
+The following is an actual MySQL error statement:
+Example Language: SQL
+The error clearly exposes the database credentials.
+MemberOf Relationships
+(result)
+  This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+MemberOf 963 SFP Secondary Cluster: Exposed Data 888 1973
+       Taxonomy Mappings
+CLASP
+Related Attack Patterns
+12 Choosing Message Identifier
+217 Exploiting Incorrectly Configured SSL
+612 WiFi MAC Address Tracking
+613 WiFi SSID Tracking
+618 Cellular Broadcast Message Request
+619 Signal Strength Tracking
+621 Analysis of Packet Timing and Sizes
+622 Electromagnetic Side-Channel Attack
+623 Compromising Emanations Attack
+References
+Accidental leaking of sensitive information through sent data
+                                      [REF-18]Secure Software, Inc.. "The CLASP Application Security Process". 2005. < https:// cwe.mitre.org/documents/sources/TheCLASPApplicationSecurityProcess.pdf >.

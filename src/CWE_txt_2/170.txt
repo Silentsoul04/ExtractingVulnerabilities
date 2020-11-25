@@ -1,0 +1,141 @@
+CWE-170: Improper Null Termination
+
+The software does not terminate or incorrectly terminates a string or array with a null character or equivalent terminator.
+Extended Description
+Null termination errors frequently occur in two different ways. An off-by-one error could cause a null to be written out of bounds, leading to an overflow. Or, a program could use a strncpy() function call incorrectly, which prevents a null terminator from being added at all. Other scenarios are possible.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+  Description
+ 
+Nature
+ChildOf PeerOf PeerOf CanAlsoBe CanFollow CanFollow CanPrecede
+CanPrecede
+Type ID
+      707
+      463
+      464
+      147
+      193
+      682
+      120
+126
+Name Page
+Improper Neutralization 1365 Deletion of Data Structure Sentinel 988 Addition of Data Structure Sentinel 989 Improper Neutralization of Input Terminators 358 Off-by-one Error 450 Incorrect Calculation 1329 Buffer Copy without Checking Size of Input ('Classic Buffer 281 Overflow')
+Buffer Over-read 306
+                                                                                   Relevant to the view "Software Development" (CWE-699)
+Nature Type ID Name Page
+MemberOf 137 Data Neutralization Issues 1883
+Relevant to the view "Seven Pernicious Kingdoms" (CWE-700)
+Nature Type ID Name Page
+ 
+       
+ ChildOf
+Weakness Ordinalities
+Resultant :
+Applicable Platforms
+20 Improper Input Validation 19
+     Language : C (Prevalence = Undetermined)
+Language : C++ (Prevalence = Undetermined) Likelihood Of Exploit
+Medium
+Common Consequences
+Scope Impact   Likelihood
+Confidentiality Integrity Availability
+Read Memory
+Execute Unauthorized Code or Commands
+The case of an omitted null character is the most dangerous of the possible issues. This will almost certainly result in information disclosure, and possibly a buffer overflow condition, which may be exploited to execute arbitrary code.
+Scope Impact   Likelihood
+Confidentiality Integrity Availability
+DoS: Crash, Exit, or Restart
+Read Memory
+DoS: Resource Consumption (CPU) DoS: Resource Consumption (Memory)
+If a null character is omitted from a string, then most string- copying functions will read data until they locate a null character, even outside of the intended boundaries of the string. This could: cause a crash due to a segmentation fault cause sensitive adjacent memory to be copied and sent to an outsider trigger a buffer overflow when the copy is being written to a fixed-size buffer.
+Integrity Availability
+Modify Memory
+DoS: Crash, Exit, or Restart
+Misplaced null characters may result in any number of security problems. The biggest issue is a subset of buffer overflow, and write-what-where conditions, where data corruption occurs from the writing of a null character over valid data, or even instructions. A randomly placed null character may put the system into an undefined state, and therefore make it prone to crashing. A misplaced null character may corrupt other data in memory.
+Integrity Confidentiality Availability Access Control Other
+Alter Execution Logic
+Execute Unauthorized Code or Commands
+Should the null character corrupt the process flow, or affect a flag controlling access, it may lead to logical errors which allow for the execution of arbitrary code.
+CWE Version 4.2
+CWE-170: Improper Null Termination
+  Potential Mitigations
+Phase: Requirements
+Use a language that is not susceptible to these issues. However, be careful of null byte interaction errors (CWE-626) with lower-level constructs that may be written in a language that is susceptible.
+Phase: Implementation
+Ensure that all string functions used are understood fully as to how they append null characters. Also, be wary of off-by-one errors when appending nulls to the end of strings.
+Phase: Implementation
+If performance constraints permit, special code can be added that validates null-termination of string buffers, this is a rather naive and error-prone solution.
+Phase: Implementation
+Switch to bounded string manipulation functions. Inspect buffer lengths involved in the buffer overrun trace reported with the defect.
+Phase: Implementation
+Add code that fills buffers with nulls (however, the length of buffers still needs to be inspected, to ensure that the non null-terminated string is not written at the physical end of the buffer).
+Observed Examples
+CVE-2000-0312 CVE-2003-0777 CVE-2004-1072 CVE-2001-1389 CVE-2003-0143
+Attacker does not null-terminate argv[] when invoking another program.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2000-0312
+Interrupted step causes resultant lack of null termination.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0777
+Fault causes resultant lack of null termination, leading to buffer expansion.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-1072
+Multiple vulnerabilities related to improper null termination.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-1389
+Product does not null terminate a message buffer after snprintf-like call, leading to overflow. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0143
+                MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ MemberOf MemberOf
+MemberOf MemberOf
+MemberOf MemberOf MemberOf
+MemberOf
+Notes
+Relationship
+730 OWASP Top Ten 2004 Category A9 - Denial of Service 741 CERT C Secure Coding Standard (2008) Chapter 8 -
+Characters and Strings (STR)
+748 CERT C Secure Coding Standard (2008) Appendix -
+POSIX (POS)
+875 CERT C++ Secure Coding Section 07 - Characters and
+Strings (STR)
+884 CWE Cross-section
+973 SFP Secondary Cluster: Improper NULL Termination 1161 SEI CERT C Coding Standard - Guidelines 07.
+Characters and Strings (STR)
+1171 SEI CERT C Coding Standard - Guidelines 50. POSIX
+(POS)
+711 1911 734 1917
+734 1924 868 1948
+884 2070 888 1978 1154 2029
+1154 2035
+                                                                                                 .
+Relationship
+Overlaps missing input terminator.
+Applicable Platform
+Conceptually, this does not just apply to the C language; any language or representation that involves a terminator could have this type of problem.
+Maintenance
+As currently described, this entry is more like a category than a weakness.
+Taxonomy Mappings
+ 400
+CWE-170: Improper Null Termination
+  
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+PLOVER
+7 Pernicious Kingdoms CLASP
+OWASP Top Ten 2004 CERT C Secure Coding
+CERT C Secure Coding CERT C Secure Coding
+Software Fault Patterns
+A9 CWE More Specific POS30- CWE More
+C Abstract
+STR03-C
+STR32-C Exact
+SFP11
+CWE Version 4.2
+CWE-172: Encoding Error
+Improper Null Termination String Termination Error Miscalculated null termination Denial of Service
+Use the readlink() function properly
+Do not inadvertently truncate a null- terminated byte string
+Do not pass a non-null-terminated character sequence to a library function that expects a string
+Improper Null Termination
+                                        
+                

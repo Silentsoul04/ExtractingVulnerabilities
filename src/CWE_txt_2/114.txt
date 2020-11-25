@@ -1,0 +1,65 @@
+CWE-114: Process Control
+Description
+Executing commands or loading libraries from an untrusted source or in an untrusted environment can cause an application to execute malicious commands (and payloads) on behalf of an attacker.
+Extended Description
+Process control vulnerabilities take two forms: 1. An attacker can change the command that
+the program executes: the attacker explicitly controls what the command is. 2. An attacker can change the environment in which the command executes: the attacker implicitly controls what the command means. Process control vulnerabilities of the first type occur when either data enters the application from an untrusted source and the data is used as part of a string representing a command that is executed by the application. By executing the command, the application gives an attacker a privilege or capability that the attacker would not otherwise have.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+ 
+  Weakness ID : 114 Status: Incomplete Structure : Simple
+Abstraction : Class
+ Relevant to the view "Research Concepts" (CWE-1000)
+Nature Type ID Name
+ChildOf 73 External Control of File Name or Path
+Relevant to the view "Architectural Concepts" (CWE-1008)
+Nature Type ID Name
+MemberOf 1011 Authorize Actors
+Relevant to the view "Seven Pernicious Kingdoms" (CWE-700)
+Nature Type ID Name
+Page
+125
+Page
+1997
+Page
+19
+ 
+       
+       
+ ChildOf
+Applicable Platforms
+20 Improper Input Validation
+     Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Scope
+Confidentiality Integrity Availability
+Impact
+Execute Unauthorized Code or Commands
+Likelihood
+   Potential Mitigations
+ 257
+ Phase: Architecture and Design
+Strategy = Libraries or Frameworks
+Libraries that are loaded should be well understood and come from a trusted source. The application can execute code contained in the native libraries, which often contain calls that are susceptible to other security problems, such as buffer overflows or command injection. All native libraries should be validated to determine if the application requires the use of the library. It is very difficult to determine what these native libraries actually do, and the potential for malicious code is high. In addition, the potential for an inadvertent mistake in these native libraries is also high, as many are written in C or C++ and may be susceptible to buffer overflow or race condition problems. To help prevent buffer overflow attacks, validate all input to native calls for content and length. If the native library does not come from a trusted source, review the source code of the library. The library should be built from the reviewed source before using it.
+Affected Resources
+• System Process
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+MemberOf
+Taxonomy Mappings
+991
+SFP Secondary Cluster: Tainted Input to Environment
+Process Control
+888 1988
+      
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+7 Pernicious Kingdoms
+Related Attack Patterns
+    
+CAPEC-ID
+Attack Pattern Name
+108 Command Line Execution through SQL Injection
+References
+[REF-6]Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. 2005 November 7. NIST. < https://samate.nist.gov/SSATTM_Content/ papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security %20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf >.

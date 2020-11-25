@@ -1,0 +1,81 @@
+CWE-180: Incorrect Behavior Order: Validate Before Canonicalize
+
+Description
+The software validates input before it is canonicalized, which prevents the software from detecting data that becomes invalid after the canonicalization step.
+Extended Description
+This can be used by an attacker to bypass the validation and launch attacks that expose weaknesses that would otherwise be prevented, such as injection.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+     Weakness ID : 180 Status: Draft Structure : Simple
+Abstraction : Variant
+ Relevant to the view "Research Concepts" (CWE-1000)
+Nature Type ID Name
+Page
+416
+ 
+ ChildOf
+Applicable Platforms
+179 Incorrect Behavior Order: Early Validation
+     Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Scope Impact
+Access Control Bypass Protection Mechanism
+Potential Mitigations
+Phase: Implementation
+Strategy = Input Validation
+Likelihood
+   Inputs should be decoded and canonicalized to the application's current internal representation before being validated (CWE-180). Make sure that the application does not decode the same input twice (CWE-174). Such errors could be used to bypass allowlist validation schemes by introducing dangerous inputs after they have been checked.
+CVE-2003-0332 Product modifies the first two letters of a filename extension after performing a security check, which allows remote attackers to bypass authentication via a
+filename with a .ats extension instead of a .hts extension.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0332
+CVE-2002-0802 Database consumes an extra character when processing a character that cannot be converted, which could remove an escape character from the query
+and make the application subject to SQL injection attacks.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0802
+Nature Type ID Name     Page
+CWE Version 4.2
+CWE-180: Incorrect Behavior Order: Validate Before Canonicalize
+The problem with the above code is that the validation step occurs before canonicalization occurs. An attacker could provide an input path of "/safe_dir/../" that would pass the validation step. However, the canonicalization process sees the double dot as a traversal to the parent directory and hence when canonicized the path would become just "/".
+To avoid this problem, validation should occur after canonicalization takes place. In this case canonicalization occurs during the initialization of the File object. The code below fixes the issue.
+Example Language: Java (good)
+  MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ MemberOf MemberOf
+MemberOf MemberOf
+MemberOf
+Notes
+Relationship 420
+722 OWASP Top Ten 2004 Category A1 - Unvalidated Input 711 1907 845 The CERT Oracle Secure Coding Standard for 844 1934
+Java (2011) Chapter 2 - Input Validation and Data
+Sanitization (IDS)
+992 SFP Secondary Cluster: Faulty Input Transformation 888 1988 1134 SEI CERT Oracle Secure Coding Standard for Java - 1133 2015
+Guidelines 00. Input Validation and Data Sanitization
+(IDS)
+1147 SEI CERT Oracle Secure Coding Standard for Java - 1133 2022
+Guidelines 13. Input Output (FIO)
+                                                           CWE-180: Incorrect Behavior Order: Validate Before Canonicalize
+This overlaps other categories.
+Taxonomy Mappings
+PLOVER
+OWASP Top Ten 2004 The CERT Oracle Secure Coding Standard for Java (2011)
+SEI CERT Oracle Coding Standard for Java
+Related Attack Patterns
+A1 CWE More Specific IDS01-J Exact
+IDS01-J Exact
+Validate-Before-Canonicalize Unvalidated Input
+Normalize strings before validating them
+Normalize strings before validating them
+CWE Version 4.2
+CWE-181: Incorrect Behavior Order: Validate Before Filter
+  
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+                
+            
+CAPEC-ID
+Attack Pattern Name
+3 Using Leading 'Ghost' Character Sequences to Bypass Input Filters 71 Using Unicode Encoding to Bypass Validation Logic
+78 Using Escaped Slashes in Alternate Encoding
+79 Using Slashes in Alternate Encoding
+80 Using UTF-8 Encoding to Bypass Validation Logic
+267 Leverage Alternate Encoding

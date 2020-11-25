@@ -1,0 +1,86 @@
+CWE-122: Heap-based Buffer Overflow
+Description
+A heap overflow condition is a buffer overflow, where the buffer that can be overwritten is allocated in the heap portion of memory, generally meaning that the buffer was allocated using a routine such as malloc().
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 787 Out-of-bounds Write 1466 ChildOf 788 Access of Memory Location After End of Buffer 1473
+Weakness Ordinalities
+Primary :
+Applicable Platforms
+Language : C (Prevalence = Undetermined)
+Language : C++ (Prevalence = Undetermined) Likelihood Of Exploit
+High
+Common Consequences
+                     Integrity Confidentiality Availability
+Execute Unauthorized Code or Commands Bypass Protection Mechanism
+Modify Memory
+ 294
+CWE-122: Heap-based Buffer Overflow
+Potential Mitigations
+Pre-design: Use a language or compiler that performs automatic bounds checking.
+Phase: Architecture and Design
+Use an abstraction library to abstract away risky APIs. Not a complete solution.
+Phase: Build and Compilation
+Pre-design through Build: Canary style bounds checking, library changes which ensure the validity of chunk data, and other such fixes are possible, but should not be relied upon.
+Phase: Implementation
+Implement and perform bounds checking on input.
+Phase: Implementation
+Strategy = Libraries or Frameworks
+Do not use dangerous functions such as gets. Look for their safe equivalent, which checks for the boundary.
+Phase: Operation
+Use OS-level preventative functionality. This is not a complete solution, but it provides some defense in depth.
+Demonstrative Examples
+Example 1:
+While buffer overflow examples can be rather complex, it is possible to have very simple, yet still exploitable, heap-based buffer overflows:
+Example Language: C (bad)
+The buffer is allocated heap memory with a fixed size, but there is no guarantee the string in argv[1] will not exceed this size and cause an overflow.
+CWE Version 4.2
+CWE-122: Heap-based Buffer Overflow
+  
+Scope Impact   Likelihood
+Access Control
+Buffer overflows often can be used to execute arbitrary code, which is usually outside the scope of a program's implicit security policy. Besides important user data, heap-based overflows can be used to overwrite function pointers that may be living in memory, pointing it to the attacker's code. Even in applications that do not explicitly use function pointers, the run-time will usually leave many in memory. For example, object methods in C++ are generally implemented using function pointers. Even in C programs, there is often a global offset table used by the underlying runtime.
+Integrity Confidentiality Availability Access Control Other
+Execute Unauthorized Code or Commands Bypass Protection Mechanism
+Other
+When the consequence is arbitrary code execution, this can often be used to subvert any other security service.
+Observed Examples
+CVE-2007-4268
+Affected Resources
+• Memory
+Chain: integer signedness error (CWE-195) passes signed comparison, leading to heap overflow (CWE-122) https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-4268
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ MemberOf MemberOf
+Notes
+Relationship 296
+970 SFP Secondary Cluster: Faulty Buffer Access 1161 SEI CERT C Coding Standard - Guidelines 07.
+Characters and Strings (STR)
+888 1977 1154 2029
+                    CWE-122: Heap-based Buffer Overflow
+CWE Version 4.2
+CWE-123: Write-what-where Condition
+Heap-based buffer overflows are usually just as dangerous as stack-based buffer overflows.
+  Taxonomy Mappings
+CLASP
+Software Fault Patterns CERT C Secure Coding
+Related Attack Patterns
+92 Forced Integer Overflow
+References
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+Heap overflow
+SFP8 Faulty Buffer Access
+STR31-C CWE More Specific Guarantee that storage for strings has sufficient space for character data and
+the null terminator
+                
+    
+CAPEC-ID
+Attack Pattern Name
+  [REF-7]Michael Howard and David LeBlanc. "Writing Secure Code". 2nd Edition. 2002 December 4. Microsoft Press. < https://www.microsoftpressstore.com/store/writing-secure- code-9780735617223 >.
+[REF-44]Michael Howard, David LeBlanc and John Viega. "24 Deadly Sins of Software Security". McGraw-Hill. 2010.
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.

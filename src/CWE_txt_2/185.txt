@@ -1,0 +1,85 @@
+CWE-185: Incorrect Regular Expression
+Description
+The software specifies a regular expression in a way that causes data to be improperly matched or compared.
+Extended Description
+When the regular expression is used in protection mechanisms such as filtering or validation, this may allow an attacker to bypass the intended restrictions on the incoming data.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+                   ChildOf ParentOf ParentOf CanPrecede CanPrecede
+Applicable Platforms
+697 Incorrect Comparison 1353 186 Overly Restrictive Regular Expression 432 625 Permissive Regular Expression 1240 182 Collapse of Data into Unsafe Value 423 187 Partial String Comparison 434
+                                                 Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Other Unexpected State Varies by Context
+When the regular expression is not correctly specified, data might have a different format or type than the rest of
+ 430
+CWE-185: Incorrect Regular Expression
+CWE Version 4.2
+CWE-185: Incorrect Regular Expression
+  
+Scope
+Impact
+the program expects, producing resultant weaknesses or errors.
+Likelihood
+Access Control Bypass Protection Mechanism
+In PHP, regular expression checks can sometimes be bypassed with a null byte, leading to any number of weaknesses.
+Potential Mitigations
+Phase: Architecture and Design
+Strategy = Refactoring
+Regular expressions can become error prone when defining a complex language even for those experienced in writing grammars. Determine if several smaller regular expressions simplify one large regular expression. Also, subject the regular expression to thorough testing techniques such as equivalence partitioning, boundary value analysis, and robustness. After testing and a reasonable confidence level is achieved, a regular expression may not be foolproof. If an exploit is allowed to slip through, then record the exploit and refactor the regular expression.
+Observed Examples
+Reference
+CVE-2002-2109
+CVE-2005-1949
+CVE-2001-1072
+CVE-2000-0115 CVE-2002-1527
+CVE-2005-1061
+Description
+Regexp isn't "anchored" to the beginning or end, which allows spoofed values that have trusted values as substrings. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-2109
+Regexp for IP address isn't anchored at the end, allowing appending of shell metacharacters.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1949
+Bypass access restrictions via multiple leading slash, which causes a regular expression to fail.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-1072
+Local user DoS via invalid regular expressions. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2000-0115
+chain: Malformed input generates a regular expression error that leads to information exposure. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1527
+Certain strings are later used in a regexp, leading to a resultant crash. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1061
+                       431
+CWE-185: Incorrect Regular Expression
+Reference Description
+Nature Type ID Name     Page
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+CAPEC-ID
+Attack Pattern Name
+Abstraction : Base
+ CWE Version 4.2
+CWE-186: Overly Restrictive Regular Expression
+  CVE-2005-2169
+CVE-2005-0603 CVE-2005-1820 CVE-2005-3153 CVE-2005-4155
+MFV. Regular expression intended to protect against directory traversal reduces ".../...//" to "../". https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-2169
+Malformed regexp syntax leads to information exposure in error message. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-0603
+Code injection due to improper quoting of regular expression.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1820
+Null byte bypasses PHP regexp check.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-3153
+Null byte bypasses PHP regexp check.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-4155
+                  MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+MemberOf 884 CWE Cross-section 884 2070 MemberOf 990 SFP Secondary Cluster: Tainted Input to Command 888 1985
+Notes
+Relationship
+While there is some overlap with allowlist/denylist problems, this entry is intended to deal with incorrectly written regular expressions, regardless of their intended use. Not every regular expression is intended for use as an allowlist or denylist. In addition, allowlists and denylists can be implemented using other mechanisms besides regular expressions.
+Research Gap
+Regexp errors are likely a primary factor in many MFVs, especially those that require multiple manipulations to exploit. However, they are rarely diagnosed at this level of detail.
+                    Taxonomy Mappings
+PLOVER
+Related Attack Patterns
+6 Argument Injection
+15 Command Delimiters
+79 Using Slashes in Alternate Encoding
+References
+Regular Expression Error
+              [REF-7]Michael Howard and David LeBlanc. "Writing Secure Code". 2nd Edition. 2002 December 4. Microsoft Press. < https://www.microsoftpressstore.com/store/writing-secure- code-9780735617223 >.

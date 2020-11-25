@@ -1,0 +1,66 @@
+CWE-186: Overly Restrictive Regular Expression
+Description
+  432
+CWE-186: Overly Restrictive Regular Expression
+CWE Version 4.2
+CWE-186: Overly Restrictive Regular Expression
+A regular expression is overly restrictive, which prevents dangerous values from being detected.
+Extended Description
+This weakness is not about regular expression complexity. Rather, it is about a regular expression that does not match all values that are intended. Consider the use of a regexp to identify acceptable values or to spot unwanted terms. An overly restrictive regexp misses some potentially security-relevant values leading to either false positives *or* false negatives, depending on how the regexp is being used within the code. Consider the expression /[0-8]/ where the intention
+was /[0-9]/. This expression is not "complex" but the value "9" is not matched when maybe the programmer planned to check for it.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+   Relevant to the view "Research Concepts" (CWE-1000)
+       Nature Type ID
+ChildOf 185 CanAlsoBe 183 CanAlsoBe 184
+Name
+Incorrect Regular Expression Permissive List of Allowed Inputs Incomplete List of Disallowed Inputs
+Page
+430 425 427
+Page
+1882
+                                      Relevant to the view "Software Development" (CWE-699)
+Nature Type ID Name
+                  MemberOf
+Applicable Platforms
+19 Data Processing Errors
+     Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Scope Impact
+Access Control Bypass Protection Mechanism
+Potential Mitigations
+Phase: Implementation
+Likelihood
+             Regular expressions can become error prone when defining a complex language even for those experienced in writing grammars. Determine if several smaller regular expressions simplify one large regular expression. Also, subject your regular expression to thorough testing techniques such as equivalence partitioning, boundary value analysis, and robustness. After testing and a reasonable confidence level is achieved, a regular expression may not be foolproof. If an exploit is allowed to slip through, then record the exploit and refactor your regular expression.
+Observed Examples
+Reference Description
+CVE-2005-1604 MIE. ".php.ns" bypasses ".php$" regexp but is still parsed as PHP by Apache. (manipulates an equivalence property under Apache)
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1604
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+          433
+CWE-186: Overly Restrictive Regular Expression
+
+ Nature
+Type ID Name
+Page
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+Abstraction : Variant
+ 
+Nature
+Type ID Name
+Page
+Scope
+Impact
+Likelihood
+CWE Version 4.2
+CWE-187: Partial String Comparison
+MemberOf 990 SFP Secondary Cluster: Tainted Input to Command
+Notes
+Relationship
+Can overlap allowlist/denylist errors (CWE-183/CWE-184)
+Taxonomy Mappings
+888 1985
+         PLOVER Overly Restrictive Regular Expression

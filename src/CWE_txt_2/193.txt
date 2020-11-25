@@ -1,0 +1,156 @@
+CWE-193: Off-by-one Error
+Description
+A product calculates or uses an incorrect maximum or minimum value that is 1 more, or 1 less, than the correct value.
+Relationships
+  450
+CWE-193: Off-by-one Error
+CWE Version 4.2
+CWE-193: Off-by-one Error
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+         Nature Type ID
+ChildOf 682 CanPrecede 119
+CanPrecede 170 CanPrecede 617
+Name Page
+Incorrect Calculation 1329 Improper Restriction of Operations within the Bounds of a 272 Memory Buffer
+Improper Null Termination 396 Reachable Assertion 1227
+                                                  Relevant to the view "Weaknesses for Simplified Mapping of Published Vulnerabilities" (CWE-1003)
+Nature Type ID Name Page
+ChildOf 682 Incorrect Calculation 1329
+Relevant to the view "Software Development" (CWE-699)
+Nature Type ID Name Page
+                                          MemberOf
+Applicable Platforms
+189 Numeric Errors 1884
+     Language : Language-Independent (Prevalence = Undetermined) Alternate Terms
+off-by-five : An "off-by-five" error was reported for sudo in 2002 (CVE-2002-0184), but that is more like a "length calculation" error.
+Common Consequences
+   Scope Impact   Likelihood
+        Availability
+DoS: Crash, Exit, or Restart
+DoS: Resource Consumption (CPU) DoS: Resource Consumption (Memory) DoS: Instability
+This weakness will generally lead to undefined behavior and therefore crashes. In the case of overflows involving loop index variables, the likelihood of infinite loops is also high.
+        Integrity Modify Memory
+If the value in question is important to data (as opposed to flow), simple data corruption has occurred. Also, if the wrap around results in other conditions such as buffer overflows, further memory corruption may occur.
+        Confidentiality Availability Access Control
+Execute Unauthorized Code or Commands Bypass Protection Mechanism
+This weakness can sometimes trigger buffer overflows which can be used to execute arbitrary code. This is usually outside the scope of a program's implicit security policy.
+   Potential Mitigations
+Phase: Implementation
+ 451
+CWE-193: Off-by-one Error
+
+int i;
+unsigned int numWidgets;
+Widget **WidgetList;
+numWidgets = GetUntrustedSizeValue();
+if ((numWidgets == 0) || (numWidgets > MAX_NUM_WIDGETS)) {
+ExitError("Incorrect number of widgets requested!"); }
+WidgetList = (Widget **)malloc(numWidgets * sizeof(Widget *)); printf("WidgetList ptr=%p\n", WidgetList);
+for(i=0; i<numWidgets; i++) {
+WidgetList[i] = InitializeWidget(); }
+WidgetList[numWidgets] = NULL; showWidgets(WidgetList);
+char firstname[20];
+char lastname[20];
+char fullname[40];
+fullname[0] = '\0'; strncat(fullname, firstname, 20); strncat(fullname, lastname, 20);
+CWE Version 4.2
+CWE-193: Off-by-one Error
+When copying character arrays or using character manipulation methods, the correct size parameter must be used to account for the null terminator that needs to be added at the end of the array. Some examples of functions susceptible to this weakness in C include strcpy(), strncpy(), strcat(), strncat(), printf(), sprintf(), scanf() and sscanf().
+Demonstrative Examples
+Example 1:
+The following code allocates memory for a maximum number of widgets. It then gets a user- specified number of widgets, making sure that the user does not request too many. It then initializes the elements of the array using InitializeWidget(). Because the number of widgets can vary for each request, the code inserts a NULL pointer to signify the location of the last widget.
+However, this code contains an off-by-one calculation error. It allocates exactly enough space to contain the specified number of widgets, but it does not include the space for the NULL pointer.
+As a result, the allocated buffer is smaller than it is supposed to be (CWE-131). So if the user ever requests MAX_NUM_WIDGETS, there is an off-by-one buffer overflow when the NULL is assigned. Depending on the environment and compilation settings, this could cause memory corruption.
+Example 2:
+In this example, the code does not account for the terminating null character, and it writes one byte beyond the end of the buffer.
+The first call to strncat() appends up to 20 characters plus a terminating null character to fullname[]. There is plenty of allocated space for this, and there is no weakness associated with this first call. However, the second call to strncat() potentially appends another 20 characters. The code does not account for the terminating null character that is automatically added by strncat(). This terminating null character would be written one byte beyond the end of the fullname[] buffer. Therefore an off- by-one error exists with the second strncat() call, as the third argument should be 19.
+When using a function like strncat() one must leave a free byte at the end of the buffer for a terminating null character, thus avoiding the off-by-one weakness. Additionally, the last argument to strncat() is the number of characters to append, which must be less than the remaining space in the buffer. Be careful not to just use the total size of the buffer.
+Observed Examples
+Reference
+CVE-2003-0252
+CVE-2001-1391
+Description
+Off-by-one error allows remote attackers to cause a denial of service and possibly execute arbitrary code via requests that do not contain newlines. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0252
+Off-by-one vulnerability in driver allows users to modify kernel memory.
+     453
+CWE-193: Off-by-one Error
+   Reference Description
+           CVE-2003-0466 Off-by-one error in function used in many products leads to a buffer overflow during pathname management, as demonstrated using multiple commands in
+an FTP server.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0466
+    CWE Version 4.2
+CWE-193: Off-by-one Error
+      CVE-2002-0083
+CVE-2002-0653
+CVE-2002-0844
+CVE-1999-1568
+CVE-2004-0346
+CVE-2004-0005
+CVE-2003-0356
+CVE-2001-1496
+CVE-2004-0342 CVE-2001-0609
+CVE-2002-1745
+CVE-2002-1816 CVE-2002-1721
+CVE-2003-0625 CVE-2006-4574
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-1391
+Off-by-one error allows local users or remote malicious servers to gain privileges.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0083
+Off-by-one buffer overflow in function usd by server allows local users to execute arbitrary code as the server user via .htaccess files with long entries. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0653
+Off-by-one buffer overflow in version control system allows local users to execute arbitrary code. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0844
+Off-by-one error in FTP server allows a remote attacker to cause a denial of service (crash) via a long PORT command. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-1999-1568
+Off-by-one buffer overflow in FTP server allows local users to gain privileges via a 1024 byte RETR command. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0346
+Multiple buffer overflows in chat client allow remote attackers to cause a denial of service and possibly execute arbitrary code. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0005
+Multiple off-by-one vulnerabilities in product allow remote attackers to cause a denial of service and possibly execute arbitrary code. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0356
+Off-by-one buffer overflow in server allows remote attackers to cause a denial of service and possibly execute arbitrary code. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-1496
+This is an interesting example that might not be an off-by-one.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0342
+An off-by-one enables a terminating null to be overwritten, which causes 2 strings to be merged and enable a format string. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0609
+Off-by-one error allows source code disclosure of files with 4 letter extensions that match an accepted 3-letter extension. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1745
+Off-by-one buffer overflow.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1816
+Off-by-one error causes an snprintf call to overwrite a critical internal variable with a null value.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1721
+Off-by-one error allows read of sensitive memory via a malformed request.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0625
+Chain: security monitoring product has an off-by-one error that leads to unexpected length values, triggering an assertion. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-4574
+                                                      MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ 454
+CWE-193: Off-by-one Error
+
+  
+ Nature
+MemberOf MemberOf
+MemberOf MemberOf
+Notes
+Relationship
+CWE Version 4.2
+CWE-194: Unexpected Sign Extension
+Type ID Name Page
+ 741 875
+884 977
+CERT C Secure Coding Standard (2008) Chapter 8 - 734 1917 Characters and Strings (STR)
+CERT C++ Secure Coding Section 07 - Characters and 868 1948 Strings (STR)
+CWE Cross-section 884 2070 SFP Secondary Cluster: Design 888 1979
+                                             
+This is not always a buffer overflow. For example, an off-by-one error could be a factor in a partial comparison, a read from the wrong memory location, an incorrect conditional, etc.
+Research Gap
+Under-studied. It requires careful code analysis or black box testing, where inputs of excessive length might not cause an error. Off-by-ones are likely triggered by extensive fuzzing, with the attendant diagnostic problems.
+Taxonomy Mappings
+PLOVER
+CERT C Secure Coding
+References
+Off-by-one Error
+STR31-C Guarantee that storage for strings has
+sufficient space for character data and the null terminator
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+            [REF-155]Halvar Flake. "Third Generation Exploits". presentation at Black Hat Europe 2001. < http://www.blackhat.com/presentations/bh-europe-01/halvar-flake/bh-europe-01-halvarflake.ppt >.
+[REF-156]Steve Christey. "Off-by-one errors: a brief explanation". Secprog and SC-L mailing list posts. 2004 May 5. < http://marc.info/?l=secprog&m=108379742110553&w=2 >.
+[REF-157]klog. "The Frame Pointer Overwrite". Phrack Issue 55, Chapter 8. 1999 September 9. < http://kaizo.org/mirrors/phrack/phrack55/P55-08 >.
+[REF-140]Greg Hoglund and Gary McGraw. "Exploiting Software: How to Break Code". 2004 February 7. Addison-Wesley. < https://www.amazon.com/Exploiting-Software-How-Break-Code/ dp/0201786958 >.
+[REF-44]Michael Howard, David LeBlanc and John Viega. "24 Deadly Sins of Software Security". McGraw-Hill. 2010.
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.

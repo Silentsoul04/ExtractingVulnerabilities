@@ -1,0 +1,49 @@
+CWE-181: Incorrect Behavior Order: Validate Before Filter
+Description
+The software validates data before it has been filtered, which prevents the software from detecting data that becomes invalid after the filtering step.
+Extended Description
+This can be used by an attacker to bypass the validation and launch attacks that expose weaknesses that would otherwise be prevented, such as injection.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+                         Weakness ID : 181 Status: Draft Structure : Simple
+Abstraction : Variant
+ Relevant to the view "Research Concepts" (CWE-1000)
+Nature Type ID Name
+Page
+416
+ 
+ ChildOf
+Applicable Platforms
+179 Incorrect Behavior Order: Early Validation
+     Language : Language-Independent (Prevalence = Undetermined) Alternate Terms
+Validate-before-cleanse : Common Consequences
+Scope Impact
+Access Control Bypass Protection Mechanism
+Likelihood
+Potential Mitigations
+Phase: Implementation
+Phase: Architecture and Design
+Inputs should be decoded and canonicalized to the application's current internal representation before being filtered.
+Functional Areas
+• Protection Mechanism
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+MemberOf 722 OWASP Top Ten 2004 Category A1 - Unvalidated Input 711 1907
+              MemberOf 992 SFP Secondary Cluster: Faulty Input Transformation
+Notes
+Research Gap
+This category is probably under-studied.
+Taxonomy Mappings
+888 1988
+       422
+CWE-181: Incorrect Behavior Order: Validate Before Filter
+CWE Version 4.2
+CWE-182: Collapse of Data into Unsafe Value
+PLOVER Validate-Before-Filter OWASP Top Ten 2004 A1 CWE More Specific Unvalidated Input
+Related Attack Patterns
+3 Using Leading 'Ghost' Character Sequences to Bypass Input Filters 43 Exploiting Multiple Input Interpretation Layers
+78 Using Escaped Slashes in Alternate Encoding
+79 Using Slashes in Alternate Encoding
+80 Using UTF-8 Encoding to Bypass Validation Logic
+120 Double Encoding
+267 Leverage Alternate Encoding

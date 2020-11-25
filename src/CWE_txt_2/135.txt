@@ -1,0 +1,92 @@
+CWE-135: Incorrect Calculation of Multi-Byte String Length
+Description
+The software does not correctly calculate the length of strings that can contain wide or multi-byte characters.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+Nature Type ID Name Page
+ChildOf 682 Incorrect Calculation 1329
+Relevant to the view "Software Development" (CWE-699)
+Nature Type ID Name Page
+   
+  Weakness ID : 135 Status: Draft Structure : Simple
+Abstraction : Base
+  
+       
+ MemberOf
+Applicable Platforms
+Language : C (Prevalence = Undetermined)
+Language : C++ (Prevalence = Undetermined) Common Consequences
+133 String Errors 1882
+     
+Scope Impact   Likelihood
+Integrity Confidentiality Availability
+Execute Unauthorized Code or Commands
+This weakness may lead to a buffer overflow. Buffer overflows often can be used to execute arbitrary code, which is usually outside the scope of a program's implicit security policy. This can often be used to subvert any other security service.
+Availability Confidentiality
+Read Memory
+DoS: Crash, Exit, or Restart
+DoS: Resource Consumption (CPU) DoS: Resource Consumption (Memory)
+Out of bounds memory access will very likely result in the corruption of relevant memory, and perhaps instructions, possibly leading to a crash. Other attacks leading to lack of availability are possible, including putting the program into an infinite loop.
+Confidentiality Read Memory
+ 341
+CWE-135: Incorrect Calculation of Multi-Byte String Length
+Scope Impact   Likelihood
+In the case of an out-of-bounds read, the attacker may have access to sensitive information. If the sensitive information contains system details, such as the current buffers position in memory, this knowledge can be used to craft further attacks, possibly with more severe consequences.
+#include <stdio.h> #include <strings.h> #include <wchar.h> int main() {
+wchar_t wideString[] = L"The spazzy orange tiger jumped " \ "over the tawny jaguar.";
+wchar_t *newString;
+printf("Strlen() output: %d\nWcslen() output: %d\n", strlen(wideString), wcslen(wideString));
+/* Wrong because the number of chars in a string isn't related to its length in bytes // newString = (wchar_t *) malloc(strlen(wideString));
+*/
+/* Wrong because wide characters aren't 1 byte long! //
+newString = (wchar_t *) malloc(wcslen(wideString));
+*/
+/* Wrong because wcslen does not include the terminating null */ newString = (wchar_t *) malloc(wcslen(wideString) * sizeof(wchar_t));
+/* correct! */
+newString = (wchar_t *) malloc((wcslen(wideString) + 1) * sizeof(wchar_t)); /* ... */
+}
+  Strlen() output: 0 Wcslen() output: 53
+ CWE Version 4.2
+CWE-135: Incorrect Calculation of Multi-Byte String Length
+  Potential Mitigations
+Phase: Implementation
+Strategy = Input Validation
+Always verify the length of the string unit character.
+Phase: Implementation
+Strategy = Libraries or Frameworks
+Use length computing functions (e.g. strlen, wcslen, etc.) appropriately with their equivalent type (e.g.: byte, wchar_t, etc.)
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ 342
+CWE-135: Incorrect Calculation of Multi-Byte String Length
+  
+ Nature
+MemberOf MemberOf
+MemberOf MemberOf
+Type ID
+741 857
+884 974
+CWE Version 4.2
+CWE-138: Improper Neutralization of Special Elements
+Name Page
+ CERT C Secure Coding Standard (2008) Chapter 8 - Characters and Strings (STR)
+The CERT Oracle Secure Coding Standard for Java (2011) Chapter 14 - Input Output (FIO)
+CWE Cross-section
+SFP Secondary Cluster: Incorrect Buffer Length Computation
+734 1917 844 1940
+884 2070 888 1978
+                                       
+      Taxonomy Mappings
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+CLASP
+The CERT Oracle Secure FIO10-J Coding Standard for Java
+(2011)
+Software Fault Patterns SFP10
+References
+Improper string length checking Ensure the array is filled when using read() to fill an array
+Incorrect Buffer Length Computation
+                    [REF-7]Michael Howard and David LeBlanc. "Writing Secure Code". 2nd Edition. 2002 December 4. Microsoft Press. < https://www.microsoftpressstore.com/store/writing-secure- code-9780735617223 >.

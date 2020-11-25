@@ -1,0 +1,60 @@
+CWE-126: Buffer Over-read
+Description
+CWE Version 4.2
+CWE-126: Buffer Over-read
+  
+The software reads from a buffer using buffer access mechanisms such as indexes or pointers that reference memory locations after the targeted buffer.
+Extended Description
+This typically occurs when the pointer or its index is incremented to a position beyond the bounds of the buffer or when pointer arithmetic results in a position outside of the valid memory location to name a few. This may result in exposure of sensitive information or possibly a crash.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ 
+Nature
+ChildOf ChildOf CanFollow
+Type ID
+125 788 170
+Name
+Out-of-bounds Read
+Access of Memory Location After End of Buffer Improper Null Termination
+Page
+303 1473 396
+                            Weakness Ordinalities
+Primary :
+Applicable Platforms
+Language : C (Prevalence = Undetermined)
+Language : C++ (Prevalence = Undetermined) Common Consequences
+Scope Impact
+Confidentiality Read Memory
+Demonstrative Examples
+Example 1:
+Likelihood
+Confidentiality
+Bypass Protection Mechanism
+By reading out-of-bounds memory, an attacker might be able to get secret values, such as memory addresses, which can be bypass protection mechanisms such as ASLR in order to improve the reliability and likelihood of exploiting a separate weakness to achieve code execution instead of just denial of service.
+In the following C/C++ example the method processMessageFromSocket() will get a message from a socket, placed into a buffer, and will parse the contents of the buffer into a structure that contains the message length and the message body. A for loop is used to copy the message body into a local character string which will be passed to another method for processing.
+However, the message length variable from the structure is used as the condition for ending the for loop without validating that the message length variable accurately reflects the length of the message body (CWE-606). This can result in a buffer over-read (CWE-125) by reading from memory beyond the bounds of the buffer if the message length variable indicates a length that is longer than the size of a message body (CWE-130).
+Example 2:
+The following C/C++ example demonstrates a buffer over-read due to a missing NULL terminator. The main method of a pattern matching utility that looks for a specific pattern within a specific file uses the string strncopy() method to copy the command line user input file name and pattern to the Filename and Pattern character arrays respectively.
+However, the code do not take into account that strncpy() will not add a NULL terminator when the source buffer is equal in length of longer than that provide size attribute. Therefore if a user enters a filename or pattern that are the same size as (or larger than) their respective character arrays, a NULL terminator will not be added (CWE-170) which leads to the printf() read beyond the expected end of the Filename and Pattern buffers.
+To fix this problem, be sure to subtract 1 from the sizeof() call to allow room for the null byte to be added.
+
+Observed Examples
+Reference Description
+CVE-2014-0160 Chain: "Heartbleed" bug receives an inconsistent length parameter (CWE-130) enabling an out-of-bounds read (CWE-126), returning memory that could
+include private cryptographic keys and other sensitive data.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0160
+CVE-2009-2523 Chain: product does not handle when an input string is not NULL terminated, leading to buffer over-read or heap-based buffer overflow. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2523
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+Nature Type ID Name Page
+MemberOf 970 SFP Secondary Cluster: Faulty Buffer Access 888 1977
+Notes
+Relationship
+These problems may be resultant from missing sentinel values (CWE-463) or trusting a user- influenced input length variable.
+Taxonomy Mappings
+PLOVER Buffer over-read Software Fault Patterns SFP8 Faulty Buffer Access
+References
+[REF-1034]Raoul Strackx, Yves Younan, Pieter Philippaerts, Frank Piessens, Sven Lachmund and Thomas Walter. "Breaking the memory secrecy assumption". 2009 March 1. ACM. < https:// dl.acm.org/citation.cfm?doid=1519144.1519145 >.
+[REF-1035]Fermin J. Serna. "The info leak era on software exploitation". 2012 July 5. < https:// media.blackhat.com/bh-us-12/Briefings/Serna/BH_US_12_Serna_Leak_Era_Slides.pdf >.
+[REF-44]Michael Howard, David LeBlanc and John Viega. "24 Deadly Sins of Software Security". McGraw-Hill. 2010.

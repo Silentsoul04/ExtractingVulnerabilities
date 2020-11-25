@@ -1,0 +1,27 @@
+CWE-115: Misinterpretation of Input
+Description
+The software misinterprets an input, whether from an attacker or another product, in a security- relevant fashion.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 436 Interpretation Conflict 947
+Relevant to the view "Software Development" (CWE-699)
+MemberOf 438 Behavioral Problems 1899
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+                Integrity
+Observed Examples
+CVE-2005-2225
+CVE-2001-0003
+Unexpected State
+Product sees dangerous file extension in free text of a group discussion, disconnects all users. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-2225
+Product does not correctly import and process security settings from another product.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0003
+         MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+MemberOf 977 SFP Secondary Cluster: Design 888 1979
+Notes
+Research Gap
+This concept needs further study. It is likely a factor in several weaknesses, possibly resultant as well. Overlaps Multiple Interpretation Errors (MIE).
+Taxonomy Mappings
+PLOVER Misinterpretation Error

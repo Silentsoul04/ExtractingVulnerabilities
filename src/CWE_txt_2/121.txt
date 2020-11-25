@@ -1,0 +1,107 @@
+CWE-121: Stack-based Buffer Overflow
+Description
+A stack-based buffer overflow condition is a condition where the buffer being overwritten is allocated on the stack (i.e., is a local variable or, rarely, a parameter to a function).
+Relationships
+    290
+CWE-121: Stack-based Buffer Overflow
+CWE Version 4.2
+CWE-121: Stack-based Buffer Overflow
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+         Nature
+ChildOf ChildOf
+Type ID
+787 788
+Name Page
+Out-of-bounds Write 1466 Access of Memory Location After End of Buffer 1473
+                            Weakness Ordinalities
+Primary :
+Applicable Platforms
+Language : C (Prevalence = Undetermined)
+Language : C++ (Prevalence = Undetermined) Background Details
+There are generally several security-critical data on an execution stack that can lead to arbitrary code execution. The most prominent is the stored return address, the memory address at which execution should continue once the current function is finished executing. The attacker can overwrite this value with some memory address to which the attacker also has write access,
+into which they place arbitrary code to be run with the full privileges of the vulnerable program. Alternately, the attacker can supply the address of an important call, for instance the POSIX system() call, leaving arguments to the call on the stack. This is often called a return into libc exploit, since the attacker generally forces the program to jump at return time into an interesting routine in the C standard library (libc). Other important data commonly on the stack include the stack pointer and frame pointer, two values that indicate offsets for computing memory addresses. Modifying those values can often be leveraged into a "write-what-where" condition.
+Alternate Terms
+Stack Overflow : "Stack Overflow" is often used to mean the same thing as stack-based buffer overflow, however it is also used on occasion to mean stack exhaustion, usually a result from an excessively recursive function call. Due to the ambiguity of the term, use of stack overflow to describe either circumstance is discouraged.
+Likelihood Of Exploit
+High
+Common Consequences
+   Scope Impact   Likelihood
+        Availability
+Modify Memory
+DoS: Crash, Exit, or Restart
+DoS: Resource Consumption (CPU) DoS: Resource Consumption (Memory)
+Buffer overflows generally lead to crashes. Other attacks leading to lack of availability are possible, including putting the program into an infinite loop.
+        Integrity Confidentiality Availability Access Control
+Modify Memory
+Execute Unauthorized Code or Commands Bypass Protection Mechanism
+Buffer overflows often can be used to execute arbitrary code, which is usually outside the scope of a program's implicit security policy.
+      Integrity Modify Memory
+ 291
+CWE-121: Stack-based Buffer Overflow
+
+Scope Impact   Likelihood
+Confidentiality Availability Access Control Other
+Execute Unauthorized Code or Commands Bypass Protection Mechanism
+Other
+When the consequence is arbitrary code execution, this can often be used to subvert any other security service.
+CWE Version 4.2
+CWE-121: Stack-based Buffer Overflow
+Potential Mitigations
+Phase: Build and Compilation
+Strategy = Compilation or Build Hardening
+Run or compile the software using features or extensions that automatically provide a protection mechanism that mitigates or eliminates buffer overflows. For example, certain compilers
+and extensions provide automatic buffer overflow detection mechanisms that are built into
+the compiled code. Examples include the Microsoft Visual Studio /GS flag, Fedora/Red Hat FORTIFY_SOURCE GCC flag, StackGuard, and ProPolice.
+Effectiveness = Defense in Depth
+This is not necessarily a complete solution, since these mechanisms can only detect certain types of overflows. In addition, an attack could still cause a denial of service, since the typical response is to exit the application.
+Phase: Architecture and Design
+Use an abstraction library to abstract away risky APIs. Not a complete solution.
+Phase: Build and Compilation
+Compiler-based canary mechanisms such as StackGuard, ProPolice and the Microsoft Visual Studio /GS flag. Unless this provides automatic bounds checking, it is not a complete solution.
+Phase: Implementation
+Implement and perform bounds checking on input.
+Phase: Implementation
+Do not use dangerous functions such as gets. Use safer, equivalent functions which check for boundary errors.
+Phase: Operation
+Use OS-level preventative functionality, such as ASLR. This is not a complete solution.
+
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ Nature
+MemberOf MemberOf
+MemberOf
+Notes
+Other
+Type ID
+970 1160
+1161
+Name Page
+ SFP Secondary Cluster: Faulty Buffer Access
+SEI CERT C Coding Standard - Guidelines 06. Arrays (ARR)
+SEI CERT C Coding Standard - Guidelines 07. Characters and Strings (STR)
+888 1977 1154 2029
+1154 2029
+                                Stack-based buffer overflows can instantiate in return address overwrites, stack pointer overwrites or frame pointer overwrites. They can also be considered function pointer overwrites, array indexer overwrites or write-what-where condition, etc.
+Taxonomy Mappings
+CLASP
+Software Fault Patterns CERT C Secure Coding
+CERT C Secure Coding
+References
+SFP8
+ARR38- Imprecise
+C
+STR31-C CWE More Specific
+Stack overflow
+Faulty Buffer Access
+Guarantee that library functions do not form invalid pointers
+Guarantee that storage for strings has sufficient space for character data and the null terminator
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+                            [REF-1029]Aleph One. "Smashing The Stack For Fun And Profit". 1996 November 8. < http:// phrack.org/issues/49/14.html >.
+[REF-7]Michael Howard and David LeBlanc. "Writing Secure Code". 2nd Edition. 2002 December 4. Microsoft Press. < https://www.microsoftpressstore.com/store/writing-secure- code-9780735617223 >.
+[REF-44]Michael Howard, David LeBlanc and John Viega. "24 Deadly Sins of Software Security". McGraw-Hill. 2010.
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.

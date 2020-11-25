@@ -1,0 +1,52 @@
+CWE-187: Partial String Comparison
+Description
+The software performs a comparison that only examines a portion of a factor before determining whether there is a match, such as a substring, leading to resultant weaknesses.
+Extended Description
+For example, an attacker might succeed in authentication by providing a small password that matches the associated portion of the larger, correct password.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+       ChildOf PeerOf CanFollow
+Weakness Ordinalities
+Primary :
+Applicable Platforms
+1023 Incomplete Comparison with Missing Factors 1638 625 Permissive Regular Expression 1240 185 Incorrect Regular Expression 430
+                           Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Integrity Alter Execution Logic
+Access Control Bypass Protection Mechanism
+Potential Mitigations
+Phase: Testing
+Thoroughly test the comparison scheme before deploying code into production. Perform positive testing as well as negative testing.
+Observed Examples
+ 435
+CWE-187: Partial String Comparison
+Reference Description
+CVE-2004-0765 Web browser only checks the hostname portion of a certificate when the hostname portion of the URI is not a fully qualified domain name (FQDN),
+which allows remote attackers to spoof trusted certificates.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0765
+Nature Type ID Name     Page
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+Abstraction : Base
+ CWE Version 4.2
+CWE-188: Reliance on Data/Memory Layout
+  CVE-2014-6394
+CVE-2004-1012
+CVE-2002-1374
+CVE-2000-0979
+Product does not prevent access to restricted directories due to partial string comparison with a public directory https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394
+Argument parser of an IMAP server treats a partial command "body[p" as if it is "body.peek", leading to index error and out-of-bounds corruption. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-1012
+One-character password by attacker checks only against first character of real password.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1374
+One-character password by attacker checks only against first character of real password.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2000-0979
+          MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+MemberOf 977 SFP Secondary Cluster: Design 888 1979
+Notes
+Relationship
+This is conceptually similar to other weaknesses, such as insufficient verification and regular expression errors. It is primary to some weaknesses.
+Taxonomy Mappings
+PLOVER Partial Comparison

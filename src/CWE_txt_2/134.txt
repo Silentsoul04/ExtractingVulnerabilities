@@ -1,0 +1,192 @@
+CWE-134: Use of Externally-Controlled Format String
+Description
+The software uses a function that accepts a format string as an argument, but the format string originates from an external source.
+Extended Description
+When an attacker can modify an externally-controlled format string, this can lead to buffer overflows, denial of service, or data representation problems.
+It should be noted that in some circumstances, such as internationalization, the set of format strings is externally controlled by design. If the source of these format strings is trusted (e.g. only contained in library files that are only modifiable by the system administrator), then the external control might not itself pose a vulnerability.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+  
+   Weakness ID : 134 Status: Draft Structure : Simple
+Abstraction : Base
+   335
+CWE-134: Use of Externally-Controlled Format String
+     Nature
+Type ID
+Name   Page
+               Nature
+Nature
+Nature
+Type ID
+Type ID
+Type ID
+Name   Page
+Name   Page
+Name   Page
+                                            Scope Impact   Likelihood
+        Confidentiality Read Memory
+Format string problems allow for information disclosure which can severely simplify exploitation of the program.
+        Integrity Execute Unauthorized Code or Commands
+Confidentiality Availability
+Format string problems can result in the execution of arbitrary code.
+   CWE Version 4.2
+CWE-134: Use of Externally-Controlled Format String
+ChildOf 668 Exposure of Resource to Wrong Sphere 1308 CanPrecede 123 Write-what-where Condition 297
+Relevant to the view "Weaknesses for Simplified Mapping of Published Vulnerabilities" (CWE-1003)
+ChildOf 668 Exposure of Resource to Wrong Sphere 1308
+Relevant to the view "Software Development" (CWE-699)
+MemberOf 133 String Errors 1882
+Relevant to the view "Seven Pernicious Kingdoms" (CWE-700)
+ChildOf 20 Improper Input Validation 19
+Weakness Ordinalities
+Primary :
+Applicable Platforms
+Language : C (Prevalence = Often) Language : C++ (Prevalence = Often) Language : Perl (Prevalence = Rarely)
+Likelihood Of Exploit
+High
+Common Consequences
+Detection Methods
+Automated Static Analysis
+This weakness can often be detected using automated static analysis tools. Many modern tools use data flow analysis or constraint-based techniques to minimize the number of false positives.
+Black Box
+Since format strings often occur in rarely-occurring erroneous conditions (e.g. for error message logging), they can be difficult to detect using black box methods. It is highly likely that many latent issues exist in executables that do not have associated source code (or equivalent source.
+Effectiveness = Limited
+Automated Static Analysis - Binary or Bytecode
+According to SOAR, the following detection techniques may be useful: Highly cost effective: Bytecode Weakness Analysis - including disassembler + source code weakness analysis Binary Weakness Analysis - including disassembler + source code weakness analysis Cost effective for partial coverage: Binary / Bytecode simple extractor - strings, ELF readers, etc.
+                                          336
+CWE-134: Use of Externally-Controlled Format String
+
+CWE Version 4.2
+CWE-134: Use of Externally-Controlled Format String
+Manual Static Analysis - Binary or Bytecode
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Binary / Bytecode disassembler - then use manual analysis for vulnerabilities & anomalies
+Effectiveness = SOAR Partial
+Dynamic Analysis with Automated Results Interpretation
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Web Application Scanner Web Services Scanner Database Scanners
+Effectiveness = SOAR Partial
+Dynamic Analysis with Manual Results Interpretation
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Fuzz Tester Framework-based Fuzzer
+Effectiveness = SOAR Partial
+Manual Static Analysis - Source Code
+According to SOAR, the following detection techniques may be useful: Highly cost effective: Manual Source Code Review (not inspections) Cost effective for partial coverage: Focused Manual Spotcheck - Focused manual analysis of source
+Effectiveness = High
+Automated Static Analysis - Source Code
+According to SOAR, the following detection techniques may be useful: Highly cost effective: Source code Weakness Analyzer Context-configured Source Code Weakness Analyzer Cost effective for partial coverage: Warning Flags
+Effectiveness = High
+Architecture or Design Review
+According to SOAR, the following detection techniques may be useful: Highly cost effective: Formal Methods / Correct-By-Construction Cost effective for partial coverage: Inspection (IEEE 1028 standard) (can apply to requirements, design, source code, etc.)
+Effectiveness = High
+Potential Mitigations
+Phase: Requirements
+Choose a language that is not subject to this flaw.
+Phase: Implementation
+Ensure that all format string functions are passed a static string which cannot be controlled by the user and that the proper number of arguments are always sent to that function as well. If at all possible, use functions that do not support the %n operator in format strings. [REF-116] [REF-117]
+Phase: Build and Compilation
+Heed the warnings of compilers and linkers, since they may alert you to improper usage.
+Observed Examples
+CVE-2002-1825 CVE-2001-0717 CVE-2002-0573 CVE-2002-1788
+format string in Perl program
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1825
+format string in bad call to syslog function
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0717
+format string in bad call to syslog function
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0573
+format strings in NNTP server responses
+             338
+CWE-134: Use of Externally-Controlled Format String
+Reference
+Description
+CWE Version 4.2
+CWE-134: Use of Externally-Controlled Format String
+             CVE-2006-2480
+CVE-2007-2027
+Functional Areas
+• Logging
+• Error Handling
+• String Processing
+Affected Resources
+• Memory
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1788
+Format string vulnerability exploited by triggering errors or warnings, as demonstrated via format string specifiers in a .bmp filename. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-2480
+Chain: untrusted search path enabling resultant format string by loading malicious internationalization messages https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-2027
+       MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+        Nature
+MemberOf MemberOf MemberOf
+MemberOf MemberOf
+MemberOf MemberOf
+MemberOf MemberOf MemberOf MemberOf
+MemberOf
+Notes
+Applicable Platform
+635 726 743
+808 845
+865 877
+884
+990
+1131
+1134
+1163
+Weaknesses Originally Used by NVD from 2008 to 2016 635 2054 OWASP Top Ten 2004 Category A5 - Buffer Overflows 711 1909 CERT C Secure Coding Standard (2008) Chapter 10 - 734 1920 Input Output (FIO)
+2010 Top 25 - Weaknesses On the Cusp 800 1928 The CERT Oracle Secure Coding Standard for 844 1934
+Java (2011) Chapter 2 - Input Validation and Data
+Sanitization (IDS)
+2011 Top 25 - Risky Resource Management 900 1944 CERT C++ Secure Coding Section 09 - Input Output 868 1950 (FIO)
+CWE Cross-section 884 2070 SFP Secondary Cluster: Tainted Input to Command 888 1985 CISQ Quality Measures - Security 1128 2014 SEI CERT Oracle Secure Coding Standard for Java - 1133 2015 Guidelines 00. Input Validation and Data Sanitization
+(IDS)
+SEI CERT C Coding Standard - Guidelines 09. Input 1154 2031 Output (FIO)
+Type ID Name Page
+                                                                                                                                                                  This weakness is possible in any programming language that support format strings.
+Other
+While Format String vulnerabilities typically fall under the Buffer Overflow category, technically they are not overflowed buffers. The Format String vulnerability is fairly new (circa 1999) and stems from the fact that there is no realistic way for a function that takes a variable number of arguments to determine just how many arguments were passed in. The most common functions that take a variable number of arguments, including C-runtime functions, are the printf() family of calls. The Format String problem appears in a number of ways. A *printf() call without a format specifier is dangerous and can be exploited. For example, printf(input); is exploitable, while
+ 339
+CWE-134: Use of Externally-Controlled Format String
+
+   Mapped Taxonomy Name
+    Node ID
+    Fit
+    Mapped Node Name
+    CAPEC-ID
+    Attack Pattern Name
+  CWE Version 4.2
+CWE-134: Use of Externally-Controlled Format String
+printf(y, input); is not exploitable in that context. The result of the first call, used incorrectly, allows for an attacker to be able to peek at stack memory since the input string will be used
+as the format specifier. The attacker can stuff the input string with format specifiers and begin reading stack values, since the remaining parameters will be pulled from the stack. Worst case, this improper use may give away enough control to allow an arbitrary value (or values in the case of an exploit program) to be written into the memory of the running program. Frequently targeted entities are file names, process names, identifiers. Format string problems are a classic C/C++ issue that are now rare due to the ease of discovery. One main reason format string vulnerabilities can be exploited is due to the %n operator. The %n operator will write the number of characters, which have been printed by the format string therefore far, to the memory pointed to by its argument. Through skilled creation of a format string, a malicious user may use values on the stack to create a write-what-where condition. Once this is achieved, they can execute arbitrary code. Other operators can be used as well; for example, a %9999s operator could also trigger a buffer overflow, or when used in file-formatting functions like fprintf, it can generate a much larger output than intended.
+Research Gap
+Format string issues are under-studied for languages other than C. Memory or disk consumption, control flow or variable alteration, and data corruption may result from format string exploitation in applications written in other languages such as Perl, PHP, Python, etc.
+  Taxonomy Mappings
+PLOVER
+7 Pernicious Kingdoms CLASP
+CERT C Secure Coding CERT C Secure Coding OWASP Top Ten 2004 WASC
+The CERT Oracle Secure Coding Standard for Java (2011)
+SEI CERT Perl Coding Standard
+Software Fault Patterns OMG ASCSM
+Related Attack Patterns
+FIO30-C Exact
+FIO47-C CWE More Specific A1 CWE More Specific 6
+IDS06-J
+IDS30- Exact PL
+SFP24 ASCSM- CWE-134
+Format string vulnerability
+Format String
+Format string problem
+Exclude user input from format strings Use valid format strings
+Unvalidated Input
+Format String
+Exclude user input from format strings
+Exclude user input from format strings Tainted input to command
+                                                                                    67 String Format Overflow in syslog() 135 Format String Injection
+References
+      [REF-116]Steve Christey. "Format String Vulnerabilities in Perl Programs". < http:// www.securityfocus.com/archive/1/418460/30/0/threaded >.
+[REF-117]Hal Burch and Robert C. Seacord. "Programming Language Format String Vulnerabilities". < http://www.ddj.com/dept/security/197002914 >.
+[REF-118]Tim Newsham. "Format String Attacks". 2000 September 9. Guardent. < http:// www.thenewsh.com/~newsham/format-string-attacks.pdf >.
+[REF-7]Michael Howard and David LeBlanc. "Writing Secure Code". 2nd Edition. 2002 December 4. Microsoft Press. < https://www.microsoftpressstore.com/store/writing-secure- code-9780735617223 >.
+ 340
+CWE-134: Use of Externally-Controlled Format String
+
+CWE Version 4.2
+CWE-135: Incorrect Calculation of Multi-Byte String Length
+[REF-44]Michael Howard, David LeBlanc and John Viega. "24 Deadly Sins of Software Security". McGraw-Hill. 2010.
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.
+[REF-962]Object Management Group (OMG). "Automated Source Code Security Measure (ASCSM)". 2016 January. < http://www.omg.org/spec/ASCSM/1.0/ >.

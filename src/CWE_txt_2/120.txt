@@ -1,0 +1,258 @@
+CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')
+Description
+The program copies an input buffer to an output buffer without verifying that the size of the input buffer is less than the size of the output buffer, leading to a buffer overflow.
+Extended Description
+A buffer overflow condition exists when a program attempts to put more data in a buffer than it
+can hold, or when a program attempts to put data in a memory area outside of the boundaries
+of a buffer. The simplest type of error, and the most common cause of buffer overflows, is the "classic" case in which the program copies the buffer without restricting how much is copied. Other variants exist, but the existence of a classic overflow strongly suggests that the programmer is not considering even the most basic of security protections.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+    ChildOf
+ParentOf
+CanFollow CanFollow CanFollow CanFollow CanPrecede
+119 Improper Restriction of Operations within the Bounds of a 272 Memory Buffer
+785 Use of Path Manipulation Function without Maximum-sized 1462 Buffer
+170 Improper Null Termination 396 231 Improper Handling of Extra Values 525 416 Use After Free 906 456 Missing Initialization of a Variable 974 123 Write-what-where Condition 297
+                                                                       Relevant to the view "Weaknesses for Simplified Mapping of Published Vulnerabilities" (CWE-1003)
+ChildOf 119 Improper Restriction of Operations within the Bounds of a 272 Memory Buffer
+Relevant to the view "Software Development" (CWE-699)
+MemberOf 1218 Memory Buffer Errors 2049
+Relevant to the view "Seven Pernicious Kingdoms" (CWE-700)
+ChildOf 20 Improper Input Validation 19
+Weakness Ordinalities
+Resultant :
+Primary :
+Applicable Platforms
+Language : C (Prevalence = Undetermined) Language : C++ (Prevalence = Undetermined) Language : Assembly (Prevalence = Undetermined)
+Alternate Terms
+                       282
+CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')
+
+CWE Version 4.2
+CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')
+Classic Buffer Overflow : This term was frequently used by vulnerability researchers during approximately 1995 to 2005 to differentiate buffer copies without length checks (which had been known about for decades) from other emerging weaknesses that still involved invalid accesses of buffers, as vulnerability researchers began to develop advanced exploitation techniques.
+Unbounded Transfer : Likelihood Of Exploit
+High
+Common Consequences
+      Scope Impact   Likelihood
+        Integrity Confidentiality Availability
+Modify Memory
+Execute Unauthorized Code or Commands
+Buffer overflows often can be used to execute arbitrary code, which is usually outside the scope of a program's implicit security policy. This can often be used to subvert any other security service.
+        Availability
+Modify Memory
+DoS: Crash, Exit, or Restart
+DoS: Resource Consumption (CPU)
+Buffer overflows generally lead to crashes. Other attacks leading to lack of availability are possible, including putting the program into an infinite loop.
+   Detection Methods
+Automated Static Analysis
+This weakness can often be detected using automated static analysis tools. Many modern tools use data flow analysis or constraint-based techniques to minimize the number of false positives. Automated static analysis generally does not account for environmental considerations when reporting out-of-bounds memory operations. This can make it difficult for users to determine which warnings should be investigated first. For example, an analysis tool might report buffer overflows that originate from command line arguments in a program that is not expected to run with setuid or other special privileges.
+Effectiveness = High
+Detection techniques for buffer-related errors are more mature than for most other weakness types.
+Automated Dynamic Analysis
+This weakness can be detected using dynamic tools and techniques that interact with the software using large test suites with many diverse inputs, such as fuzz testing (fuzzing), robustness testing, and fault injection. The software's operation may slow down, but it should not become unstable, crash, or generate incorrect results.
+Manual Analysis
+Manual analysis can be useful for finding this weakness, but it might not achieve desired code coverage within limited time constraints. This becomes difficult for weaknesses that must be considered for all inputs, since the attack surface can be too large.
+Automated Static Analysis - Binary or Bytecode
+According to SOAR, the following detection techniques may be useful: Highly cost effective: Bytecode Weakness Analysis - including disassembler + source code weakness analysis Binary Weakness Analysis - including disassembler + source code weakness analysis
+Effectiveness = High
+ 283
+CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')
+
+CWE Version 4.2
+CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')
+Manual Static Analysis - Binary or Bytecode
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Binary / Bytecode disassembler - then use manual analysis for vulnerabilities & anomalies
+Effectiveness = SOAR Partial
+Dynamic Analysis with Automated Results Interpretation
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Web Application Scanner Web Services Scanner Database Scanners
+Effectiveness = SOAR Partial
+Dynamic Analysis with Manual Results Interpretation
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Fuzz Tester Framework-based Fuzzer
+Effectiveness = SOAR Partial
+Manual Static Analysis - Source Code
+According to SOAR, the following detection techniques may be useful: Cost effective for partial coverage: Focused Manual Spotcheck - Focused manual analysis of source Manual Source Code Review (not inspections)
+Effectiveness = SOAR Partial
+Automated Static Analysis - Source Code
+According to SOAR, the following detection techniques may be useful: Highly cost effective: Source code Weakness Analyzer Context-configured Source Code Weakness Analyzer
+Effectiveness = High
+Architecture or Design Review
+According to SOAR, the following detection techniques may be useful: Highly cost effective: Formal Methods / Correct-By-Construction Cost effective for partial coverage: Inspection (IEEE 1028 standard) (can apply to requirements, design, source code, etc.)
+Effectiveness = High
+Potential Mitigations
+Phase: Requirements
+Strategy = Language Selection
+Use a language that does not allow this weakness to occur or provides constructs that make
+this weakness easier to avoid. For example, many languages that perform their own memory management, such as Java and Perl, are not subject to buffer overflows. Other languages, such as Ada and C#, typically provide overflow protection, but the protection can be disabled by the programmer. Be wary that a language's interface to native code may still be subject to overflows, even if the language itself is theoretically safe.
+Phase: Architecture and Design
+Strategy = Libraries or Frameworks
+Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid. Examples include the Safe C String Library (SafeStr) by Messier and Viega [REF-57], and the Strsafe.h library from Microsoft [REF-56]. These libraries provide safer versions of overflow-prone string-handling functions.
+Phase: Build and Compilation
+Strategy = Compilation or Build Hardening
+   CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')
+ 284
+
+CWE Version 4.2
+CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')
+Run or compile the software using features or extensions that automatically provide a protection mechanism that mitigates or eliminates buffer overflows. For example, certain compilers
+and extensions provide automatic buffer overflow detection mechanisms that are built into
+the compiled code. Examples include the Microsoft Visual Studio /GS flag, Fedora/Red Hat FORTIFY_SOURCE GCC flag, StackGuard, and ProPolice.
+Effectiveness = Defense in Depth
+This is not necessarily a complete solution, since these mechanisms can only detect certain types of overflows. In addition, an attack could still cause a denial of service, since the typical response is to exit the application.
+Phase: Implementation
+Consider adhering to the following rules when allocating and managing an application's memory: Double check that your buffer is as large as you specify. When using functions that accept a number of bytes to copy, such as strncpy(), be aware that if the destination buffer size is equal to the source buffer size, it may not NULL-terminate the string. Check buffer boundaries if accessing the buffer in a loop and make sure you are not in danger of writing past the allocated space. If necessary, truncate all input strings to a reasonable length before passing them to the copy and concatenation functions.
+Phase: Implementation
+Strategy = Input Validation
+Assume all input is malicious. Use an "accept known good" input validation strategy, i.e., use
+a list of acceptable inputs that strictly conform to specifications. Reject any input that does not strictly conform to specifications, or transform it into something that does. When performing input validation, consider all potentially relevant properties, including length, type of input, the full range of acceptable values, missing or extra inputs, syntax, consistency across related fields, and conformance to business rules. As an example of business rule logic, "boat" may be syntactically valid because it only contains alphanumeric characters, but it is not valid if the input is only expected to contain colors such as "red" or "blue." Do not rely exclusively on looking for malicious or malformed inputs. This is likely to miss at least one undesirable input, especially if the code's environment changes. This can give attackers enough room to bypass the intended validation. However, denylists can be useful for detecting potential attacks or determining which inputs are so malformed that they should be rejected outright.
+Phase: Architecture and Design
+For any security checks that are performed on the client side, ensure that these checks are duplicated on the server side, in order to avoid CWE-602. Attackers can bypass the client-side checks by modifying values after the checks have been performed, or by changing the client to remove the client-side checks entirely. Then, these modified values would be submitted to the server.
+Phase: Operation
+Strategy = Environment Hardening
+Run or compile the software using features or extensions that randomly arrange the positions of a program's executable and libraries in memory. Because this makes the addresses unpredictable, it can prevent an attacker from reliably jumping to exploitable code. Examples include Address Space Layout Randomization (ASLR) [REF-58] [REF-60] and Position- Independent Executables (PIE) [REF-64].
+Effectiveness = Defense in Depth
+This is not a complete solution. However, it forces the attacker to guess an unknown value that changes every program execution. In addition, an attack could still cause a denial of service, since the typical response is to exit the application.
+   Phase: Operation
+ 285
+CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')
+
+CWE Version 4.2
+CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')
+Strategy = Environment Hardening
+Use a CPU and operating system that offers Data Execution Protection (NX) or its equivalent [REF-60] [REF-61].
+Effectiveness = Defense in Depth
+This is not a complete solution, since buffer overflows could be used to overwrite nearby variables to modify the software's state in dangerous ways. In addition, it cannot be used in cases in which self-modifying code is required. Finally, an attack could still cause a denial of service, since the typical response is to exit the application.
+Phase: Build and Compilation Phase: Operation
+Most mitigating technologies at the compiler or OS level to date address only a subset of buffer overflow problems and rarely provide complete protection against even that subset. It is good practice to implement strategies to increase the workload of an attacker, such as leaving the attacker to guess an unknown value that changes every program execution.
+Phase: Implementation
+Replace unbounded copy functions with analogous functions that support length arguments, such as strcpy with strncpy. Create these if they are not available.
+Effectiveness = Moderate
+This approach is still susceptible to calculation errors, including issues such as off-by-one errors (CWE-193) and incorrectly calculating buffer lengths (CWE-131).
+Phase: Architecture and Design
+Strategy = Enforcement by Conversion
+When the set of acceptable objects, such as filenames or URLs, is limited or known, create a mapping from a set of fixed input values (such as numeric IDs) to the actual filenames or URLs, and reject all other inputs.
+Phase: Architecture and Design Phase: Operation
+Strategy = Environment Hardening
+Run your code using the lowest privileges that are required to accomplish the necessary tasks [REF-76]. If possible, create isolated accounts with limited privileges that are only used for a single task. That way, a successful attack will not immediately give the attacker access to the rest of the software or its environment. For example, database applications rarely need to run as the database administrator, especially in day-to-day operations.
+Phase: Architecture and Design Phase: Operation
+Strategy = Sandbox or Jail
+Run the code in a "jail" or similar sandbox environment that enforces strict boundaries between the process and the operating system. This may effectively restrict which files can be accessed in a particular directory or which commands can be executed by the software. OS-level examples include the Unix chroot jail, AppArmor, and SELinux. In general, managed code may provide some protection. For example, java.io.FilePermission in the Java SecurityManager allows the software to specify restrictions on file operations. This may not be a feasible solution, and it
+only limits the impact to the operating system; the rest of the application may still be subject to compromise. Be careful to avoid CWE-243 and other weaknesses related to jails.
+Effectiveness = Limited
+   CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')
+ 286
+
+CWE Version 4.2
+CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')
+The effectiveness of this mitigation depends on the prevention capabilities of the specific sandbox or jail being used and might only help to reduce the scope of an attack, such as restricting the attacker to certain system calls or limiting the portion of the file system that can be accessed.
+Observed Examples
+CVE-2000-1094 CVE-1999-0046 CVE-2002-1337
+CVE-2003-0595
+CVE-2001-0191
+Functional Areas
+buffer overflow using command with long argument
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2000-1094
+buffer overflow in local program using long environment variable
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-1999-0046
+buffer overflow in comment characters, when product increments a counter for a ">" but does not decrement for "<" https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1337
+By replacing a valid cookie value with an extremely long string of characters, an attacker may overflow the application's buffers. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0595
+By replacing a valid cookie value with an extremely long string of characters, an attacker may overflow the application's buffers. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0191
+                  • Memory Management
+Affected Resources
+• Memory
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ MemberOf MemberOf MemberOf
+MemberOf MemberOf
+722 OWASP Top Ten 2004 Category A1 - Unvalidated Input 711 1907 726 OWASP Top Ten 2004 Category A5 - Buffer Overflows 711 1909 741 CERT C Secure Coding Standard (2008) Chapter 8 - 734 1917
+Characters and Strings (STR)
+802 2010 Top 25 - Risky Resource Management 800 1927 865 2011 Top 25 - Risky Resource Management 900 1944
+                                                           288
+CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')
+CWE Version 4.2
+CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')
+          Nature
+MemberOf
+MemberOf MemberOf MemberOf MemberOf MemberOf
+Notes
+Relationship
+Type ID
+875
+      884
+      970
+      1129
+      1131
+      1161
+Name Page
+             CERT C++ Secure Coding Section 07 - Characters and Strings (STR)
+CWE Cross-section
+SFP Secondary Cluster: Faulty Buffer Access
+CISQ Quality Measures - Reliability CISQ Quality Measures - Security
+SEI CERT C Coding Standard - Guidelines 07. Characters and Strings (STR)
+868 1948
+884 2070 888 1977 1128 2012 1128 2014 1154 2029
+                                                                        At the code level, stack-based and heap-based overflows do not differ significantly, so there usually is not a need to distinguish them. From the attacker perspective, they can be quite different, since different techniques are required to exploit them.
+Terminology
+Many issues that are now called "buffer overflows" are substantively different than the "classic" overflow, including entirely different bug types that rely on overflow exploit techniques, such as integer signedness errors, integer overflows, and format string bugs. This imprecise terminology can make it difficult to determine which variant is being reported.
+Taxonomy Mappings
+PLOVER
+7 Pernicious Kingdoms
+CLASP
+OWASP Top Ten 2004 A1 OWASP Top Ten 2004 A5
+CWE More Specific
+Unbounded Transfer ('classic overflow') Buffer Overflow
+Buffer overflow
+Unvalidated Input
+Buffer Overflows
+Guarantee that storage for strings has sufficient space for character data and the null terminator
+Buffer Overflow
+Faulty Buffer Access
+  Mapped Taxonomy Name
+    Node ID
+    Fit
+    Mapped Node Name
+                                          CERT C Secure Coding
+WASC
+Software Fault Patterns OMG ASCSM
+OMG ASCRM
+Related Attack Patterns
+CWE More Specific STR31-C Exact
+7
+SFP8 ASCSM- CWE-120 ASCRM- CWE-120
+                                      CAPEC-ID
+    Attack Pattern Name
+  8 Buffer Overflow in an API Call
+9 Buffer Overflow in Local Command-Line Utilities
+10 Buffer Overflow via Environment Variables
+14 Client-side Injection-induced Buffer Overflow 24 Filter Failure through Buffer Overflow
+42 MIME Conversion
+44 Overflow Binary Resource File
+45 Buffer Overflow via Symbolic Links
+46 Overflow Variables and Tags
+47 Buffer Overflow via Parameter Expansion
+67 String Format Overflow in syslog() 92 Forced Integer Overflow
+100 Overflow Buffers
+                                                   289
+CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')
+
+  Weakness ID : 121 Status: Draft Structure : Simple
+Abstraction : Variant
+ CWE Version 4.2
+References
+[REF-7]Michael Howard and David LeBlanc. "Writing Secure Code". 2nd Edition. 2002 December 4. Microsoft Press. < https://www.microsoftpressstore.com/store/writing-secure- code-9780735617223 >.
+[REF-44]Michael Howard, David LeBlanc and John Viega. "24 Deadly Sins of Software Security". McGraw-Hill. 2010.
+[REF-56]Microsoft. "Using the Strsafe.h Functions". < http://msdn.microsoft.com/en-us/library/ ms647466.aspx >.
+[REF-57]Matt Messier and John Viega. "Safe C String Library v1.0.3". < http://www.zork.org/ safestr/ >.
+[REF-58]Michael Howard. "Address Space Layout Randomization in Windows Vista". < http:// blogs.msdn.com/michael_howard/archive/2006/05/26/address-space-layout-randomization-in- windows-vista.aspx >.
+[REF-59]Arjan van de Ven. "Limiting buffer overflows with ExecShield". < http://www.redhat.com/ magazine/009jul05/features/execshield/ >.
+[REF-60]"PaX". < http://en.wikipedia.org/wiki/PaX >.
+[REF-74]Jason Lam. "Top 25 Series - Rank 3 - Classic Buffer Overflow". 2010 March 2. SANS Software Security Institute. < http://software-security.sans.org/blog/2010/03/02/top-25-series- rank-3-classic-buffer-overflow/ >.
+[REF-61]Microsoft. "Understanding DEP as a mitigation technology part 1". < http:// blogs.technet.com/b/srd/archive/2009/06/12/understanding-dep-as-a-mitigation-technology- part-1.aspx >.
+[REF-76]Sean Barnum and Michael Gegick. "Least Privilege". 2005 September 4. < https:// buildsecurityin.us-cert.gov/daisy/bsi/articles/knowledge/principles/351.html >.
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.
+[REF-64]Grant Murphy. "Position Independent Executables (PIE)". 2012 November 8. Red Hat. < https://securityblog.redhat.com/2012/11/28/position-independent-executables-pie/ >.
+[REF-961]Object Management Group (OMG). "Automated Source Code Reliability Measure (ASCRM)". 2016 January. < http://www.omg.org/spec/ASCRM/1.0/ >.
+[REF-962]Object Management Group (OMG). "Automated Source Code Security Measure (ASCSM)". 2016 January. < http://www.omg.org/spec/ASCSM/1.0/ >.

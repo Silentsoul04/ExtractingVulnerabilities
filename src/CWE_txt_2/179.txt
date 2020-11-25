@@ -1,0 +1,53 @@
+CWE-179: Incorrect Behavior Order: Early Validation
+Description
+The software validates input before applying protection mechanisms that modify the input, which could allow an attacker to bypass the validation via dangerous inputs that only arise after the modification.
+Extended Description
+Software needs to validate data at the proper time, after data has been canonicalized and cleansed. Early validation is susceptible to various manipulations that result in dangerous inputs that are produced by canonicalization and cleansing.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+         ChildOf 20 ChildOf 696 ParentOf 180 ParentOf 181
+Improper Input Validation 19 Incorrect Behavior Order 1351 Incorrect Behavior Order: Validate Before Canonicalize 419 Incorrect Behavior Order: Validate Before Filter 421
+                                      Relevant to the view "Software Development" (CWE-699)
+MemberOf 1215 Data Validation Issues 2048 MemberOf 438 Behavioral Problems 1899
+Applicable Platforms
+Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Potential Mitigations
+                   416
+CWE-179: Incorrect Behavior Order: Early Validation
+Phase: Implementation
+Strategy = Input Validation
+CWE Version 4.2
+CWE-179: Incorrect Behavior Order: Early Validation
+  Inputs should be decoded and canonicalized to the application's current internal representation before being validated (CWE-180). Make sure that the application does not decode the same input twice (CWE-174). Such errors could be used to bypass allowlist validation schemes by introducing dangerous inputs after they have been checked.
+CVE-2003-0332 Product modifies the first two letters of a filename extension after performing a security check, which allows remote attackers to bypass authentication via a
+filename with a .ats extension instead of a .hts extension.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0332
+CVE-2002-0802 Database consumes an extra character when processing a character that cannot be converted, which could remove an escape character from the query
+and make the application subject to SQL injection attacks.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0802
+CVE-2002-0934 Directory traversal vulnerability allows remote attackers to read or modify arbitrary files via invalid characters between two . (dot) characters, which are
+filtered and result in a ".." sequence.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0934
+CVE-2003-0282 Directory traversal vulnerability allows attackers to overwrite arbitrary files via invalid characters between two . (dot) characters, which are filtered and result
+in a ".." sequence.
+CVE-2002-0433
+Product allows remote attackers to view restricted files via an HTTP request containing a "*" (wildcard or asterisk) character. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0433
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ MemberOf MemberOf MemberOf
+Notes
+Research Gap
+722 OWASP Top Ten 2004 Category A1 - Unvalidated Input 711 1907 884 CWE Cross-section 884 2070 992 SFP Secondary Cluster: Faulty Input Transformation 888 1988
+                                These errors are mostly reported in path traversal vulnerabilities, but the concept applies whenever validation occurs.
+Taxonomy Mappings
+PLOVER Early Validation Errors
+Related Attack Patterns
+3 Using Leading 'Ghost' Character Sequences to Bypass Input Filters 43 Exploiting Multiple Input Interpretation Layers
+71 Using Unicode Encoding to Bypass Validation Logic
+References
+               418
+CWE-179: Incorrect Behavior Order: Early Validation
+CWE Version 4.2
+CWE-180: Incorrect Behavior Order: Validate Before Canonicalize
+[REF-62]Mark Dowd, John McDonald and Justin Schuh. "The Art of Software Security Assessment". 1st Edition. 2006. Addison Wesley.

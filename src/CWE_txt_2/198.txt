@@ -1,0 +1,53 @@
+CWE-198: Use of Incorrect Byte Ordering
+Description
+The software receives input from an upstream component, but it does not account for byte ordering (e.g. big-endian and little-endian) when processing the input, causing an incorrect number or value to be used.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 188 Reliance on Data/Memory Layout 436
+         466
+CWE-198: Use of Incorrect Byte Ordering
+Relevant to the view "Software Development" (CWE-699)
+Nature Type ID Name
+Page
+1884
+CWE Version 4.2
+CWE-200: Exposure of Sensitive Information to an Unauthorized Actor
+   
+ MemberOf
+Applicable Platforms
+189 Numeric Errors
+     Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Scope Impact
+Integrity Unexpected State
+Detection Methods
+Black Box
+Likelihood
+   Because byte ordering bugs are usually very noticeable even with normal inputs, this bug is more likely to occur in rarely triggered error conditions, making them difficult to detect using black box methods.
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ Nature
+MemberOf
+MemberOf MemberOf
+Notes
+Research Gap
+Under-reported.
+Taxonomy Mappings
+Type ID
+857
+993 1147
+Name Page
+ The CERT Oracle Secure Coding Standard for Java (2011) Chapter 14 - Input Output (FIO)
+SFP Secondary Cluster: Incorrect Input Handling SEI CERT Oracle Secure Coding Standard for Java - Guidelines 13. Input Output (FIO)
+844 1940
+888 1989 1133 2022
+                                
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+PLOVER
+The CERT Oracle Secure FIO12-J Coding Standard for Java
+(2011)
+Numeric Byte Ordering Error
+Provide methods to read and write little- endian data

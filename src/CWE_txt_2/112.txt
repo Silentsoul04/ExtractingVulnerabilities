@@ -1,0 +1,55 @@
+CWE-112: Missing XML Validation
+Description
+The software accepts XML from an untrusted source but does not validate the XML against the proper schema.
+Extended Description
+Most successful attacks begin with a violation of the programmer's assumptions. By accepting an XML document without validating it against a DTD or XML schema, the programmer leaves a door open for attackers to provide unexpected, unreasonable, or malicious input.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+   250
+CWE-112: Missing XML Validation
+CWE Version 4.2
+CWE-112: Missing XML Validation
+Nature Type ID Name Page
+ChildOf 1286 Improper Validation of Syntactic Correctness of Input 1848
+  
+      Relevant to the view "Software Development" (CWE-699)
+Nature Type ID Name
+MemberOf 1215 Data Validation Issues
+Relevant to the view "Seven Pernicious Kingdoms" (CWE-700)
+Nature Type ID Name
+Page
+2048
+Page
+19
+ 
+       
+ ChildOf
+Weakness Ordinalities
+Primary :
+Applicable Platforms
+20 Improper Input Validation
+     Language : Language-Independent (Prevalence = Undetermined) Common Consequences
+Scope Impact
+Integrity Unexpected State
+Potential Mitigations
+Phase: Architecture and Design
+Strategy = Input Validation
+Likelihood
+   Always validate XML input against a known XML Schema or DTD. It is not possible for an XML parser to validate all aspects of a document's content because a parser cannot understand
+the complete semantics of the data. However, a parser can do a complete and thorough job
+of checking the document's structure and therefore guarantee to the code that processes the document that the content is well-formed.
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+   MemberOf 990
+Taxonomy Mappings
+7 Pernicious Kingdoms Software Fault Patterns
+Related Attack Patterns
+SFP Secondary Cluster: Tainted Input to Command
+888 1985
+              SFP24
+Missing XML Validation Tainted input to command
+    230 XML Nested Payloads
+231 XML Oversized Payloads
+References
+      [REF-6]Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. 2005 November 7. NIST. < https://samate.nist.gov/SSATTM_Content/ papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security %20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf >.

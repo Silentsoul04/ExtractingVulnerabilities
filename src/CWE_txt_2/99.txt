@@ -1,0 +1,92 @@
+CWE-99: Improper Control of Resource Identifiers ('Resource Injection')
+Weakness ID: 99
+Abstraction: Class
+Structure: Simple	
+Status: Draft
+Presentation Filter:  
++ Description
+The software receives input from an upstream component, but it does not restrict or incorrectly restricts the input before it is used as an identifier for a resource that may be outside the intended sphere of control.
++ Extended Description
+A resource injection issue occurs when the following two conditions are met:
+An attacker can specify the identifier used to access a system resource. For example, an attacker might be able to specify part of the name of a file to be opened or a port number to be used.
+By specifying the resource, the attacker gains a capability that would not otherwise be permitted. For example, the program may give the attacker the ability to overwrite the specified file, run with a configuration controlled by the attacker, or transmit sensitive information to a third-party server.
+This may enable an attacker to access or modify otherwise protected system resources.
++ Alternate Terms
+Insecure Direct Object Reference:	
+OWASP uses this term, although it is effectively the same as resource injection.
++ Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOf and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that the user may want to explore.
++ Relevant to the view "Research Concepts" (CWE-1000)
+Nature	Type	ID	Name
+ChildOf	Class	74	Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')
+ParentOf	Base	641	Improper Restriction of Names for Files and Other Resources
+ParentOf	Base	694	Use of Multiple Resources with Duplicate Identifier
+ParentOf	Base	914	Improper Control of Dynamically-Identified Variables
+PeerOf	Class	706	Use of Incorrectly-Resolved Name or Reference
+CanAlsoBe	Base	73	External Control of File Name or Path
++ Relevant to the view "Architectural Concepts" (CWE-1008)
++ Modes Of Introduction
+The different Modes of Introduction provide information about how and when this weakness may be introduced. The Phase identifies a point in the life cycle at which introduction may occur, while the Note provides a typical scenario related to introduction during the given phase.
+
+Phase	Note
+Architecture and Design	
+Implementation	REALIZATION: This weakness is caused during implementation of an architectural security tactic.
++ Applicable Platforms
+The listings below show possible areas for which the given weakness could appear. These may be for specific named Languages, Operating Systems, Architectures, Paradigms, Technologies, or a class of such platforms. The platform is listed along with how frequently the given weakness appears for that instance.
+Languages
+Class: Language-Independent (Undetermined Prevalence)
++ Common Consequences
+The table below specifies different individual consequences associated with the weakness. The Scope identifies the application security area that is violated, while the Impact describes the negative technical impact that arises if an adversary succeeds in exploiting this weakness. The Likelihood provides information about how likely the specific consequence is expected to be seen relative to the other consequences in the list. For example, there may be high likelihood that a weakness will be exploited to achieve a certain impact, but a low likelihood that it will be exploited to achieve a different impact.
+
+Scope	Impact	Likelihood
+Confidentiality
+Integrity
+Technical Impact: Read Application Data; Modify Application Data; Read Files or Directories; Modify Files or Directories
+
+An attacker could gain access to or modify sensitive data or system resources. This could allow access to protected files or directories including configuration files and files containing sensitive information.
++ Likelihood Of Exploit
+High
+Potential Mitigations
+Phase: Implementation
+Strategy: Input Validation
+Assume all input is malicious. Use an "accept known good" input validation strategy, i.e., use a list of acceptable inputs that strictly conform to specifications. Reject any input that does not strictly conform to specifications, or transform it into something that does.
+When performing input validation, consider all potentially relevant properties, including length, type of input, the full range of acceptable values, missing or extra inputs, syntax, consistency across related fields, and conformance to business rules. As an example of business rule logic, "boat" may be syntactically valid because it only contains alphanumeric characters, but it is not valid if the input is only expected to contain colors such as "red" or "blue."
+Do not rely exclusively on looking for malicious or malformed inputs. This is likely to miss at least one undesirable input, especially if the code's environment changes. This can give attackers enough room to bypass the intended validation. However, it can be useful for detecting potential attacks or determining which inputs are so malformed that they should be rejected outright.
++ Weakness Ordinalities
+Ordinality	Description
+Primary
+(where the weakness exists independent of other weaknesses)
++ Memberships
+This MemberOf Relationships table shows additional CWE Categories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+Nature	Type	ID	Name
+MemberOf	Category	813	OWASP Top Ten 2010 Category A4 - Insecure Direct Object References
+MemberOf	View	884	CWE Cross-section
+MemberOf	Category	932	OWASP Top Ten 2013 Category A4 - Insecure Direct Object References
+MemberOf	Category	990	SFP Secondary Cluster: Tainted Input to Command
+MemberOf	Category	1005	7PK - Input Validation and Representation
+MemberOf	Category	1131	CISQ Quality Measures - Security
+MemberOf	Category	1308	CISQ Quality Measures - Security
++ Notes
+Maintenance
+The relationship between CWE-99 and CWE-610 needs further investigation and clarification. They might be duplicates. CWE-99 "Resource Injection," as originally defined in Seven Pernicious Kingdoms taxonomy, emphasizes the "identifier used to access a system resource" such as a file name or port number, yet it explicitly states that the "resource injection" term does not apply to "path manipulation," which effectively identifies the path at which a resource can be found and could be considered to be one aspect of a resource identifier. Also, CWE-610 effectively covers any type of resource, whether that resource is at the system layer, the application layer, or the code layer.
+Relationship
+Resource injection that involves resources stored on the filesystem goes by the name path manipulation (CWE-73).
++ Taxonomy Mappings
+Mapped Taxonomy Name	Node ID	Fit	Mapped Node Name
+7 Pernicious Kingdoms			Resource Injection
+Software Fault Patterns	SFP24		Tainted input to command
+OMG ASCSM	ASCSM-CWE-99		
++ Related Attack Patterns
+CAPEC-ID	Attack Pattern Name
+CAPEC-10	Buffer Overflow via Environment Variables
+CAPEC-240	Resource Injection
+CAPEC-75	Manipulating Writeable Configuration Files
++ References
+[REF-6] Katrina Tsipenyuk, Brian Chess and Gary McGraw. "Seven Pernicious Kingdoms: A Taxonomy of Software Security Errors". NIST Workshop on Software Security Assurance Tools Techniques and Metrics. NIST. 2005-11-07. <https://samate.nist.gov/SSATTM_Content/papers/Seven%20Pernicious%20Kingdoms%20-%20Taxonomy%20of%20Sw%20Security%20Errors%20-%20Tsipenyuk%20-%20Chess%20-%20McGraw.pdf>.
+[REF-962] Object Management Group (OMG). "Automated Source Code Security Measure (ASCSM)". ASCSM-CWE-99. 2016-01. <http://www.omg.org/spec/ASCSM/1.0/>.
++ Content History
++ Submissions
+Submission Date	Submitter	Organization
+2006-07-19	7 Pernicious Kingdoms	
++ Modifications
++ Previous Entry Names

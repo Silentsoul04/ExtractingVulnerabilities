@@ -1,0 +1,100 @@
+CWE-123: Write-what-where Condition
+Description
+Any condition where the attacker has the ability to write an arbitrary value to an arbitrary location, often as the result of a buffer overflow.
+Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+   Weakness ID : 123 Status: Draft Structure : Simple
+Abstraction : Base
+  
+Nature
+ChildOf PeerOf CanFollow
+CanFollow CanFollow CanFollow CanFollow CanFollow
+Type ID
+787 415 120
+      134
+      364
+      416
+      479
+      590
+Name Page
+Out-of-bounds Write 1466 Double Free 903 Buffer Copy without Checking Size of Input ('Classic Buffer 281 Overflow')
+Use of Externally-Controlled Format String 335 Signal Handler Race Condition 804 Use After Free 906 Signal Handler Use of a Non-reentrant Function 1024 Free of Memory not on the Heap 1182
+                                                                                    297
+CWE-123: Write-what-where Condition
+Nature Type ID Name   Page
+Scope Impact   Likelihood
+Integrity Confidentiality Availability Access Control
+Modify Memory
+Execute Unauthorized Code or Commands Gain Privileges or Assume Identity
+DoS: Crash, Exit, or Restart
+Bypass Protection Mechanism
+Clearly, write-what-where conditions can be used to write data to areas of memory outside the scope of a policy. Also, they almost invariably can be used to execute arbitrary code, which is usually outside the scope of
+a program's implicit security policy. If the attacker can overwrite a pointer's worth of memory (usually 32 or 64 bits), they can redirect a function pointer to their own malicious code. Even when the attacker can only modify a single byte arbitrary code execution can be possible. Sometimes this is because the same problem can be exploited repeatedly to the same effect. Other times it
+is because the attacker can overwrite security-critical application-specific data -- such as a flag indicating whether the user is an administrator.
+Integrity DoS: Crash, Exit, or Restart Availability Modify Memory
+Many memory accesses can lead to program termination, such as when writing to addresses that are invalid for the current process.
+Access Control Bypass Protection Mechanism Other Other
+When the consequence is arbitrary code execution, this can often be used to subvert any other security service.
+CWE Version 4.2
+CWE-123: Write-what-where Condition
+Relevant to the view "Software Development" (CWE-699)
+MemberOf 1218 Memory Buffer Errors 2049
+Weakness Ordinalities
+Resultant :
+Applicable Platforms
+Language : C (Prevalence = Undetermined)
+Language : C++ (Prevalence = Undetermined) Likelihood Of Exploit
+High
+Common Consequences
+Potential Mitigations
+Phase: Architecture and Design
+Strategy = Language Selection
+Use a language that provides appropriate memory abstractions.
+Phase: Operation
+Use OS-level preventative functionality integrated after the fact. Not a complete solution.
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+ Nature
+MemberOf MemberOf
+Type ID
+1160 1161
+Name Page
+ SEI CERT C Coding Standard - Guidelines 06. Arrays (ARR)
+SEI CERT C Coding Standard - Guidelines 07. Characters and Strings (STR)
+1154 2029 1154 2029
+                   Taxonomy Mappings
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+CLASP
+CERT C Secure Coding
+CERT C Secure Coding CERT C Secure Coding
+CERT C Secure Coding
+ARR30- Imprecise C
+ARR38- Imprecise C
+STR31-C Imprecise
+STR32-C Imprecise
+Write-what-where condition
+Do not form or use out-of-bounds pointers or array subscripts
+Guarantee that library functions do not form invalid pointers
+Guarantee that storage for strings has sufficient space for character data and the null terminator
+Do not pass a non-null-terminated character sequence to a library function that expects a string
+                                     299
+CWE-123: Write-what-where Condition
+Abstraction : Base
+ 
+Nature
+Nature
+Type ID Name
+Type ID Name
+Page
+Page
+Scope
+Impact
+Likelihood
+CWE Version 4.2
+CWE-124: Buffer Underwrite ('Buffer Underflow')
+References
+[REF-44]Michael Howard, David LeBlanc and John Viega. "24 Deadly Sins of Software Security". McGraw-Hill. 2010.

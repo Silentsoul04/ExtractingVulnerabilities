@@ -1,0 +1,65 @@
+CWE-127: Buffer Under-read
+Description
+The software reads from a buffer using buffer access mechanisms such as indexes or pointers that reference memory locations prior to the targeted buffer.
+Extended Description
+This typically occurs when the pointer or its index is decremented to a position before the buffer, when pointer arithmetic results in a position before the beginning of the valid memory location, or when a negative index is used. This may result in exposure of sensitive information or possibly a crash.
+Relationships
+  
+Reference Description
+CVE-2014-0160 Chain: "Heartbleed" bug receives an inconsistent length parameter (CWE-130) enabling an out-of-bounds read (CWE-126), returning memory that could
+include private cryptographic keys and other sensitive data.
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0160
+  
+ 
+       
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+               Weakness ID : 127 Status: Draft Structure : Simple
+Abstraction : Variant
+  309
+CWE-127: Buffer Under-read
+Nature
+Type ID Name
+Page
+Scope
+Impact
+Likelihood
+Confidentiality
+Bypass Protection Mechanism
+By reading out-of-bounds memory, an attacker might be able to get secret values, such as memory addresses, which can be bypass protection mechanisms such as ASLR in order to improve the reliability and likelihood of exploiting a separate weakness to achieve code execution instead of just denial of service.
+ Nature
+Type ID Name
+Page
+Mapped Taxonomy Name
+Node ID
+Fit
+Mapped Node Name
+CWE Version 4.2
+CWE-127: Buffer Under-read
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOr and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that may want to be explored.
+Relevant to the view "Research Concepts" (CWE-1000)
+ChildOf 125 Out-of-bounds Read 303 ChildOf 786 Access of Memory Location Before Start of Buffer 1464
+Weakness Ordinalities
+Primary :
+Applicable Platforms
+Language : C (Prevalence = Undetermined)
+Language : C++ (Prevalence = Undetermined) Common Consequences
+Confidentiality Read Memory
+MemberOf Relationships
+This MemberOf relationships table shows additional CWE Catgeories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+                     MemberOf 970
+Notes
+Research Gap
+Under-studied.
+Taxonomy Mappings
+PLOVER
+Software Fault Patterns SFP8
+References
+SFP Secondary Cluster: Faulty Buffer Access
+888 1977
+      Buffer under-read Faulty Buffer Access
+            [REF-1034]Raoul Strackx, Yves Younan, Pieter Philippaerts, Frank Piessens, Sven Lachmund and Thomas Walter. "Breaking the memory secrecy assumption". 2009 March 1. ACM. < https:// dl.acm.org/citation.cfm?doid=1519144.1519145 >.
+[REF-1035]Fermin J. Serna. "The info leak era on software exploitation". 2012 July 5. < https:// media.blackhat.com/bh-us-12/Briefings/Serna/BH_US_12_Serna_Leak_Era_Slides.pdf >.
+[REF-44]Michael Howard, David LeBlanc and John Viega. "24 Deadly Sins of Software Security". McGraw-Hill. 2010.

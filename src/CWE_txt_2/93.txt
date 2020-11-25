@@ -1,0 +1,85 @@
+CWE-93: Improper Neutralization of CRLF Sequences ('CRLF Injection')
+Weakness ID: 93
+Abstraction: Base
+Structure: Simple	
+Status: Draft
+Presentation Filter:  
++ Description
+The software uses CRLF (carriage return line feeds) as a special element, e.g. to separate lines or records, but it does not neutralize or incorrectly neutralizes CRLF sequences from inputs.
++ Relationships
+The table(s) below shows the weaknesses and high level categories that are related to this weakness. These relationships are defined as ChildOf, ParentOf, MemberOf and give insight to similar items that may exist at higher and lower levels of abstraction. In addition, relationships such as PeerOf and CanAlsoBe are defined to show similar weaknesses that the user may want to explore.
++ Relevant to the view "Research Concepts" (CWE-1000)
+Nature	Type	ID	Name
+ChildOf	Class	74	Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')
+ParentOf	Variant	113	Improper Neutralization of CRLF Sequences in HTTP Headers ('HTTP Response Splitting')
+CanPrecede	Base	117	Improper Output Neutralization for Logs
++ Relevant to the view "Software Development" (CWE-699)
+Nature	Type	ID	Name
+MemberOf	Category	137	Data Neutralization Issues
++ Relevant to the view "Architectural Concepts" (CWE-1008)
++ Modes Of Introduction
+The different Modes of Introduction provide information about how and when this weakness may be introduced. The Phase identifies a point in the life cycle at which introduction may occur, while the Note provides a typical scenario related to introduction during the given phase.
+
+Phase	Note
+Architecture and Design	
+Implementation	REALIZATION: This weakness is caused during implementation of an architectural security tactic.
++ Applicable Platforms
+The listings below show possible areas for which the given weakness could appear. These may be for specific named Languages, Operating Systems, Architectures, Paradigms, Technologies, or a class of such platforms. The platform is listed along with how frequently the given weakness appears for that instance.
+Languages
+Class: Language-Independent (Undetermined Prevalence)
++ Common Consequences
+The table below specifies different individual consequences associated with the weakness. The Scope identifies the application security area that is violated, while the Impact describes the negative technical impact that arises if an adversary succeeds in exploiting this weakness. The Likelihood provides information about how likely the specific consequence is expected to be seen relative to the other consequences in the list. For example, there may be high likelihood that a weakness will be exploited to achieve a certain impact, but a low likelihood that it will be exploited to achieve a different impact.
+
+Scope	Impact	Likelihood
+Integrity
+Technical Impact: Modify Application Data
+
+Observed Examples
+Reference	Description
+CVE-2002-1771
+CRLF injection enables spam proxy (add mail headers) using email address or name.
+CVE-2002-1783
+CRLF injection in API function arguments modify headers for outgoing requests.
+CVE-2004-1513
+Spoofed entries in web server log file via carriage returns
+CVE-2006-4624
+Chain: inject fake log entries with fake timestamps using CRLF injection
+CVE-2005-1951
+Chain: Application accepts CRLF in an object ID, allowing HTTP response splitting.
+CVE-2004-1687
+Chain: HTTP response splitting via CRLF in parameter related to URL.
++ Potential Mitigations
+Phase: Implementation
+Avoid using CRLF as a special sequence.
+Phase: Implementation
+Appropriately filter or quote CRLF sequences in user-controlled input.
++ Weakness Ordinalities
+Ordinality	Description
+Primary
+(where the weakness exists independent of other weaknesses)
++ Memberships
+This MemberOf Relationships table shows additional CWE Categories and Views that reference this weakness as a member. This information is often useful in understanding where a weakness fits within the context of external information sources.
+Nature	Type	ID	Name
+MemberOf	Category	713	OWASP Top Ten 2007 Category A2 - Injection Flaws
+MemberOf	Category	990	SFP Secondary Cluster: Tainted Input to Command
++ Notes
+Research Gap
+Probably under-studied, although gaining more prominence in 2005 as a result of interest in HTTP response splitting.
++ Taxonomy Mappings
+Mapped Taxonomy Name	Node ID	Fit	Mapped Node Name
+PLOVER			CRLF Injection
+OWASP Top Ten 2007	A2	CWE More Specific	Injection Flaws
+WASC	24		HTTP Request Splitting
+Software Fault Patterns	SFP24		Tainted input to command
++ Related Attack Patterns
+CAPEC-ID	Attack Pattern Name
+CAPEC-15	Command Delimiters
+CAPEC-81	Web Logs Tampering
++ References
+[REF-928] Ulf Harnhammar. "CRLF Injection". Bugtraq. 2002-05-07. <http://marc.info/?l=bugtraq&m=102088154213630&w=2>.
++ Content History
++ Submissions
+Submission Date	Submitter	Organization
+2006-07-19	PLOVER	
++ Modifications
++ Previous Entry Names
